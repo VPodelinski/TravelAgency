@@ -1,14 +1,183 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>by.VitaliPodelinski</groupId>
-  <artifactId>TravelAgency</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>TravelAgency</name>
-  <modules>
-    <module>DomainModul</module>
-    <module>WebModul</module>
-    <module>infrastructureModul</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>by.vitali.podelinski.travel-agency</groupId>
+    <artifactId>travel-agency</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>travel-agency</name>
+
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <modules>
+        <module>domain</module>
+        <module>web</module>
+        <module>infrastructure</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.2</version>
+                    <configuration>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
+                    </configuration>
+                </plugin>
+                <!-- Плагины -->
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-pmd-plugin</artifactId>
+                    <version>3.6</version>
+                    <configuration>
+                        <rulesets>
+                            <ruleset>../quality/pmd/pmd-ruleset-production.xml</ruleset>
+                        </rulesets>
+                        <outputDirectory>${project.build.directory}/reports/pmd</outputDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>pmd</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>findbugs-maven-plugin</artifactId>
+                    <version>3.0.4</version>
+                    <executions>
+                        <execution>
+                            <id>findbugs</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                            <configuration>
+                                <excludeFilterFile>quality/findbugs/exclude-filter.xml</excludeFilterFile>
+                                <findbugsXmlOutputDirectory>${project.build.directory}/reports/findbugs
+                                </findbugsXmlOutputDirectory>
+                                <failOnError>true</failOnError>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
+                    <executions>
+                        <execution>
+                            <id>test</id>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <configuration>
+                                <skip>false</skip>
+                                <enableAssertions>false</enableAssertions>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>2.17</version>
+                    <executions>
+                        <execution>
+                            <id>checkstyle</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>checkstyle</goal>
+                            </goals>
+                            <configuration>
+                                <configLocation>/quality/checkstyle/checkstyle-production.xml</configLocation>
+                                <outputFile>${project.build.directory}/reports/checkstyle/checkstyle-result.xml
+                                </outputFile>
+                                <failsOnError>false</failsOnError>
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>check</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>checkstyle</goal>
+                            </goals>
+                            <configuration>
+                                <configLocation>/quality/checkstyle/checkstyle-production.xml</configLocation>
+                                <outputFile>${project.build.directory}/reports/checkstyle/checkstyle-result.xml
+                                </outputFile>
+                                <failsOnError>true</failsOnError>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!--Forming a html report at compile step.-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>xml-maven-plugin</artifactId>
+                    <version>1.0</version>
+                    <executions>
+                        <execution>
+                            <id>checkstyle-html</id>
+                            <phase>validate</phase>
+                            <goals>
+                                <goal>transform</goal>
+                            </goals>
+                            <configuration>
+                                <transformationSets>
+                                    <transformationSet>
+                                        <dir>${project.build.directory}/reports/checkstyle</dir>
+                                        <outputDir>${project.build.directory}/reports/checkstyle</outputDir>
+                                        <stylesheet>../quality/checkstyle/checkstyle-noframes-sorted.xsl
+                                        </stylesheet>
+                                        <fileMappers>
+                                            <fileMapper
+                                                    implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+                                                <targetExtension>.html</targetExtension>
+                                            </fileMapper>
+                                        </fileMappers>
+                                    </transformationSet>
+                                </transformationSets>
+                            </configuration>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-checkstyle-plugin</artifactId>
+                            <version>2.17</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+
+
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
