@@ -10,11 +10,14 @@ import java.io.Serializable;
 @Embeddable
 public class Address implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 6L;
+
     @Column(name = "city")
     private String city;
+
     @Column(name = "street")
     private String street;
+
     @Column(name = "number_building")
     private String numberBuilding;
 
