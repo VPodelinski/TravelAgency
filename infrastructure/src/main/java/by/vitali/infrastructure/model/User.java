@@ -1,8 +1,16 @@
-package by.vitali.infrastructure.module;
+package by.vitali.infrastructure.model;
 
-import by.vitali.infrastructure.module.enums.RoleType;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -13,12 +21,12 @@ import java.util.Set;
 @Table(name = "user")
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2198919198686671715L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private long userId;
+    @Column(name = "id")
+    private long id;
 
     @Column(name = "name")
     private String name;
@@ -28,9 +36,6 @@ public class User implements Serializable {
 
     @Column(name = "email")
     private String email;
-
-    @Column(name = "login")
-    private String login;
 
     @Column(name = "password")
     private String password;
@@ -43,27 +48,21 @@ public class User implements Serializable {
     private Set<Order> orders;
 
     public User() {
+        // Empty constructor
     }
 
-    public User(String name, String surname, String email, String login, String password, RoleType role) {
+    public User(String name, String surname, String email) {
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.login = login;
-        this.password = password;
-        this.role = role;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public long getUserId() {
-        return userId;
+    public long getId() {
+        return id;
     }
 
     public void setUserIdf(final long userId) {
-        this.userId = userId;
+        this.id = userId;
     }
 
     public String getName() {
@@ -90,14 +89,6 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(final String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -106,11 +97,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public RoleType getRole() {
+    public RoleType getRoles() {
         return role;
     }
 
-    public void setRole(final RoleType role) {
+    public void setRoles(final RoleType role) {
         this.role = role;
     }
 

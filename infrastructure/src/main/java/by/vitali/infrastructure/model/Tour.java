@@ -1,12 +1,19 @@
-package by.vitali.infrastructure.module;
+package by.vitali.infrastructure.model;
 
 
-import by.vitali.infrastructure.module.enums.Country;
-import by.vitali.infrastructure.module.enums.DepartureCity;
-import by.vitali.infrastructure.module.enums.TourType;
-import by.vitali.infrastructure.module.enums.TransportType;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -14,28 +21,27 @@ import java.util.Set;
 @Table(name = "tour")
 public class Tour implements Serializable {
 
-    private static final long serialVersionUID = 3L;
+    private static final long serialVersionUID = -6387314156812978647L;
 
     @Id
-    @Column(name = "tour_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long tourId;
+    private long id;
 
-    @Column(name = "name_tour")
-    private String nameTour;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "price")
     private int price;
 
     @Column(name = "discount")
-
     private int discount;
 
     @Column(name = "is_hot")
     private boolean isHot;
 
-    @Column(name = "count_of_nights")
-    private int countOfNights;
+    @Column(name = "duration")
+    private int duration;
 
     @Column(name = "departure_city")
     @Enumerated(EnumType.STRING)
@@ -60,41 +66,32 @@ public class Tour implements Serializable {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
 
-    //Empty constructor
     public Tour() {
+        // Empty constructor
     }
 
-    public Tour(String nameTour, int price, int discount, boolean isHot, int countOfNights, DepartureCity departureCity, Country country, TourType tourType, TransportType transportType, Hotel hotel) {
-        this.nameTour = nameTour;
+    public Tour(final String name, final int price, final int duration, final Country country, final TourType tourType) {
+        this.name = name;
         this.price = price;
-        this.discount = discount;
-        this.isHot = isHot;
-        this.countOfNights = countOfNights;
-        this.departureCity = departureCity;
+        this.duration = duration;
         this.country = country;
         this.tourType = tourType;
-        this.transportType = transportType;
-        this.hotel = hotel;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public long getId() {
+        return id;
     }
 
-    public long getTourId() {
-        return tourId;
+    public void setId(final long id) {
+        this.id = id;
     }
 
-    public void setTourId(final long tourId) {
-        this.tourId = tourId;
+    public String getName() {
+        return name;
     }
 
-    public String getNameTour() {
-        return nameTour;
-    }
-
-    public void setNameTour(final String nameTour) {
-        this.nameTour = nameTour;
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public int getPrice() {
@@ -121,12 +118,12 @@ public class Tour implements Serializable {
         isHot = hot;
     }
 
-    public int getCountOfNights() {
-        return countOfNights;
+    public int getDuration() {
+        return duration;
     }
 
-    public void setCountOfNights(final int countOfNights) {
-        this.countOfNights = countOfNights;
+    public void setDuration(final int duration) {
+        this.duration = duration;
     }
 
     public DepartureCity getDepartureCity() {

@@ -1,4 +1,4 @@
-package by.vitali.infrastructure.module.enums;
+package by.vitali.infrastructure.model;
 
 /**
  * This listing lists the type of meals

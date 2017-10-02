@@ -1,9 +1,17 @@
-package by.vitali.infrastructure.module;
+package by.vitali.infrastructure.model;
 
-import by.vitali.infrastructure.module.enums.HotelCategory;
-import by.vitali.infrastructure.module.enums.TypeOfMeals;
-
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -11,13 +19,13 @@ import java.util.Set;
 @Table(name = "hotel")
 public class Hotel implements Serializable {
 
-    private static final long serialVersionUID = 8L;
+    private static final long serialVersionUID = 6421504641464581929L;
     @Id
-    @Column(name = "hotel_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long  hotelId;
+    private long id;
 
-
+    @Embedded
     private Address address;
 
     @Column(name = "category")
@@ -31,11 +39,11 @@ public class Hotel implements Serializable {
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Tour> tours;
 
-    //Empty constructor
     public Hotel() {
+        // Empty constructor
     }
 
-    public Hotel(Address address, HotelCategory category, TypeOfMeals typeOfMeals) {
+    public Hotel(final Address address, final HotelCategory category, final TypeOfMeals typeOfMeals) {
         this.address = address;
         this.category = category;
         this.typeOfMeals = typeOfMeals;
@@ -45,15 +53,15 @@ public class Hotel implements Serializable {
         return serialVersionUID;
     }
 
-    public long getHotelId() {
-        return hotelId;
+    public long getId() {
+        return id;
     }
 
-    public void setHotelId(long hotelId) {
-        this.hotelId = hotelId;
+    public void setId(long id) {
+        this.id = id;
     }
 
-        public Address getAddress() {
+    public Address getAddress() {
         return address;
     }
 

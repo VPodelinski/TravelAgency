@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+
+  mysql:
+    image: mysql:5.6
+    container_name: mysql-agency
+    ports:
+      - "3306:3306"
+    environment:
+    environment:
+       - MYSQL_ROOT_PASSWORD=root
+       - MYSQL_USER=agent
+       - MYSQL_PASSWORD=1234
+       - MYSQL_DATABASE=travel_agency
+    networks:
+      - academynet
+
+networks:
+  academynet:
+    driver: bridge

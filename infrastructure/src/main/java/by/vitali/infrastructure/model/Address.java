@@ -1,16 +1,14 @@
-package by.vitali.infrastructure.module;
+package by.vitali.infrastructure.model;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
  * This class save hotels address
  */
-@Embeddable
 public class Address implements Serializable {
 
-    private static final long serialVersionUID = 6L;
+    private static final long serialVersionUID = 5274743189482560061L;
 
     @Column(name = "city")
     private String city;
@@ -21,17 +19,14 @@ public class Address implements Serializable {
     @Column(name = "number_building")
     private String numberBuilding;
 
-    //Empty comstructor
-    public Address(){}
+    public Address() {
+        // Empty constructor
+    }
 
-    public Address(String city, String street, String numberBuilding) {
+    public Address(final String city, final String street, final String numberBuilding) {
         this.city = city;
         this.street = street;
         this.numberBuilding = numberBuilding;
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     public String getCity() {
