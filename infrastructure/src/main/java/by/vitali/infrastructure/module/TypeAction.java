@@ -14,14 +14,15 @@ public class TypeAction implements Serializable {
     private static final long serialVersionUID = 2L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "type_action_id")
     private long typeActionId;
 
     @Column(name = "action_type")
     private String actionType;
 
-    @OneToMany(mappedBy = "typeAction")
-    private Set<LinkTable> actions;
+//    @OneToMany(mappedBy = "typeAction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Set<Order> actions;
 
     public TypeAction() {
     }
@@ -34,7 +35,7 @@ public class TypeAction implements Serializable {
         return typeActionId;
     }
 
-    public void setTypeActionId(long typeActionId) {
+    public void setTypeActionId(final long typeActionId) {
         this.typeActionId = typeActionId;
     }
 
@@ -42,15 +43,15 @@ public class TypeAction implements Serializable {
         return actionType;
     }
 
-    public void setActionType(String actionType) {
+    public void setActionType(final String actionType) {
         this.actionType = actionType;
     }
 
-    public Set<LinkTable> getActions() {
-        return actions;
-    }
-
-    public void setActions(Set<LinkTable> actions) {
-        this.actions = actions;
-    }
+//    public Set<Order> getActions() {
+//        return actions;
+//    }
+//
+//    public void setActions(final Set<Order> actions) {
+//        this.actions = actions;
+//    }
 }

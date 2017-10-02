@@ -11,13 +11,14 @@ import java.util.Set;
 @Table(name = "hotel")
 public class Hotel implements Serializable {
 
-    private static final long serialVersionUID = 5L;
+    private static final long serialVersionUID = 8L;
+    @Id
+    @Column(name = "hotel_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long  hotelId;
 
-    @Column(name = "id")
-    int id;
 
-    @Column(name = "address")
-    private Address address; //LOOK LATER, do like workbook
+    private Address address;
 
     @Column(name = "category")
     @Enumerated(EnumType.STRING)
@@ -27,29 +28,36 @@ public class Hotel implements Serializable {
     @Enumerated(EnumType.STRING)
     private TypeOfMeals typeOfMeals;
 
-    @OneToMany(mappedBy = "hotel")
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Tour> tours;
 
+    //Empty constructor
     public Hotel() {
+    }
+
+    public Hotel(Address address, HotelCategory category, TypeOfMeals typeOfMeals) {
+        this.address = address;
+        this.category = category;
+        this.typeOfMeals = typeOfMeals;
     }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public int getId() {
-        return id;
+    public long getHotelId() {
+        return hotelId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setHotelId(long hotelId) {
+        this.hotelId = hotelId;
     }
 
-    public Address getAddress() {
+        public Address getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(final Address address) {
         this.address = address;
     }
 
@@ -57,7 +65,7 @@ public class Hotel implements Serializable {
         return category;
     }
 
-    public void setCategory(HotelCategory category) {
+    public void setCategory(final HotelCategory category) {
         this.category = category;
     }
 
@@ -65,7 +73,7 @@ public class Hotel implements Serializable {
         return typeOfMeals;
     }
 
-    public void setTypeOfMeals(TypeOfMeals typeOfMeals) {
+    public void setTypeOfMeals(final TypeOfMeals typeOfMeals) {
         this.typeOfMeals = typeOfMeals;
     }
 
@@ -73,7 +81,7 @@ public class Hotel implements Serializable {
         return tours;
     }
 
-    public void setTours(Set<Tour> tours) {
+    public void setTours(final Set<Tour> tours) {
         this.tours = tours;
     }
 }

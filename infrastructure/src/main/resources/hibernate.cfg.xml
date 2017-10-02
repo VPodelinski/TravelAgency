@@ -2,23 +2,26 @@
 <!DOCTYPE hibernate-configuration PUBLIC
         "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
-
 <hibernate-configuration>
-
     <session-factory>
         <!-- Database connection settings -->
-        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/EXEMPLE?useSSL=false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/travel_agency?useSSL=false</property>
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">1234</property>
-        <!-- JDBC connection pool (use the built-in) -->
+        <!-- JDBC connection pool (use the built-in) -->      <!--?useSSl=false-->
         <property name="hibernate.connection.pool_size">10</property>
         <!-- Echo all executed SQL to stdout -->
         <property name="show_sql">true</property>
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
-        <mapping class="by.vitali.infrastructure.module.Person"/>
+
+        <mapping class="by.vitali.infrastructure.module.User"/>
+        <mapping class="by.vitali.infrastructure.module.Hotel"/>
+        <mapping class="by.vitali.infrastructure.module.Order"/>
+        <mapping class="by.vitali.infrastructure.module.Tour"/>
+        <!--<mapping class="by.vitali.infrastructure.module.TypeAction"/>-->
 
     </session-factory>
 </hibernate-configuration>

@@ -21,7 +21,14 @@ public class Address implements Serializable {
     @Column(name = "number_building")
     private String numberBuilding;
 
+    //Empty comstructor
     public Address(){}
+
+    public Address(String city, String street, String numberBuilding) {
+        this.city = city;
+        this.street = street;
+        this.numberBuilding = numberBuilding;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -31,7 +38,7 @@ public class Address implements Serializable {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(final String city) {
         this.city = city;
     }
 
@@ -39,7 +46,7 @@ public class Address implements Serializable {
         return street;
     }
 
-    public void setStreet(String street) {
+    public void setStreet(final String street) {
         this.street = street;
     }
 
@@ -47,7 +54,7 @@ public class Address implements Serializable {
         return numberBuilding;
     }
 
-    public void setNumberBuilding(String numberBuilding) {
+    public void setNumberBuilding(final String numberBuilding) {
         this.numberBuilding = numberBuilding;
     }
 }

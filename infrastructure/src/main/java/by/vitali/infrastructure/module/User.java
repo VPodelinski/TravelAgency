@@ -16,7 +16,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long userId;
 
@@ -39,10 +39,19 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private RoleType role;
 
-    @OneToMany(mappedBy = "user")
-    private Set<LinkTable> actions;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Order> orders;
 
     public User() {
+    }
+
+    public User(String name, String surname, String email, String login, String password, RoleType role) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.role = role;
     }
 
     public static long getSerialVersionUID() {
@@ -53,7 +62,7 @@ public class User implements Serializable {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserIdf(final long userId) {
         this.userId = userId;
     }
 
@@ -61,7 +70,7 @@ public class User implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -69,7 +78,7 @@ public class User implements Serializable {
         return surname;
     }
 
-    public void setSurname(String surname) {
+    public void setSurname(final String surname) {
         this.surname = surname;
     }
 
@@ -77,7 +86,7 @@ public class User implements Serializable {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -85,7 +94,7 @@ public class User implements Serializable {
         return login;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(final String login) {
         this.login = login;
     }
 
@@ -93,7 +102,7 @@ public class User implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
         this.password = password;
     }
 
@@ -101,16 +110,16 @@ public class User implements Serializable {
         return role;
     }
 
-    public void setRole(RoleType role) {
+    public void setRole(final RoleType role) {
         this.role = role;
     }
 
-    public Set<LinkTable> getActions() {
-        return actions;
+    public Set<Order> getOrders() {
+        return orders;
     }
 
-    public void setActions(Set<LinkTable> actions) {
-        this.actions = actions;
+    public void setOrders(final Set<Order> orders) {
+        this.orders = orders;
     }
 }
 
