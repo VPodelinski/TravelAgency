@@ -15,6 +15,9 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * This class describe hotel parameters.
+ */
 @Entity
 @Table(name = "hotel")
 public class Hotel implements Serializable {
@@ -57,7 +60,7 @@ public class Hotel implements Serializable {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         this.id = id;
     }
 

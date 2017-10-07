@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import java.io.Serializable;
 
 /**
- * This class save hotels address
+ * This class save hotels address.
  */
 public class Address implements Serializable {
 

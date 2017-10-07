@@ -16,8 +16,8 @@ import java.util.Set;
  *
  */
 @Entity
-@Table(name = "type_action")
-public class TypeAction implements Serializable {
+@Table(name = "order_status")
+public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = -1337340666060010312L;
 
@@ -26,15 +26,11 @@ public class TypeAction implements Serializable {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "status")
+    private String status;
 
-    @OneToMany(mappedBy = "typeAction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
-
-    public TypeAction() {
-        // Empty constructor
-    }
 
     public long getId() {
         return id;
@@ -45,11 +41,11 @@ public class TypeAction implements Serializable {
     }
 
     public String getType() {
-        return type;
+        return status;
     }
 
-    public void setType(final String type) {
-        this.type = type;
+    public void setType(final String status) {
+        this.status = status;
     }
 
     public Set<Order> getOrders() {

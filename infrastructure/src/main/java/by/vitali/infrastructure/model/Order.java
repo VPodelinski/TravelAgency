@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 
+/**
+ * This class contains information about users, tours, order status.
+ */
 @Entity
 @Table(name = "`order`")
 public class Order implements Serializable {
@@ -22,8 +25,8 @@ public class Order implements Serializable {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "type_id")
-    private TypeAction typeAction;
+    @JoinColumn(name = "status_id")
+    private OrderStatus orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,10 +36,6 @@ public class Order implements Serializable {
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
-    public Order() {
-        // Empty constructor
-    }
-
     public long getId() {
         return id;
     }
@@ -45,12 +44,12 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public TypeAction getTypeAction() {
-        return typeAction;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setTypeAction(final TypeAction typeAction) {
-        this.typeAction = typeAction;
+    public void setOrderStatus(final OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public User getUser() {

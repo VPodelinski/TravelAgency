@@ -6,16 +6,59 @@ package by.vitali.infrastructure.model;
 
 public enum Country {
 
+    /**
+     * Travel to India.
+     */
     INDIA("India"),
+
+    /**
+     * Travel to France.
+     */
     FRANCE("France"),
+
+    /**
+     * Travel to Spain.
+     */
     SPAIN("Spain"),
+
+    /**
+     * Travel to England.
+     */
     ENGLAND("England"),
+
+    /**
+     * Travel to Netherlands.
+     */
     NETHERLANDS("Netherlands"),
+
+    /**
+     * Travel to Thailand.
+     */
     THAILAND("Thailand"),
+
+    /**
+     * Travel to Austria.
+     */
     AUSTRIA("Austria"),
+
+    /**
+     * Travel to Italy.
+     */
     ITALY("Italy"),
+
+    /**
+     * Travel to China.
+     */
     CHINA("China"),
+
+    /**
+     * Travel to Czech Republic.
+     */
     CZECH_REPUBLIC("Czech Republic"),
+
+    /**
+     * Travel to Turkey.
+     */
     TURKEY("Turkey");
 
     private String name;

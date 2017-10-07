@@ -15,8 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
+/**
+ * This class describe tour parameters.
+ */
 @Entity
 @Table(name = "tour")
 public class Tour implements Serializable {
@@ -43,6 +47,9 @@ public class Tour implements Serializable {
     @Column(name = "duration")
     private int duration;
 
+    @Column(name = "date")
+    private Date date;
+
     @Column(name = "departure_city")
     @Enumerated(EnumType.STRING)
     private DepartureCity departureCity;
@@ -65,10 +72,6 @@ public class Tour implements Serializable {
 
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
-
-    public Tour() {
-        // Empty constructor
-    }
 
     public Tour(final String name, final int price, final int duration, final Country country, final TourType tourType) {
         this.name = name;
@@ -109,12 +112,19 @@ public class Tour implements Serializable {
     public void setDiscount(final int discount) {
         this.discount = discount;
     }
+    public Date getDate() {
+        return date;
+    }
 
-    public boolean isHot() {
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public boolean getHot() {
         return isHot;
     }
 
-    public void setHot(boolean hot) {
+    public void setHot(final boolean hot) {
         isHot = hot;
     }
 
