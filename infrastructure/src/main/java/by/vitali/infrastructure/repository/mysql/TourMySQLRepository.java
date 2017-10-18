@@ -3,18 +3,25 @@ package by.vitali.infrastructure.repository.mysql;
 import by.vitali.infrastructure.repository.TourRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.Tour;
-import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * The implementation repository for a tour.
  */
+@Repository
 public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements TourRepository {
+    @Autowired
+    public TourMySQLRepository(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     // ******************************************неопределенно!!!
 
@@ -27,7 +34,7 @@ public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements 
     @Override
     public List<Tour> getToursByRequest(final String request) throws DaoException {
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
             transaction = session.beginTransaction();
             final Query query = session.createQuery(request);
             transaction.commit();
@@ -51,7 +58,7 @@ public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements 
     @Override
     public List<Tour> getToursWithLimit(final int start, final int size) throws DaoException {
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
             transaction = session.beginTransaction();
             final Query query = session.createQuery("FROM Tour");
             query.setFirstResult(start);
@@ -75,7 +82,7 @@ public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements 
     @Override
     public int getCountTours() throws DaoException {
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
 
             transaction = session.beginTransaction();
             final String hql = "SELECT COUNT(DISTINCT T.id) FROM Tour T";

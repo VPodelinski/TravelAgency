@@ -38,7 +38,31 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+        </dependency>
 
     </dependencies>
 
@@ -48,26 +72,26 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
             </plugin>
-              <plugin>
-                   <groupId>org.apache.maven.plugins</groupId>
-                   <artifactId>maven-pmd-plugin</artifactId>
-               </plugin>
-               <plugin>
-                   <groupId>org.codehaus.mojo</groupId>
-                   <artifactId>findbugs-maven-plugin</artifactId>
-               </plugin>
-               <plugin>
-                   <groupId>org.apache.maven.plugins</groupId>
-                   <artifactId>maven-surefire-plugin</artifactId>
-               </plugin>
-               <plugin>
-                   <groupId>org.apache.maven.plugins</groupId>
-                   <artifactId>maven-checkstyle-plugin</artifactId>
-               </plugin>
-               <plugin>
-                   <groupId>org.codehaus.mojo</groupId>
-                   <artifactId>xml-maven-plugin</artifactId>
-               </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 </project>

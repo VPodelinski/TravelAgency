@@ -2,22 +2,33 @@ package by.vitali.infrastructure.repository.mysql;
 
 import by.vitali.infrastructure.repository.CommonRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
-import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
 
 import java.util.List;
 
 /**
  * Common class for other repositories.
+ *
  * @param <T>
  */
 public class CommonMySQLRepository<T> implements CommonRepository<T> {
 
+    protected SessionFactory sessionFactory;
+
     /**
-     *
+     * This class return session.
+     * @return
+     */
+    protected Session currentSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
+    /**
      * @param t
      * @return
      * @throws DaoException
@@ -25,7 +36,7 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     @Override
     public T save(T t) throws DaoException {
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
             transaction = session.beginTransaction();
             session.save(t);
             transaction.commit();
@@ -40,7 +51,6 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     }
 
     /**
-     *
      * @param t
      * @return
      * @throws DaoException
@@ -49,7 +59,7 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     public T update(T t) throws DaoException {
 
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
             transaction = session.beginTransaction();
             session.update(t);
             transaction.commit();
@@ -64,7 +74,6 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     }
 
     /**
-     *
      * @param t
      * @return
      * @throws DaoException
@@ -73,7 +82,7 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     public T delete(final T t) throws DaoException {
 
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
             transaction = session.beginTransaction();
             session.delete(t);
             transaction.commit();
@@ -88,7 +97,6 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     }
 
     /**
-     *
      * @param id
      * @param type
      * @return
@@ -97,7 +105,7 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     @Override
     public T read(final long id, final Class<T> type) throws DaoException {
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
             transaction = session.beginTransaction();
             final String hql = "SELECT H FROM " + type.getName() + " H WHERE H.id=:id";
             final Query query = session.createQuery(hql);
@@ -114,7 +122,6 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     }
 
     /**
-     *
      * @param type
      * @return
      * @throws DaoException
@@ -122,7 +129,7 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
     @Override
     public List<T> getAll(final Class<T> type) throws DaoException {
         Transaction transaction = null;
-        try (final Session session = HibernateSessionManager.getSession().openSession()) {
+        try (final Session session = currentSession()) {
             transaction = session.beginTransaction();
             final String hql = "FROM " + type.getName();
             final Query query = session.createQuery(hql);

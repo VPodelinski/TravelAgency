@@ -21,7 +21,7 @@ import java.util.Set;
 /**
  * This class describe user.
  */
-
+@SuppressWarnings("PMD.ShortClassName")
 @Getter
 @Setter
 @Entity
