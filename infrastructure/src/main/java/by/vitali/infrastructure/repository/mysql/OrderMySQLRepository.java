@@ -12,8 +12,17 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * The implementation repository for a order.
+ */
 public class OrderMySQLRepository extends CommonMySQLRepository<Order> implements OrderRepository {
 
+    /**
+     *
+     * @param user
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Order> getListUserOrders(final User user) throws DaoException {
         Transaction transaction = null;
@@ -33,6 +42,13 @@ public class OrderMySQLRepository extends CommonMySQLRepository<Order> implement
         }
     }
 
+    /**
+     *
+     * @param idUser
+     * @param idTour
+     * @return
+     * @throws DaoException
+     */
     @Override
     public Order getOrderByUserAndTour(final int idUser, final int idTour) throws DaoException {
         Transaction transaction = null;
@@ -52,6 +68,12 @@ public class OrderMySQLRepository extends CommonMySQLRepository<Order> implement
         }
     }
 
+    /**
+     *
+     * @param idOrderStatus
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Order> getListOrdersByOrderStatus(final int idOrderStatus) throws DaoException {
         Transaction transaction = null;

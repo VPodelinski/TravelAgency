@@ -10,8 +10,18 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * Common class for other repositories.
+ * @param <T>
+ */
 public class CommonMySQLRepository<T> implements CommonRepository<T> {
 
+    /**
+     *
+     * @param t
+     * @return
+     * @throws DaoException
+     */
     @Override
     public T save(T t) throws DaoException {
         Transaction transaction = null;
@@ -29,6 +39,12 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
         }
     }
 
+    /**
+     *
+     * @param t
+     * @return
+     * @throws DaoException
+     */
     @Override
     public T update(T t) throws DaoException {
 
@@ -47,6 +63,12 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
         }
     }
 
+    /**
+     *
+     * @param t
+     * @return
+     * @throws DaoException
+     */
     @Override
     public T delete(final T t) throws DaoException {
 
@@ -65,6 +87,13 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param type
+     * @return
+     * @throws DaoException
+     */
     @Override
     public T read(final long id, final Class<T> type) throws DaoException {
         Transaction transaction = null;
@@ -84,6 +113,12 @@ public class CommonMySQLRepository<T> implements CommonRepository<T> {
         }
     }
 
+    /**
+     *
+     * @param type
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<T> getAll(final Class<T> type) throws DaoException {
         Transaction transaction = null;

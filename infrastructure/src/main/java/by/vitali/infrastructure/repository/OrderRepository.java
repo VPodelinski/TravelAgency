@@ -8,11 +8,12 @@ import by.vitali.infrastructure.model.User;
 import java.util.List;
 
 /**
- * UserMySQLRepository for Order.
+ * Repository for Order.
  */
 public interface OrderRepository extends CommonRepository<Order> {
+
     /**
-     * возвращает все заказы юсера
+     * This method returns user's orders.
      * @param user
      * @return
      * @throws DaoException
@@ -20,16 +21,16 @@ public interface OrderRepository extends CommonRepository<Order> {
     List<Order> getListUserOrders(User user) throws DaoException;
 
     /**
-     *
+     * This method returns order depending on the user and tour.
      * @param idUser
      * @param idTour
-     * @return
+     * @return Order
      * @throws DaoException
      */
     Order getOrderByUserAndTour(int idUser, int idTour) throws DaoException;
 
     /**
-     *
+     * This method returns order depending on the order status.
      * @param idOrderStatus
      * @return
      * @throws DaoException

@@ -13,8 +13,17 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * The implementation repository for a user.
+ */
 public class UserMySQLRepository extends CommonMySQLRepository<User> implements UserRepository {
 
+    /**
+     *
+     * @param email
+     * @return
+     * @throws DaoException
+     */
     @Override
     public User getUserByEmail(final String email) throws DaoException {
         Transaction transaction = null;
@@ -34,6 +43,12 @@ public class UserMySQLRepository extends CommonMySQLRepository<User> implements 
         }
     }
 
+    /**
+     *
+     * @param roleType
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<User> getUsersByRole(final RoleType roleType) throws DaoException {
         Transaction transaction = null;

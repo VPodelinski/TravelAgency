@@ -8,20 +8,20 @@ import by.vitali.infrastructure.model.TypeOfMeals;
 import java.util.List;
 
 /**
- * UserMySQLRepository from Hotel
+ * Repository for Hotel.
  */
 public interface HotelRepository extends CommonRepository<Hotel> {
 
     /**
-     *
+     * This method returns hotels depending on the type of meals.
      * @param typeOfMeals
-     * @return
+     * @return List<Hotel>
      * @throws DaoException
      */
     List<Hotel> getHotelsByTypeOfMeals(TypeOfMeals typeOfMeals) throws DaoException;
 
     /**
-     *
+     *This method returns hotels depending on the hotel category.
      * @param hotelCategory
      * @return
      * @throws DaoException

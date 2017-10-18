@@ -4,15 +4,15 @@ import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.OrderStatus;
 
 /**
- * UserMySQLRepository for OrderStatus.
+ * Repository for OrderStatus.
  */
 public interface OrderStatusRepository extends CommonRepository<OrderStatus> {
+
     /**
-     * возвращает статус позже пересмотри!!!!
+     * This method return order type.
      * @param status
      * @return
-     * @throws Exception
+     * @throws DaoException
      */
     OrderStatus getOrderStatusByOrderStatus(String status) throws DaoException;
-
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserRepository extends CommonRepository<User> {
 
     /**
-     *
+     * This method returns user with the specified email.
      * @param email
      * @return
      * @throws DaoException
@@ -20,7 +20,7 @@ public interface UserRepository extends CommonRepository<User> {
     User getUserByEmail(String email) throws DaoException;
 
     /**
-     *
+     * This method returns users with the same role.
      * @param roleType
      * @return
      * @throws DaoException

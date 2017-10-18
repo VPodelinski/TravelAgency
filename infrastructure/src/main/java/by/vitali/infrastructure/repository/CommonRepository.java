@@ -5,23 +5,49 @@ import by.vitali.infrastructure.exceptions.DaoException;
 import java.util.List;
 
 /**
- * UserMySQLRepository interface.
+ * Common  Repository interface.
  */
 public interface CommonRepository<T> {
 
-    //create
+    /**
+     * This method saves object.
+     * @param t
+     * @return T
+     * @throws DaoException
+     */
     T save(T t) throws DaoException;
 
-    //read
+    /**
+     * This method reads object.
+     * @param id
+     * @param t
+     * @return T
+     * @throws DaoException
+     */
     T read(long id, Class<T> t) throws DaoException;
 
+    /**
+     * This method returns all objects.
+     * @param type
+     * @return List<T>
+     * @throws DaoException
+     */
     List<T> getAll(Class<T> type) throws DaoException;
 
-    //update
+    /**
+     * This method updates object.
+     * @param t
+     * @return T
+     * @throws DaoException
+     */
     T update(T t) throws DaoException;
 
-    //delete
+    /**
+     * This method removes object.
+     * @param t
+     * @return T
+     * @throws DaoException
+     */
     T delete(T t) throws DaoException;
-
 
 }

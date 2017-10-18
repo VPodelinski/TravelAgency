@@ -11,9 +11,19 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * The implementation repository for a tour.
+ */
 public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements TourRepository {
 
-    // неопределенно!!!
+    // ******************************************неопределенно!!!
+
+    /**
+     *
+     * @param request
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Tour> getToursByRequest(final String request) throws DaoException {
         Transaction transaction = null;
@@ -31,6 +41,13 @@ public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements 
         }
     }
 
+    /**
+     *
+     * @param start
+     * @param size
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Tour> getToursWithLimit(final int start, final int size) throws DaoException {
         Transaction transaction = null;
@@ -50,6 +67,11 @@ public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements 
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws DaoException
+     */
     @Override
     public int getCountTours() throws DaoException {
         Transaction transaction = null;

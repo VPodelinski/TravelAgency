@@ -9,9 +9,17 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-
+/**
+ * The implementation repository for a order status.
+ */
 public  class OrderStatusMySQLRepository extends CommonMySQLRepository<OrderStatus> implements OrderStatusRepository {
 
+    /**
+     *
+     * @param status
+     * @return
+     * @throws DaoException
+     */
     @Override
     public OrderStatus getOrderStatusByOrderStatus(final String status) throws DaoException {
         Transaction transaction = null;

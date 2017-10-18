@@ -13,8 +13,17 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+/**
+ * The implementation repository for a hotel.
+ */
 public class HotelMySQLRepository extends CommonMySQLRepository<Hotel> implements HotelRepository {
 
+    /**
+     *
+     * @param typeOfMeals
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Hotel> getHotelsByTypeOfMeals(final TypeOfMeals typeOfMeals) throws DaoException {
         Transaction transaction = null;
@@ -34,6 +43,12 @@ public class HotelMySQLRepository extends CommonMySQLRepository<Hotel> implement
         }
     }
 
+    /**
+     *
+     * @param hotelCategory
+     * @return
+     * @throws DaoException
+     */
     @Override
     public List<Hotel> getHotelsByHotelCategory(final HotelCategory hotelCategory) throws DaoException {
         Transaction transaction = null;
