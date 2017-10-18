@@ -1,11 +1,11 @@
 package by.vitali.infrastructure.exceptions;
 
 /**
- * My DAO exception
+ * My DAO exception.
  */
 public class DaoException extends Exception {
 
-    public DaoException(String message) {
+    public DaoException(final String message) {
         super(message);
     }
 }

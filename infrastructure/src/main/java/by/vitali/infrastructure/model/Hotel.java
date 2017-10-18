@@ -1,5 +1,9 @@
 package by.vitali.infrastructure.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -18,6 +22,8 @@ import java.util.Set;
 /**
  * This class describe hotel parameters.
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "hotel")
 public class Hotel implements Serializable {
@@ -52,47 +58,5 @@ public class Hotel implements Serializable {
         this.typeOfMeals = typeOfMeals;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(final Address address) {
-        this.address = address;
-    }
-
-    public HotelCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(final HotelCategory category) {
-        this.category = category;
-    }
-
-    public TypeOfMeals getTypeOfMeals() {
-        return typeOfMeals;
-    }
-
-    public void setTypeOfMeals(final TypeOfMeals typeOfMeals) {
-        this.typeOfMeals = typeOfMeals;
-    }
-
-    public Set<Tour> getTours() {
-        return tours;
-    }
-
-    public void setTours(final Set<Tour> tours) {
-        this.tours = tours;
-    }
 }

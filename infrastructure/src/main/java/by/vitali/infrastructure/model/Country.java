@@ -1,9 +1,11 @@
 package by.vitali.infrastructure.model;
 
+import lombok.Getter;
+
 /**
  * This enum lists the countries where you can go on vacation.
  */
-
+@Getter
 public enum Country {
 
     /**
@@ -67,8 +69,6 @@ public enum Country {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
+
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "role")
 public enum RoleType {
+
     /**
      * The role is customer for other users.
      */

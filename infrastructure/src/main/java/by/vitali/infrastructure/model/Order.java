@@ -1,5 +1,8 @@
 package by.vitali.infrastructure.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +16,8 @@ import java.io.Serializable;
 /**
  * This class contains information about users, tours, order status.
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "`order`")
 public class Order implements Serializable {
@@ -36,35 +41,5 @@ public class Order implements Serializable {
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(final long id) {
-        this.id = id;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(final OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(final User user) {
-        this.user = user;
-    }
-
-    public Tour getTour() {
-        return tour;
-    }
-
-    public void setTour(final Tour tour) {
-        this.tour = tour;
-    }
 }

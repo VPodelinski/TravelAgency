@@ -1,5 +1,9 @@
 package by.vitali.infrastructure.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +21,9 @@ import java.util.Set;
 /**
  * This class describe user.
  */
+
+@Getter
+@Setter
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -40,17 +47,6 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
-    }
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
@@ -69,60 +65,16 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setUserIdf(final long userId) {
-        this.id = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(final String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(final String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(final String password) {
-        this.password = password;
-    }
-
-    public RoleType getRoles() {
-        return role;
-    }
-
-    public void setRoles(final RoleType role) {
-        this.role = role;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(final Set<Order> orders) {
-        this.orders = orders;
+    @Override
+    public String toString() {
+        return "User{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", surname='" + surname + '\''
+                + ", email='" + email + '\''
+                + ", password='" + password + '\''
+                + ", role=" + role
+                + '}';
     }
 }
 

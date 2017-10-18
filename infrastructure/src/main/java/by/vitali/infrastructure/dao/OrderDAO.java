@@ -12,127 +12,62 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO{
+public class OrderDAO extends AbstractDAO<Order> implements IOrderDAO {
 
     @Override
-    public Order find(long id) throws DaoException {
-        Session session = null;
+    public List<Order> getListUserOrders(final User user) throws DaoException {
         Transaction transaction = null;
-        Order order = null;
-        try {
-            String hql = "SELECT O FROM Order O WHERE O.user_id=:id";
-            session = HibernateSessionManager.getSession().openSession();
+        try (final Session session = HibernateSessionManager.getSession().openSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createQuery(hql);
-            query.setParameter("id", id);
-            order = (Order) query.uniqueResult();
-            transaction.commit();
-        } catch (HibernateException e) {
-            //log.error
-            transaction.rollback();
-            throw new DaoException(e.getMessage());
-        } finally {
-            if (session != null)
-                session.close();
-        }
-        return order;
-    }
-
-    @Override
-    public List<Order> getAll() throws DaoException {
-        Session session = null;
-        Transaction transaction = null;
-        List<Order> orders = null;
-        try {
-            String hql = "FROM Order";
-            session = HibernateSessionManager.getSession().openSession();
-            transaction = session.beginTransaction();
-            Query query = session.createQuery(hql);
-            orders = query.list();
-            transaction.commit();
-        } catch (HibernateException e) {
-            //log.error
-            transaction.rollback();
-            throw new DaoException(e.getMessage());
-        } finally {
-            if (session != null)
-                session.close();
-        }
-        return orders;
-    }
-
-    @Override
-    public List<Order> getListUserOrders(User user) throws DaoException {
-        Session session = null;
-        Transaction transaction = null;
-        List<Order> orders = null;
-        try {
-            String hql = "SELECT O FROM Order O WHERE O.user_id=:id";
-            session = HibernateSessionManager.getSession().openSession();
-            transaction = session.beginTransaction();
-            Query query = session.createQuery(hql);
+            final String hql = "SELECT O FROM Order O WHERE O.user_id=:id";
+            final Query query = session.createQuery(hql);
             query.setParameter("id", user.getId());
-            orders =  query.list();
             transaction.commit();
+            return (List<Order>) query.list();
         } catch (HibernateException e) {
             //log.error
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DaoException(e.getMessage());
-        } finally {
-            if (session != null)
-                session.close();
         }
-        return orders;
     }
 
     @Override
-    public Order getOrderByUserAndTour(int idUser, int idTour) throws DaoException {
-        Session session = null;
+    public Order getOrderByUserAndTour(final int idUser, final int idTour) throws DaoException {
         Transaction transaction = null;
-        Order order = null;
-        try {
-            String hql = "SELECT O FROM Order O WHERE O.user_id=:user_id and O.tour_id:=tour_id";
-            session = HibernateSessionManager.getSession().openSession();
+        try (final Session session = HibernateSessionManager.getSession().openSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createQuery(hql);
+            final String hql = "SELECT O FROM Order O WHERE O.user_id=:user_id and O.tour_id:=tour_id";
+            final Query query = session.createQuery(hql);
             query.setParameter("user_id", idUser).setParameter("tour_id", idTour);
-
-            order = (Order) query.uniqueResult();
             transaction.commit();
+            return (Order) query.uniqueResult();
         } catch (HibernateException e) {
             //log.error
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DaoException(e.getMessage());
-        } finally {
-            if (session != null)
-                session.close();
         }
-        return order;
     }
 
     @Override
-    public List<Order> getListOrdersByOrderStatus(int idOrderStatus) throws DaoException {
-        Session session = null;
+    public List<Order> getListOrdersByOrderStatus(final int idOrderStatus) throws DaoException {
         Transaction transaction = null;
-        List<Order> orders = null;
-        try {
-            String hql = "SELECT O FROM Order O WHERE O.status_id=:status_id";
-            session = HibernateSessionManager.getSession().openSession();
+        try (final Session session = HibernateSessionManager.getSession().openSession()) {
             transaction = session.beginTransaction();
-            Query query = session.createQuery(hql);
+            final String hql = "SELECT O FROM Order O WHERE O.status_id=:status_id";
+            final Query query = session.createQuery(hql);
             query.setParameter("status_id", idOrderStatus);
-            orders =  query.list();
             transaction.commit();
+            return (List<Order>) query.list();
         } catch (HibernateException e) {
             //log.error
-            transaction.rollback();
+            if (transaction != null) {
+                transaction.rollback();
+            }
             throw new DaoException(e.getMessage());
-        } finally {
-            if (session != null)
-                session.close();
         }
-        return orders;
     }
-
-
 }

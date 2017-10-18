@@ -14,13 +14,15 @@ public interface DAO<T> {
     T save(T t) throws DaoException;
 
     //read
-    T find(long id) throws DaoException;
+    T read(long id, Class<T> t) throws DaoException;
 
-    List<T> getAll() throws DaoException;
+    List<T> getAll(Class<T> type) throws DaoException;
 
     //update
     T update(T t) throws DaoException;
 
     //delete
     T delete(T t) throws DaoException;
+
+
 }

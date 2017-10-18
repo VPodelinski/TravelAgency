@@ -1,6 +1,9 @@
 package by.vitali.infrastructure.model;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +24,8 @@ import java.util.Set;
 /**
  * This class describe tour parameters.
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "tour")
 public class Tour implements Serializable {
@@ -79,108 +84,5 @@ public class Tour implements Serializable {
         this.duration = duration;
         this.country = country;
         this.tourType = tourType;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(final long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(final String name) {
-        this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(final int price) {
-        this.price = price;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(final int discount) {
-        this.discount = discount;
-    }
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public boolean getHot() {
-        return isHot;
-    }
-
-    public void setHot(final boolean hot) {
-        isHot = hot;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(final int duration) {
-        this.duration = duration;
-    }
-
-    public DepartureCity getDepartureCity() {
-        return departureCity;
-    }
-
-    public void setDepartureCity(final DepartureCity departureCity) {
-        this.departureCity = departureCity;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(final Country country) {
-        this.country = country;
-    }
-
-    public TourType getTourType() {
-        return tourType;
-    }
-
-    public void setTourType(final TourType tourType) {
-        this.tourType = tourType;
-    }
-
-    public TransportType getTransportType() {
-        return transportType;
-    }
-
-    public void setTransportType(final TransportType transportType) {
-        this.transportType = transportType;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(final Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(final Set<Order> orders) {
-        this.orders = orders;
     }
 }

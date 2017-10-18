@@ -1,5 +1,8 @@
 package by.vitali.infrastructure.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +16,10 @@ import java.io.Serializable;
 import java.util.Set;
 
 /**
- *
+ *This class describe status user's order.
  */
+@Getter
+@Setter
 @Entity
 @Table(name = "order_status")
 public class OrderStatus implements Serializable {
@@ -32,35 +37,13 @@ public class OrderStatus implements Serializable {
     @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(final long id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return status;
-    }
-
-    public void setType(final String status) {
-        this.status = status;
-    }
-
-    public Set<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(final Set<Order> orders) {
-        this.orders = orders;
-    }
 
     @Override
     public String toString() {
-        return "OrderStatus{" +
-                "id=" + id +
-                ", status='" + status + '\'' +
+        return "OrderStatus{"
+                + "id=" + id
+                + ", status='" + status + '\''
                 +
                 '}';
     }

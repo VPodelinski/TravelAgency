@@ -19,28 +19,28 @@ public class Loader {
 
         User user1 = new User("Vitali", "Podelinski", "viivpo2010@mail.ru");
         user1.setPassword("5678");
-        user1.setRoles(RoleType.CUSTOMER);
+        user1.setRole(RoleType.CUSTOMER);
 
         User user2 = new User("Ivan", "Podelinski", "ivan2010@mail.ru");
         user2.setPassword("1234");
-        user2.setRoles(RoleType.TRAVEL_AGENT);
+        user2.setRole(RoleType.TRAVEL_AGENT);
         User user22 = new User("Petia", "Podelinski", "petia2010@mail.ru");
         user22.setPassword("1234");
-        user22.setRoles(RoleType.TRAVEL_AGENT);
+        user22.setRole(RoleType.TRAVEL_AGENT);
 
         userDAO.save(user1);
         userDAO.save(user2);
         userDAO.save(user22);
 
         //userDAO.delete(user1); // not work
-        List<User> users = userDAO.getAll();
-        System.out.println("@@@@@@@@@@@@ " + users.size());
+        List<User> users = userDAO.getAll(User.class);
+        System.out.println("22222222222222@@@@@@@@@@@@ " + users.size());
 
         for (User user : users) {
             System.out.println(user);
         }
-        User user = userDAO.find(2);
-        System.out.println("user from find " + user);
+        User user = userDAO.read(1, User.class);
+        System.out.println("222222222222222user from find " + user);
 
         User user3 = userDAO.getUserByEmail("viivpo2010@mail.ru");
         System.out.println("user from email " + user3);
@@ -65,14 +65,14 @@ public class Loader {
 
         OrderStatus orderStatus = new OrderStatus();
         OrderStatus orderStatus1 = new OrderStatus();
-        orderStatus.setType("bought");
-        orderStatus1.setType("brone");
+        orderStatus.setStatus("bought");
+        orderStatus1.setStatus("brone");
 
         orderStatusDAO.save(orderStatus);
         orderStatusDAO.save(orderStatus1);
-        orderStatusDAO.find(1);
+      //  orderStatusDAO.find(1);
 
-        System.out.println("orderstatus " + orderStatusDAO.find(2));
+       // System.out.println("orderstatus " + orderStatusDAO.find(2));
         System.out.println("method brone" + orderStatusDAO.getOrderStatusByOrderStatus("bought"));
 
     }

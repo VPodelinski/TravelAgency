@@ -33,6 +33,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
 
     </dependencies>
@@ -43,7 +48,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
             </plugin>
-        <!--      <plugin>
+              <plugin>
                    <groupId>org.apache.maven.plugins</groupId>
                    <artifactId>maven-pmd-plugin</artifactId>
                </plugin>
@@ -62,7 +67,7 @@
                <plugin>
                    <groupId>org.codehaus.mojo</groupId>
                    <artifactId>xml-maven-plugin</artifactId>
-               </plugin> -->
+               </plugin>
         </plugins>
     </build>
 </project>
