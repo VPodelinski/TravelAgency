@@ -1,21 +1,18 @@
 package by.vitali.infrastructure.loader;
 
-import by.vitali.infrastructure.dao.HotelDAO;
-import by.vitali.infrastructure.dao.OrderStatusDAO;
-import by.vitali.infrastructure.dao.UserDAO;
+import by.vitali.infrastructure.repository.mysql.HotelMySQLRepository;
+import by.vitali.infrastructure.repository.mysql.OrderStatusMySQLRepository;
+import by.vitali.infrastructure.repository.mysql.UserMySQLRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.*;
-import by.vitali.infrastructure.utils.HibernateSessionManager;
-import org.hibernate.Session;
 
 import java.util.List;
-import java.util.Locale;
 
 
 public class Loader {
     public static void main(final String... args) throws DaoException {
 
-        UserDAO userDAO = new UserDAO();
+        UserMySQLRepository userMySQLDAO = new UserMySQLRepository();
 
         User user1 = new User("Vitali", "Podelinski", "viivpo2010@mail.ru");
         user1.setPassword("5678");
@@ -28,24 +25,24 @@ public class Loader {
         user22.setPassword("1234");
         user22.setRole(RoleType.TRAVEL_AGENT);
 
-        userDAO.save(user1);
-        userDAO.save(user2);
-        userDAO.save(user22);
+        userMySQLDAO.save(user1);
+        userMySQLDAO.save(user2);
+        userMySQLDAO.save(user22);
 
-        //userDAO.delete(user1); // not work
-        List<User> users = userDAO.getAll(User.class);
+        //userMySQLDAO.delete(user1); // not work
+        List<User> users = userMySQLDAO.getAll(User.class);
         System.out.println("22222222222222@@@@@@@@@@@@ " + users.size());
 
         for (User user : users) {
             System.out.println(user);
         }
-        User user = userDAO.read(1, User.class);
+        User user = userMySQLDAO.read(1, User.class);
         System.out.println("222222222222222user from find " + user);
 
-        User user3 = userDAO.getUserByEmail("viivpo2010@mail.ru");
+        User user3 = userMySQLDAO.getUserByEmail("viivpo2010@mail.ru");
         System.out.println("user from email " + user3);
 
-        List<User> users1 = userDAO.getUsersByRole(RoleType.TRAVEL_AGENT);
+        List<User> users1 = userMySQLDAO.getUsersByRole(RoleType.TRAVEL_AGENT);
         for (User user4 : users1) {
             System.out.println("user from role " + user4);
         }
@@ -58,22 +55,22 @@ public class Loader {
 
         Hotel hotel1 = new Hotel(address1, HotelCategory.FOUR, TypeOfMeals.FB);
 
-        HotelDAO hotelDAO = new HotelDAO();
-        hotelDAO.save(hotel1);
+        HotelMySQLRepository hotelMySQLDAO = new HotelMySQLRepository();
+        hotelMySQLDAO.save(hotel1);
 
-        OrderStatusDAO orderStatusDAO = new OrderStatusDAO();
+        OrderStatusMySQLRepository orderStatusMySQLDAO = new OrderStatusMySQLRepository();
 
         OrderStatus orderStatus = new OrderStatus();
         OrderStatus orderStatus1 = new OrderStatus();
         orderStatus.setStatus("bought");
         orderStatus1.setStatus("brone");
 
-        orderStatusDAO.save(orderStatus);
-        orderStatusDAO.save(orderStatus1);
-      //  orderStatusDAO.find(1);
+        orderStatusMySQLDAO.save(orderStatus);
+        orderStatusMySQLDAO.save(orderStatus1);
+      //  orderStatusMySQLDAO.find(1);
 
-       // System.out.println("orderstatus " + orderStatusDAO.find(2));
-        System.out.println("method brone" + orderStatusDAO.getOrderStatusByOrderStatus("bought"));
+       // System.out.println("orderstatus " + orderStatusMySQLDAO.find(2));
+        System.out.println("method brone" + orderStatusMySQLDAO.getOrderStatusByOrderStatus("bought"));
 
     }
 }

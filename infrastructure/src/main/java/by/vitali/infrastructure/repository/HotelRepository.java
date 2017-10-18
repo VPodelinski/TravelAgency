@@ -1,4 +1,4 @@
-package by.vitali.infrastructure.dao.interfaces;
+package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.Hotel;
@@ -8,9 +8,9 @@ import by.vitali.infrastructure.model.TypeOfMeals;
 import java.util.List;
 
 /**
- * UserDAO from Hotel
+ * UserMySQLRepository from Hotel
  */
-public interface IHotelDAO extends DAO<Hotel> {
+public interface HotelRepository extends CommonRepository<Hotel> {
 
     /**
      *

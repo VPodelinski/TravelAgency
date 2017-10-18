@@ -1,4 +1,4 @@
-package by.vitali.infrastructure.dao.interfaces;
+package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.RoleType;
@@ -7,9 +7,9 @@ import by.vitali.infrastructure.model.User;
 import java.util.List;
 
 /**
- * UserDAO for User.
+ * UserMySQLRepository for User.
  */
-public interface IUserDAO extends DAO<User> {
+public interface UserRepository extends CommonRepository<User> {
 
     /**
      *

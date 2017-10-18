@@ -23,6 +23,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <junit.version>3.8.2</junit.version>
+        <lombok.versioon>1.16.16</lombok.versioon>
     </properties>
 
     <dependencyManagement>
@@ -63,7 +64,7 @@
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.16.16</version>
+                <version>${lombok.versioon}</version>
                 <scope>provided</scope>
             </dependency>
 

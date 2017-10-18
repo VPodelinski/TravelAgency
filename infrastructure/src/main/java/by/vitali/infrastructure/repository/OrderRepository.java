@@ -1,17 +1,16 @@
-package by.vitali.infrastructure.dao.interfaces;
+package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.Order;
 import by.vitali.infrastructure.model.User;
 
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
- * UserDAO for Order.
+ * UserMySQLRepository for Order.
  */
-public interface IOrderDAO extends DAO<Order> {
+public interface OrderRepository extends CommonRepository<Order> {
     /**
      * возвращает все заказы юсера
      * @param user

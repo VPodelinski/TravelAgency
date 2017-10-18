@@ -1,30 +1,30 @@
-package by.vitali.infrastructure.dao;
+package by.vitali.infrastructure.repository.mysql;
 
-import by.vitali.infrastructure.dao.interfaces.IUserDAO;
+import by.vitali.infrastructure.repository.HotelRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
-import by.vitali.infrastructure.model.RoleType;
-import by.vitali.infrastructure.model.User;
+import by.vitali.infrastructure.model.Hotel;
+import by.vitali.infrastructure.model.HotelCategory;
+import by.vitali.infrastructure.model.TypeOfMeals;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-
 import java.util.List;
 
-public class UserDAO extends AbstractDAO<User> implements IUserDAO {
+public class HotelMySQLRepository extends CommonMySQLRepository<Hotel> implements HotelRepository {
 
     @Override
-    public User getUserByEmail(final String email) throws DaoException {
+    public List<Hotel> getHotelsByTypeOfMeals(final TypeOfMeals typeOfMeals) throws DaoException {
         Transaction transaction = null;
         try (final Session session = HibernateSessionManager.getSession().openSession()) {
             transaction = session.beginTransaction();
-            final String hql = "SELECT U FROM User U WHERE U.email=:email";
+            final String hql = "SELECT H FROM Hotel H WHERE H.type_of_meals=:type_of_meals";
             final Query query = session.createQuery(hql);
-            query.setParameter("email", email);
+            query.setParameter("type_of_meals", typeOfMeals);
             transaction.commit();
-            return (User) query.uniqueResult();
+            return (List<Hotel>) query.list();
         } catch (HibernateException e) {
             //log.error
             if (transaction != null) {
@@ -35,15 +35,15 @@ public class UserDAO extends AbstractDAO<User> implements IUserDAO {
     }
 
     @Override
-    public List<User> getUsersByRole(final RoleType roleType) throws DaoException {
+    public List<Hotel> getHotelsByHotelCategory(final HotelCategory hotelCategory) throws DaoException {
         Transaction transaction = null;
         try (final Session session = HibernateSessionManager.getSession().openSession()) {
             transaction = session.beginTransaction();
-            final String hql = "SELECT U FROM User U WHERE U.role=:role";
+            final String hql = "SELECT H FROM Hotel H WHERE H.category=:category";
             final Query query = session.createQuery(hql);
-            query.setParameter("role", roleType);
+            query.setParameter("category", hotelCategory);
             transaction.commit();
-            return (List<User>) query.list();
+            return (List<Hotel>) query.list();
         } catch (HibernateException e) {
             //log.error
             if (transaction != null) {

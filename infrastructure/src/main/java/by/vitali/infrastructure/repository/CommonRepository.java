@@ -1,14 +1,13 @@
-package by.vitali.infrastructure.dao.interfaces;
+package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
- * UserDAO interface.
+ * UserMySQLRepository interface.
  */
-public interface DAO<T> {
+public interface CommonRepository<T> {
 
     //create
     T save(T t) throws DaoException;

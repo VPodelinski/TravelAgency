@@ -1,12 +1,12 @@
-package by.vitali.infrastructure.dao.interfaces;
+package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.OrderStatus;
 
 /**
- * UserDAO for OrderStatus.
+ * UserMySQLRepository for OrderStatus.
  */
-public interface IOrderStatusDAO extends DAO<OrderStatus> {
+public interface OrderStatusRepository extends CommonRepository<OrderStatus> {
     /**
      * возвращает статус позже пересмотри!!!!
      * @param status

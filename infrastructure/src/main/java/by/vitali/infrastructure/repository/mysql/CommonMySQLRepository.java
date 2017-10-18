@@ -1,6 +1,6 @@
-package by.vitali.infrastructure.dao;
+package by.vitali.infrastructure.repository.mysql;
 
-import by.vitali.infrastructure.dao.interfaces.DAO;
+import by.vitali.infrastructure.repository.CommonRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
@@ -10,7 +10,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-public abstract class AbstractDAO<T> implements DAO<T> {
+public class CommonMySQLRepository<T> implements CommonRepository<T> {
 
     @Override
     public T save(T t) throws DaoException {

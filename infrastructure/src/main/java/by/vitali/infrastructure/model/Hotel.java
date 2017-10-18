@@ -24,6 +24,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "hotel")
 public class Hotel implements Serializable {

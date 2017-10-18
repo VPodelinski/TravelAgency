@@ -1,4 +1,4 @@
-package by.vitali.infrastructure.dao.interfaces;
+package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.Tour;
@@ -6,9 +6,9 @@ import by.vitali.infrastructure.model.Tour;
 import java.util.List;
 
 /**
- * UserDAO for Tour.
+ * UserMySQLRepository for Tour.
  */
-public interface ITourDAO extends DAO<Tour> {
+public interface TourRepository extends CommonRepository<Tour> {
 
 
 
