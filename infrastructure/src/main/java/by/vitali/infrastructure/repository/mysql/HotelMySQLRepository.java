@@ -1,13 +1,13 @@
 package by.vitali.infrastructure.repository.mysql;
 
-import by.vitali.infrastructure.repository.HotelRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.Hotel;
 import by.vitali.infrastructure.model.HotelCategory;
 import by.vitali.infrastructure.model.TypeOfMeals;
+import by.vitali.infrastructure.repository.HotelRepository;
+import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,8 @@ import java.util.List;
 public class HotelMySQLRepository extends CommonMySQLRepository<Hotel> implements HotelRepository {
 
     @Autowired
-    public HotelMySQLRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-
+    public HotelMySQLRepository(final HibernateSessionManager sessionManager) {
+        super(sessionManager);
     }
 
     /**
@@ -35,7 +34,7 @@ public class HotelMySQLRepository extends CommonMySQLRepository<Hotel> implement
     @Override
     public List<Hotel> getHotelsByTypeOfMeals(final TypeOfMeals typeOfMeals) throws DaoException {
         Transaction transaction = null;
-        try (final Session session = currentSession()) {
+        try (final Session session = getSession()) {
             transaction = session.beginTransaction();
             final String hql = "SELECT H FROM Hotel H WHERE H.type_of_meals=:type_of_meals";
             final Query query = session.createQuery(hql);
@@ -59,7 +58,7 @@ public class HotelMySQLRepository extends CommonMySQLRepository<Hotel> implement
     @Override
     public List<Hotel> getHotelsByHotelCategory(final HotelCategory hotelCategory) throws DaoException {
         Transaction transaction = null;
-        try (final Session session = currentSession()) {
+        try (final Session session = getSession()) {
             transaction = session.beginTransaction();
             final String hql = "SELECT H FROM Hotel H WHERE H.category=:category";
             final Query query = session.createQuery(hql);

@@ -1,44 +1,31 @@
 package by.vitali.infrastructure.utils;
 
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Hibernate utils.
  */
-
+@Component
 public class HibernateSessionManager {
 
+    private final SessionFactory sessionFactory;
 
-    private static SessionFactory sessionFactory = buildSessionFactory();
+    @Autowired
+    public HibernateSessionManager(final SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
-    protected static SessionFactory buildSessionFactory() {
-        // A SessionFactory is set up once for an application!
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure() // configures settings from hibernate.cfg.xml
-                .build();
+    public Session getSession() {
+        Session session;
         try {
-            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        } catch (Exception e) {
-            // The registry would be destroyed by the SessionFactory, but we had trouble building the SessionFactory
-            // so destroy it manually.
-            StandardServiceRegistryBuilder.destroy(registry);
-
-            throw new ExceptionInInitializerError("Initial SessionFactory failed" + e);
+            session = sessionFactory.getCurrentSession();
+        } catch (org.hibernate.HibernateException he) {
+            session = sessionFactory.openSession();
         }
-        return sessionFactory;
-    }
-
-
-    public static SessionFactory getSession() {
-        return sessionFactory;
-    }
-
-    public static void shutdown() {
-        // Close caches and connection pools
-        getSession().close();
+        return session;
     }
 }
