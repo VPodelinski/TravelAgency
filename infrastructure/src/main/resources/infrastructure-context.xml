@@ -12,7 +12,7 @@
     http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="by.vitali.infrastructure.repository"/>
+    <context:component-scan base-package="by.vitali.infrastructure"/>
     <aop:aspectj-autoproxy/>
 
 
