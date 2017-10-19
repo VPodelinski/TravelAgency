@@ -17,7 +17,7 @@
     <aop:aspectj-autoproxy/>
 
 
-    <bean id="dataSource" class="org.apache.dbcp.BasicDataSource" destroy-method="close"
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
           p:url="jdbc:mysql://localhost:3306/travel_agency"
           p:driverClassName="com.mysql.jdbc.Driver"
           p:username="root"
@@ -43,7 +43,7 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="debug">true</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">create-drop</prop>
             </props>
         </property>
     </bean>
