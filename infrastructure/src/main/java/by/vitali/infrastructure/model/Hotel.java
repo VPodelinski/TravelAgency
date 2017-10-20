@@ -24,7 +24,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
-@ToString
+
 @Entity
 @Table(name = "hotel")
 public class Hotel implements Serializable {
@@ -59,5 +59,14 @@ public class Hotel implements Serializable {
         this.typeOfMeals = typeOfMeals;
     }
 
-
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", address=" + address +
+                ", category=" + category +
+                ", typeOfMeals=" + typeOfMeals +
+                //", tours=" + tours +
+                '}';
+    }
 }

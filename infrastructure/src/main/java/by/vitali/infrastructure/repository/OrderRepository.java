@@ -29,12 +29,12 @@ public interface OrderRepository extends CommonRepository<Order> {
      */
     Order getOrderByUserAndTour(int idUser, int idTour) throws DaoException;
 
-    /**
-     * This method returns order depending on the order status.
-     * @param idOrderStatus
-     * @return
-     * @throws DaoException
-     */
-    List<Order> getListOrdersByOrderStatus(int idOrderStatus) throws DaoException;
+//    /**
+//     * This method returns order depending on the order status.
+//     * @param idOrderStatus
+//     * @return
+//     * @throws DaoException
+//     */
+//    List<Order> getListOrdersByOrderStatus(int idOrderStatus) throws DaoException;
 
 }

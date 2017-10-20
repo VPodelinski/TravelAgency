@@ -3,6 +3,7 @@ package by.vitali.infrastructure.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,6 +25,7 @@ import java.util.Set;
 /**
  * This class describe tour parameters.
  */
+//@ToString
 @Getter
 @Setter
 @Entity
@@ -52,7 +54,7 @@ public class Tour implements Serializable {
     @Column(name = "duration")
     private int duration;
 
-    @Column(name = "date")
+    @Column(name = "date" )
     private Date date;
 
     @Column(name = "departure_city")
@@ -78,11 +80,34 @@ public class Tour implements Serializable {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
 
+    public Tour() {
+        // Empty constructor
+    }
+
     public Tour(final String name, final int price, final int duration, final Country country, final TourType tourType) {
         this.name = name;
         this.price = price;
         this.duration = duration;
         this.country = country;
         this.tourType = tourType;
+    }
+
+    @Override
+    public String toString() {
+        return "Tour{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", isHot=" + isHot +
+                ", duration=" + duration +
+                ", date=" + date +
+                ", departureCity=" + departureCity +
+                ", country=" + country +
+                ", tourType=" + tourType +
+                ", transportType=" + transportType +
+                //", hotel=" + hotel +
+               // ", orders=" + orders +
+                '}';
     }
 }

@@ -20,11 +20,22 @@ public interface UserRepository extends CommonRepository<User> {
     User getUserByEmail(String email) throws DaoException;
 
     /**
+     * This method returns user with the specified email and password.
+     * @param email
+     * @return
+     * @throws DaoException
+     */
+    User getUserByEmailAndPassword(String email, String password) throws DaoException;
+
+    /**
      * This method returns users with the same role.
      * @param roleType
      * @return
      * @throws DaoException
      */
     List<User> getUsersByRole(RoleType roleType) throws DaoException;
+
+
+
 
 }

@@ -2,6 +2,7 @@ package by.vitali.infrastructure.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import java.io.Serializable;
 /**
  * This class contains information about users, tours, order status.
  */
+@ToString
 @Getter
 @Setter
 @Entity
