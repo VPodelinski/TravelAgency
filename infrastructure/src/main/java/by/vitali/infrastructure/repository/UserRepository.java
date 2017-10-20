@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * UserMySQLRepository for User.
  */
-public interface UserRepository extends CommonRepository<User> {
+public interface UserRepository extends GeneralRepository<User> {
 
     /**
      * This method returns user with the specified email.

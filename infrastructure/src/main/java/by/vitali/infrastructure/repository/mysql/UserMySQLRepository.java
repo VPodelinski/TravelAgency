@@ -18,7 +18,7 @@ import java.util.List;
  * The implementation repository for a user.
  */
 @Repository
-public class UserMySQLRepository extends CommonMySQLRepository<User> implements UserRepository {
+public class UserMySQLRepository extends GeneralMySQLRepository<User> implements UserRepository {
 
     @Autowired
     public UserMySQLRepository(final HibernateSessionManager sessionManager) {

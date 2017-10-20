@@ -18,7 +18,7 @@ import java.util.List;
  * The implementation repository for a order.
  */
 @Repository
-public class OrderMySQLRepository extends CommonMySQLRepository<Order> implements OrderRepository {
+public class OrderMySQLRepository extends GeneralMySQLRepository<Order> implements OrderRepository {
 
     @Autowired
     public OrderMySQLRepository(final HibernateSessionManager sessionManager) {
@@ -44,7 +44,6 @@ public class OrderMySQLRepository extends CommonMySQLRepository<Order> implement
             throw new DaoException(e.getMessage());
         }
     }
-
 
     @Override
     public Order getOrderByUserAndTour(final int idUser, final int idTour) throws DaoException {

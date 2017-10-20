@@ -6,7 +6,7 @@ import by.vitali.infrastructure.model.OrderStatus;
 /**
  * Repository for OrderStatus.
  */
-public interface OrderStatusRepository extends CommonRepository<OrderStatus> {
+public interface OrderStatusRepository extends GeneralRepository<OrderStatus> {
 
     /**
      * This method return order type.

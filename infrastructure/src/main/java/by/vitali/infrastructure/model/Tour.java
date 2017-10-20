@@ -107,7 +107,7 @@ public class Tour implements Serializable {
                 ", tourType=" + tourType +
                 ", transportType=" + transportType +
                 //", hotel=" + hotel +
-               // ", orders=" + orders +
+                //", orders=" + orders +
                 '}';
     }
 }

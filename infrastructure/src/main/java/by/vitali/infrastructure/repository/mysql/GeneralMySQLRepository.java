@@ -1,6 +1,6 @@
 package by.vitali.infrastructure.repository.mysql;
 
-import by.vitali.infrastructure.repository.CommonRepository;
+import by.vitali.infrastructure.repository.GeneralRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
@@ -16,11 +16,11 @@ import java.util.List;
  *
  * @param <T>
  */
-public class CommonMySQLRepository<T> implements CommonRepository<T> {
+public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
     private HibernateSessionManager sessionManager;
 
-    public CommonMySQLRepository(final HibernateSessionManager sessionManager) {
+    public GeneralMySQLRepository(final HibernateSessionManager sessionManager) {
         this.sessionManager = sessionManager;
     }
 

@@ -1,4 +1,4 @@
-package by.vitali.infrastructure.repository;
+package by.vitali.domain.services.interfaces;
 
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.Hotel;
@@ -7,10 +7,7 @@ import by.vitali.infrastructure.model.TypeOfMeals;
 
 import java.util.List;
 
-/**
- * Repository for Hotel.
- */
-public interface HotelRepository extends GeneralRepository<Hotel> {
+public interface HotelManagement extends GeneralManagement<Hotel> {
 
     /**
      * This method returns hotels depending on the type of meals.

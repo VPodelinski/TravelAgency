@@ -17,7 +17,7 @@ import java.util.List;
  * The implementation repository for a tour.
  */
 @Repository
-public class TourMySQLRepository extends CommonMySQLRepository<Tour> implements TourRepository {
+public class TourMySQLRepository extends GeneralMySQLRepository<Tour> implements TourRepository {
 
     @Autowired
     public TourMySQLRepository(final HibernateSessionManager sessionManager) {

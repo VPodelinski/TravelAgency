@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Repository for Tour.
  */
-public interface TourRepository extends CommonRepository<Tour> {
+public interface TourRepository extends GeneralRepository<Tour> {
 
 //*********************Think***************************
     /**

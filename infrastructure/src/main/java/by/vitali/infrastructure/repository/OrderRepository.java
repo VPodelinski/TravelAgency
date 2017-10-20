@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Repository for Order.
  */
-public interface OrderRepository extends CommonRepository<Order> {
+public interface OrderRepository extends GeneralRepository<Order> {
 
     /**
      * This method returns user's orders.

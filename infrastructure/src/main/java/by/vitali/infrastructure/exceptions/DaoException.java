@@ -1,7 +1,7 @@
 package by.vitali.infrastructure.exceptions;
 
 /**
- * My CommonRepository exception.
+ * My GeneralRepository exception.
  */
 public class DaoException extends Exception {
 

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * The implementation repository for a order status.
  */
 @Repository
-public class OrderStatusMySQLRepository extends CommonMySQLRepository<OrderStatus> implements OrderStatusRepository {
+public class OrderStatusMySQLRepository extends GeneralMySQLRepository<OrderStatus> implements OrderStatusRepository {
 
     @Autowired
     public OrderStatusMySQLRepository(final HibernateSessionManager sessionManager) {

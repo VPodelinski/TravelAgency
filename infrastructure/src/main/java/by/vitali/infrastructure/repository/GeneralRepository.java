@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Common  Repository interface.
  */
-public interface CommonRepository<T> {
+public interface GeneralRepository<T> {
 
     /**
      * This method saves object.

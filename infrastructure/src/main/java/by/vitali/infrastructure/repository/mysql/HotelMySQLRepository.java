@@ -19,7 +19,7 @@ import java.util.List;
  * The implementation repository for a hotel.
  */
 @Repository
-public class HotelMySQLRepository extends CommonMySQLRepository<Hotel> implements HotelRepository {
+public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implements HotelRepository {
 
     @Autowired
     public HotelMySQLRepository(final HibernateSessionManager sessionManager) {
