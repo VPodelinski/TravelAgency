@@ -13,7 +13,6 @@ public class Load {
     public static void main(String[] args) throws DaoException {
         ApplicationContext context = new ClassPathXmlApplicationContext("infrastructure-context.xml");
 
-
         UserMySQLRepository userMySQLRepository = (UserMySQLRepository) context.getBean("userMySQLRepository");
         TourMySQLRepository tourMySQLRepository = (TourMySQLRepository) context.getBean("tourMySQLRepository");
         HotelMySQLRepository hotelMySQLRepository = (HotelMySQLRepository) context.getBean("hotelMySQLRepository");
@@ -59,13 +58,13 @@ public class Load {
 
         Address address3 = new Address();
         address3.setCity("Praha");
-        address3.setStreet("Praha streett");
+        address3.setStreet("Praha street");
         address3.setNumberBuilding("89");
 
 
         Hotel hotel = new Hotel();
         hotel.setAddress(address);
-        hotel.setCategory(HotelCategory.FOUR);
+        hotel.setCategory(HotelCategory.FIVE);
         hotel.setTypeOfMeals(TypeOfMeals.OB);
 
         Hotel hotel2 = new Hotel();
@@ -100,7 +99,7 @@ public class Load {
         calendar.set(2017, Calendar.NOVEMBER, 2);
 
         Tour tour = new Tour("Tour to Spain", 600, 10, Country.SPAIN, TourType.REST);
-        tour.setHot(false);
+
         tour.setHotel(hotel);
         tour.setDepartureCity(DepartureCity.MINSK);
         tour.setTransportType(TransportType.BUS);
@@ -113,7 +112,7 @@ public class Load {
 
 
         Tour tour2 = new Tour("Tour to France", 1000, 7, Country.FRANCE, TourType.REST);
-        tour2.setHot(true);
+
         tour2.setHotel(hotel2);
         tour2.setDepartureCity(DepartureCity.WARSAW);
         tour2.setTransportType(TransportType.PLANE);
@@ -124,17 +123,26 @@ public class Load {
         calendar.set(2017, Calendar.DECEMBER, 23);
 
         Tour tour3 = new Tour("Tour to Czech Republic", 500, 2, Country.CZECH_REPUBLIC, TourType.EXCURSION);
-        tour3.setHot(true);
+
         tour3.setHotel(hotel3);
         tour3.setDepartureCity(DepartureCity.GRODNO);
         tour3.setTransportType(TransportType.BUS);
         //tour3.setOrders(orders);
         tour3.setDate(new java.sql.Date(calendar3.getTime().getTime()));
 
+        Tour tour4 = new Tour("Tour to Czech Republic2", 1500, 12, Country.CZECH_REPUBLIC, TourType.EXCURSION);
+
+        tour4.setHotel(hotel3);
+        tour4.setDepartureCity(DepartureCity.WARSAW);
+        tour4.setTransportType(TransportType.BUS);
+        //tour3.setOrders(orders);
+        tour4.setDate(new java.sql.Date(calendar3.getTime().getTime()));
 
         tourMySQLRepository.save(tour);
         tourMySQLRepository.save(tour2);
         tourMySQLRepository.save(tour3);
+        tourMySQLRepository.save(tour4);
+
 
         //*********************************create order
         //My order
@@ -168,7 +176,6 @@ public class Load {
         Set<Order> orders = new HashSet<>();
         orders.add(order);
         orders.add(order2);
-
 
         orderMySQLRepository.save(order);
         orderMySQLRepository.save(order2);
@@ -220,7 +227,8 @@ public class Load {
         for (Hotel hotel1 : hotelrequest3) {
             System.out.println("##getAll## TEST METHOD HOTEL" + hotel1);
         }
-        hotel3.setCategory(HotelCategory.FIVE);
+
+        hotel3.setCategory(HotelCategory.FOUR);
         hotelMySQLRepository.update(hotel3);
 
         Hotel hotelRead = hotelMySQLRepository.read(3, Hotel.class);
@@ -262,6 +270,15 @@ public class Load {
             System.out.println("##getToursWithLimit## TEST METHOD TOUR " + tour1);
         }
 
+        //List<Tour> tours2 = tourMySQLRepository.getToursByRequest(TourType.REST, Country.FRANCE,TransportType.PLANE,HotelCategory.FIVE,TypeOfMeals.AL);
+        List<Tour> tours2 = tourMySQLRepository.getToursByRequest(TourType.EXCURSION, Country.CZECH_REPUBLIC,TransportType.BUS,HotelCategory.FOUR,TypeOfMeals.BB);
+        System.out.println(tours2.size());
+        for (Tour tour1 : tours2) {
+            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+            System.out.println("##getToursByRequest## TEST METHOD TOUR " + tour1);
+            System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+        }
+
 
         System.out.println("#####################################################################################################");
         System.out.println("#################TEST ORDER###########################################");
@@ -285,9 +302,9 @@ public class Load {
             System.out.println("##getListUserOrders(user)## TEST METHOD ORDER " + order1);
         }
 
-        Order orders3 = orderMySQLRepository.getOrderByUserAndTour(1,3);
+        Order orders3 = orderMySQLRepository.getOrderByUserAndTour(1, 3);
 
-            System.out.println("##getOrderByUserAndTour## TEST METHOD ORDER " + orders3);
+        System.out.println("##getOrderByUserAndTour## TEST METHOD ORDER " + orders3);
 
     }
 

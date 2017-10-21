@@ -20,6 +20,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 @Entity
 @Table(name = "order_status")
 public class OrderStatus implements Serializable {
@@ -36,8 +37,6 @@ public class OrderStatus implements Serializable {
 
     @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
-
-
 
     @Override
     public String toString() {

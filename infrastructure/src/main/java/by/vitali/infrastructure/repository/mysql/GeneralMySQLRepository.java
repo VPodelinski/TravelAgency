@@ -7,6 +7,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
@@ -16,9 +18,10 @@ import java.util.List;
  *
  * @param <T>
  */
+
 public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
-    private HibernateSessionManager sessionManager;
+    final private HibernateSessionManager sessionManager;
 
     public GeneralMySQLRepository(final HibernateSessionManager sessionManager) {
         this.sessionManager = sessionManager;
@@ -30,11 +33,11 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
     @Override
     public T save(final T t) throws DaoException {
-        Transaction transaction = null;//
+        Transaction transaction = null;
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();//
+            transaction = session.beginTransaction();
             session.save(t);
-            transaction.commit();//
+            transaction.commit();
             return t;
         } catch (HibernateException e) {
             if (transaction != null) {
@@ -49,7 +52,7 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
         Transaction transaction = null;
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();
+            //transaction = session.beginTransaction();
             session.update(t);
             transaction.commit();
             return t;

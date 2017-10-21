@@ -3,7 +3,6 @@ package by.vitali.infrastructure.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,9 +24,9 @@ import java.util.Set;
 /**
  * This class describe tour parameters.
  */
-//@ToString
 @Getter
 @Setter
+@SuppressWarnings("PMD.ShortClassName" + "PMD.UnusedPrivateField")
 @Entity
 @Table(name = "tour")
 public class Tour implements Serializable {
@@ -48,13 +47,10 @@ public class Tour implements Serializable {
     @Column(name = "discount")
     private int discount;
 
-    @Column(name = "is_hot")
-    private boolean isHot;
-
     @Column(name = "duration")
     private int duration;
 
-    @Column(name = "date" )
+    @Column(name = "date")
     private Date date;
 
     @Column(name = "departure_city")
@@ -94,20 +90,19 @@ public class Tour implements Serializable {
 
     @Override
     public String toString() {
-        return "Tour{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", discount=" + discount +
-                ", isHot=" + isHot +
-                ", duration=" + duration +
-                ", date=" + date +
-                ", departureCity=" + departureCity +
-                ", country=" + country +
-                ", tourType=" + tourType +
-                ", transportType=" + transportType +
-                //", hotel=" + hotel +
-                //", orders=" + orders +
-                '}';
+        return "Tour{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", price=" + price
+                + ", discount=" + discount
+                + ", duration=" + duration
+                + ", date=" + date
+                + ", departureCity=" + departureCity
+                + ", country=" + country
+                + ", tourType=" + tourType
+                + ", transportType=" + transportType
+                + ", hotel=" + hotel
+                //+ ", orders=" + orders
+                + '}';
     }
 }

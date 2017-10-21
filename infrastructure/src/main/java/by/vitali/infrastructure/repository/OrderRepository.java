@@ -27,7 +27,7 @@ public interface OrderRepository extends GeneralRepository<Order> {
      * @return Order
      * @throws DaoException
      */
-    Order getOrderByUserAndTour(int idUser, int idTour) throws DaoException;
+    Order getOrderByUserAndTour(long idUser, long idTour) throws DaoException;
 
 //    /**
 //     * This method returns order depending on the order status.

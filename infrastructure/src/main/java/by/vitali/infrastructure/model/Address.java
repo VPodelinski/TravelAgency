@@ -1,6 +1,10 @@
 package by.vitali.infrastructure.model;
 
-import lombok.*;
+
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import java.io.Serializable;
@@ -11,8 +15,7 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
-//@RequiredArgsConstructor(staticName = "anAddress", access = AccessLevel.PUBLIC)
-
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 5274743189482560061L;
@@ -25,6 +28,5 @@ public class Address implements Serializable {
 
     @Column(name = "number_building")
     private String numberBuilding;
-
 
 }

@@ -1,5 +1,6 @@
-package by.vitali.domain.services.interfaces;
+package by.vitali.domain.services.management;
 
+import by.vitali.domain.services.exceptions.ServiceException;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.Hotel;
 import by.vitali.infrastructure.model.HotelCategory;
@@ -7,6 +8,9 @@ import by.vitali.infrastructure.model.TypeOfMeals;
 
 import java.util.List;
 
+/**
+ *
+ */
 public interface HotelManagement extends GeneralManagement<Hotel> {
 
     /**
@@ -15,7 +19,7 @@ public interface HotelManagement extends GeneralManagement<Hotel> {
      * @return List<Hotel>
      * @throws DaoException
      */
-    List<Hotel> getHotelsByTypeOfMeals(TypeOfMeals typeOfMeals) throws DaoException;
+    List<Hotel> getHotelsByTypeOfMeals(TypeOfMeals typeOfMeals) throws ServiceException;
 
     /**
      *This method returns hotels depending on the hotel category.
@@ -23,6 +27,12 @@ public interface HotelManagement extends GeneralManagement<Hotel> {
      * @return
      * @throws DaoException
      */
-    List<Hotel> getHotelsByHotelCategory(HotelCategory hotelCategory) throws DaoException;
+    List<Hotel> getHotelsByHotelCategory(HotelCategory hotelCategory) throws ServiceException;
+
+    /**
+     * This method creates hotel object.
+     * @throws ServiceException
+     */
+    void createHotel(String city, String street, String numbBuilding, HotelCategory category, TypeOfMeals typeOfMeals) throws ServiceException;
 
 }

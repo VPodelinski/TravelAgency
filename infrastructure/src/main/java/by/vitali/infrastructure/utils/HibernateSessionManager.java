@@ -19,6 +19,10 @@ public class HibernateSessionManager {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     *
+     * @return session
+     */
     public Session getSession() {
         Session session;
         try {

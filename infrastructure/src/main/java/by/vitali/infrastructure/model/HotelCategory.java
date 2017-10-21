@@ -38,5 +38,4 @@ public enum HotelCategory {
      * 7 stars.
      */
     SEVEN
-
 }

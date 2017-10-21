@@ -20,6 +20,7 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 @Entity
 @Table(name = "`order`")
 public class Order implements Serializable {

@@ -2,7 +2,6 @@ package by.vitali.infrastructure.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,9 +20,10 @@ import java.util.Set;
 /**
  * This class describe user.
  */
-@SuppressWarnings("PMD.ShortClassName")
+
 @Getter
 @Setter
+@SuppressWarnings("PMD.ShortClassName" + "PMD.UnusedPrivateField")
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -46,7 +46,6 @@ public class User implements Serializable {
 
     @Column(name = "password")
     private String password;
-
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)

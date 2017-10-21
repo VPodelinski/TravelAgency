@@ -1,7 +1,7 @@
 package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
-import by.vitali.infrastructure.model.Tour;
+import by.vitali.infrastructure.model.*;
 
 import java.util.List;
 
@@ -11,13 +11,18 @@ import java.util.List;
 public interface TourRepository extends GeneralRepository<Tour> {
 
 //*********************Think***************************
+
     /**
-     * This method returns tours appropriate to the request.
-     * @param request
-     * @return List<Tour>
+     *
+     * @param tourType
+     * @param country
+     * @param transportType
+     * @param category
+     * @param typeOfMeals
+     * @return
      * @throws DaoException
      */
-    List<Tour> getToursByRequest(String request) throws DaoException;
+    List<Tour> getToursByRequest(TourType tourType, Country country, TransportType transportType, HotelCategory category, TypeOfMeals typeOfMeals) throws DaoException;
 
     /**
      * This method returns a limited list of tours.

@@ -51,7 +51,7 @@ public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implemen
     public List<Hotel> getHotelsByHotelCategory(final HotelCategory hotelCategory) throws DaoException {
         Transaction transaction = null;
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();
+           transaction = session.beginTransaction();
             final String hql = "SELECT H FROM Hotel H WHERE category=:category";
             final Query query = session.createQuery(hql);
             query.setParameter("category", hotelCategory);

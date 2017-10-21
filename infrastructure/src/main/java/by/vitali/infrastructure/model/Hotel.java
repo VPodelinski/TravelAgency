@@ -2,7 +2,6 @@ package by.vitali.infrastructure.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,7 +23,7 @@ import java.util.Set;
  */
 @Getter
 @Setter
-
+@SuppressWarnings("PMD.UnusedPrivateField")
 @Entity
 @Table(name = "hotel")
 public class Hotel implements Serializable {
@@ -61,12 +60,12 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "id=" + id +
-                ", address=" + address +
-                ", category=" + category +
-                ", typeOfMeals=" + typeOfMeals +
+        return "Hotel{"
+                + "id=" + id
+                + ", address=" + address
+                + ", category=" + category
+                + ", typeOfMeals=" + typeOfMeals
                 //", tours=" + tours +
-                '}';
+                + '}';
     }
 }

@@ -46,7 +46,7 @@ public class UserMySQLRepository extends GeneralMySQLRepository<User> implements
     }
 
     @Override
-    public User getUserByEmailAndPassword(String email, String password) throws DaoException {
+    public User getUserByEmailAndPassword(final String email, final String password) throws DaoException {
 
             Transaction transaction = null;
             try (final Session session = getSession()) {
