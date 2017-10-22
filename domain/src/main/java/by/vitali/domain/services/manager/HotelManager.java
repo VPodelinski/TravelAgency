@@ -16,14 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- *
+ * Hotel manager.
  */
 @Service
 //@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class ,readOnly = false)
 public class HotelManager implements HotelManagement {
 
     private HotelRepository hotelRepository;
-
 
     @Autowired
     public HotelManager(HotelRepository hotelRepository) {

@@ -9,7 +9,7 @@ import by.vitali.infrastructure.model.TypeOfMeals;
 import java.util.List;
 
 /**
- *
+ * Interface for hotel manager.
  */
 public interface HotelManagement extends GeneralManagement<Hotel> {
 

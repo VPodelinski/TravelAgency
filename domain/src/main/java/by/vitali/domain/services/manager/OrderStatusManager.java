@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- *
+ * Order status manager.
  */
 @Service
 //@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class)

@@ -6,6 +6,8 @@ import by.vitali.infrastructure.model.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Map;
+
 public class Load2 {
     public static void main(String[] args) throws ServiceException {
 
@@ -67,6 +69,20 @@ public class Load2 {
 
 //************************create order*******************
         orderManager.reserveTour(tourManager.read(1),user1,orderStatusManager.read(1).getStatus());
-        orderManager.deleteOrder(user1, tourManager.read(1));
+       // orderManager.deleteOrder(user1, tourManager.read(1));
+
+        Map<Long, String> map = orderManager.getUserOrders(user1);
+        System.out.println( map.size());
+
+        for (Map.Entry<Long, String> pair : map.entrySet())
+        {
+            Long key = pair.getKey();                      //ключ
+            String value = pair.getValue();                  //значение
+            System.out.println(key + ":" + value);
+        }
+
+        //test all methods
+
+
     }
 }

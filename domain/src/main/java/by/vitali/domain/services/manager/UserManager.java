@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- *
+ * User manager.
  */
 @Service
 //@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class)

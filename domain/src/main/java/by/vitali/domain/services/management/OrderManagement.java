@@ -8,12 +8,12 @@ import by.vitali.infrastructure.model.User;
 import java.util.Map;
 
 /**
- *
+ * Interface for order manager.
  */
 public interface OrderManagement extends GeneralManagement<Order> {
 
     /**
-     *
+     * This method returns user's orders.
      * @param user
      * @return
      * @throws Exception
@@ -21,7 +21,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
     Map<Long, String> getUserOrders(User user) throws ServiceException;
 
     /**
-     *
+     * This method removes user's order.
      * @param user
      * @param tour
      * @throws Exception
@@ -29,7 +29,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
     void deleteOrder(User user, Tour tour) throws ServiceException;
 
     /**
-     *
+     * This method saves (reserves) user's order.
      * @param tour
      * @param user
      * @param orderStatus

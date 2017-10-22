@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Tour manager.
  */
 @Service
 //@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class)
