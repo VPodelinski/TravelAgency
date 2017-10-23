@@ -20,7 +20,7 @@ import java.util.Map;
  * Order manager.
  */
 @Service
-//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class)
+@Transactional(propagation = Propagation.REQUIRED)
 public class OrderManager implements OrderManagement {
 
     private OrderRepository orderRepository;

@@ -20,7 +20,7 @@ import java.util.Map;
  * Tour manager.
  */
 @Service
-//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class)
+@Transactional(propagation = Propagation.REQUIRED)
 public class TourManager implements TourManagement {
 
     private TourRepository tourRepository;
@@ -76,7 +76,7 @@ public class TourManager implements TourManagement {
     public void makeDiscount(final long idTour, final int discount) throws ServiceException {
         try {
             Tour tour = tourRepository.read(idTour, Tour.class);
-            tour.setDiscount(tour.getDiscount() - discount);
+            tour.setDiscount(discount);
             //or discount
             update(tour);
         } catch (DaoException e) {
@@ -86,7 +86,7 @@ public class TourManager implements TourManagement {
     }
 
     @Override
-    public Map<Long, String> getMapToursByRequest(final TourType tourType, final Country country, final TransportType transportType, final HotelCategory hotelCategory, final TypeOfMeals typeOfMeals) throws Exception {
+    public Map<Long, String> getMapToursByRequest(final TourType tourType, final Country country, final TransportType transportType, final HotelCategory hotelCategory, final TypeOfMeals typeOfMeals) throws ServiceException {
         try {
             List<Tour> list = tourRepository.getToursByRequest(tourType, country, transportType, hotelCategory, typeOfMeals);
 

@@ -17,7 +17,7 @@ import java.util.List;
  * User manager.
  */
 @Service
-//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class)
+@Transactional(propagation = Propagation.REQUIRED)
 public class UserManager implements UserManagement {
 
     private UserRepository userRepository;

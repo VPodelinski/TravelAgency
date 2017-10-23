@@ -19,7 +19,7 @@ import java.util.List;
  * Hotel manager.
  */
 @Service
-//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class ,readOnly = false)
+@Transactional(propagation = Propagation.REQUIRED)
 public class HotelManager implements HotelManagement {
 
     private HotelRepository hotelRepository;

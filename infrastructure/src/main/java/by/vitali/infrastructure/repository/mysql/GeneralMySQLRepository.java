@@ -52,7 +52,7 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
         Transaction transaction = null;
         try (final Session session = getSession()) {
-            //transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.update(t);
             transaction.commit();
             return t;

@@ -17,7 +17,7 @@ import java.util.List;
  * Order status manager.
  */
 @Service
-//@Transactional(propagation = Propagation.REQUIRED, rollbackFor = DaoException.class)
+@Transactional(propagation = Propagation.REQUIRED)
 public class OrderStatusManager implements OrderStatusManagement {
 
     private OrderStatusRepository orderStatusRepository;
