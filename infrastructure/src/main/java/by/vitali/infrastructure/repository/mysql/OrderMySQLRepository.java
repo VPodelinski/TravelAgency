@@ -28,38 +28,34 @@ public class OrderMySQLRepository extends GeneralMySQLRepository<Order> implemen
 
     @Override
     public List<Order> getListUserOrders(final User user) throws DaoException {
-        Transaction transaction = null;
+
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();
+
             final String hql = "SELECT O FROM Order O WHERE user_id=:id";
             final Query query = session.createQuery(hql);
             query.setParameter("id", user.getId());
-            transaction.commit();
+
             return (List<Order>) query.list();
         } catch (HibernateException e) {
             //log.error
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             throw new DaoException(e.getMessage());
         }
     }
 
     @Override
     public Order getOrderByUserAndTour(final long idUser, final long idTour) throws DaoException {
-        Transaction transaction = null;
+
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();
+
             final String hql = "SELECT O FROM Order O WHERE user_id=:user_id AND tour_id=:tour_id";
             final Query query = session.createQuery(hql);
             query.setParameter("user_id", idUser).setParameter("tour_id", idTour);
-            transaction.commit();
+
             return (Order) query.uniqueResult();
         } catch (HibernateException e) {
             //log.error
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             throw new DaoException(e.getMessage());
         }
     }

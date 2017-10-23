@@ -26,9 +26,9 @@ public class TourMySQLRepository extends GeneralMySQLRepository<Tour> implements
 
     @Override
     public List<Tour> getToursByRequest(final TourType tourType, final Country country, final TransportType transportType, final HotelCategory hotelCategory, final TypeOfMeals typeOfMeals) throws DaoException {
-        Transaction transaction = null;
+
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();
+
 
             final String sql = "SELECT *  FROM tour INNER JOIN hotel WHERE"
                     + " tour.tour_type = '" + tourType + "' AND"
@@ -38,53 +38,47 @@ public class TourMySQLRepository extends GeneralMySQLRepository<Tour> implements
                     + " hotel.type_of_meals = '" + typeOfMeals + "'";
 
             final Query query = session.createNativeQuery(sql).addEntity(Tour.class);
-            transaction.commit();
+
             return (List<Tour>) query.list();
         } catch (HibernateException e) {
             //log.error
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             throw new DaoException(e.getMessage());
         }
     }
 
     @Override
     public List<Tour> getToursWithLimit(final int start, final int size) throws DaoException {
-        Transaction transaction = null;
+
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();
+
             final Query query = session.createQuery("FROM Tour");
             query.setFirstResult(start);
             query.setMaxResults(size);
-            transaction.commit();
+
             return (List<Tour>) query.list();
         } catch (HibernateException e) {
             //log.error
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             throw new DaoException(e.getMessage());
         }
     }
 
     @Override
     public int getCountTours() throws DaoException {
-        Transaction transaction = null;
+
         try (final Session session = getSession()) {
 
-            transaction = session.beginTransaction();
+
             final String hql = "SELECT COUNT(DISTINCT T.id) FROM Tour T";
             final Query query = session.createQuery(hql);
             final long count = (long) query.uniqueResult();
-            transaction.commit();
+
             return (int) count;
 
         } catch (HibernateException e) {
             //log.error
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             throw new DaoException(e.getMessage());
         }
     }

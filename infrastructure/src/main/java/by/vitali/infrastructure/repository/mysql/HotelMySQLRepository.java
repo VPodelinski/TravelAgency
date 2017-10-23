@@ -29,19 +29,17 @@ public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implemen
 
     @Override
     public List<Hotel> getHotelsByTypeOfMeals(final TypeOfMeals typeOfMeals) throws DaoException {
-        Transaction transaction = null;
+
         try (final Session session = getSession()) {
-            transaction = session.beginTransaction();
+
             final String hql = "SELECT H FROM Hotel H WHERE type_of_meals=:type_of_meals";
             final Query query = session.createQuery(hql);
             query.setParameter("type_of_meals", typeOfMeals.toString());
-            transaction.commit();
+
             return (List<Hotel>) query.list();
         } catch (HibernateException e) {
             //log.error
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             throw new DaoException(e.getMessage());
         }
     }
@@ -49,19 +47,17 @@ public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implemen
 
     @Override
     public List<Hotel> getHotelsByHotelCategory(final HotelCategory hotelCategory) throws DaoException {
-        Transaction transaction = null;
+
         try (final Session session = getSession()) {
-           transaction = session.beginTransaction();
+
             final String hql = "SELECT H FROM Hotel H WHERE category=:category";
             final Query query = session.createQuery(hql);
             query.setParameter("category", hotelCategory);
-            transaction.commit();
+
             return (List<Hotel>) query.list();
         } catch (HibernateException e) {
             //log.error
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             throw new DaoException(e.getMessage());
         }
     }
