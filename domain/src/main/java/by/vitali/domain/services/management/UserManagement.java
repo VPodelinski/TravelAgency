@@ -11,6 +11,7 @@ public interface UserManagement extends GeneralManagement<User> {
 
     /**
      * This the method authorizes user.
+     *
      * @param email
      * @param password
      * @return boolean
@@ -20,6 +21,7 @@ public interface UserManagement extends GeneralManagement<User> {
 
     /**
      * This method check user's role type.
+     *
      * @param email
      * @return role
      * @throws Exception
@@ -28,6 +30,7 @@ public interface UserManagement extends GeneralManagement<User> {
 
     /**
      * This method returns user by email.
+     *
      * @param email
      * @return user
      * @throws Exception
@@ -36,6 +39,7 @@ public interface UserManagement extends GeneralManagement<User> {
 
     /**
      * This method checks is the user new.
+     *
      * @param email
      * @return boolean
      * @throws Exception

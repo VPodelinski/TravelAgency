@@ -7,7 +7,7 @@ import by.vitali.infrastructure.repository.OrderRepository;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,8 +29,8 @@ public class OrderMySQLRepository extends GeneralMySQLRepository<Order> implemen
     @Override
     public List<Order> getListUserOrders(final User user) throws DaoException {
 
-        try (final Session session = getSession()) {
-
+        try {
+            final Session session = getSession();
             final String hql = "SELECT O FROM Order O WHERE user_id=:id";
             final Query query = session.createQuery(hql);
             query.setParameter("id", user.getId());
@@ -46,8 +46,8 @@ public class OrderMySQLRepository extends GeneralMySQLRepository<Order> implemen
     @Override
     public Order getOrderByUserAndTour(final long idUser, final long idTour) throws DaoException {
 
-        try (final Session session = getSession()) {
-
+        try {
+            final Session session = getSession();
             final String hql = "SELECT O FROM Order O WHERE user_id=:user_id AND tour_id=:tour_id";
             final Query query = session.createQuery(hql);
             query.setParameter("user_id", idUser).setParameter("tour_id", idTour);

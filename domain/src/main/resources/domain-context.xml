@@ -14,10 +14,10 @@
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <import resource="classpath*:infrastructure-context.xml"/>
-    <context:component-scan base-package="by.vitali.domain.services.manager"/>
-    <aop:aspectj-autoproxy/>
+    <context:component-scan base-package="by.vitali.domain.services"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <bean id="serviceTransactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+    <bean id="serviceTransactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

@@ -19,18 +19,18 @@ import java.util.List;
  * Hotel manager.
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional
 public class HotelManager implements HotelManagement {
 
     private HotelRepository hotelRepository;
 
     @Autowired
-    public HotelManager(HotelRepository hotelRepository) {
+    public HotelManager(final HotelRepository hotelRepository) {
         this.hotelRepository = hotelRepository;
     }
 
     @Override
-    public List<Hotel> getHotelsByTypeOfMeals(TypeOfMeals typeOfMeals) throws ServiceException {
+    public List<Hotel> getHotelsByTypeOfMeals(final TypeOfMeals typeOfMeals) throws ServiceException {
         try {
             return hotelRepository.getHotelsByTypeOfMeals(typeOfMeals);
         } catch (DaoException e) {

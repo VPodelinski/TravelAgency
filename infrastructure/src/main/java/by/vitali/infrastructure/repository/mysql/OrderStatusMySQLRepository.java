@@ -6,6 +6,7 @@ import by.vitali.infrastructure.repository.OrderStatusRepository;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,9 @@ public class OrderStatusMySQLRepository extends GeneralMySQLRepository<OrderStat
     @Override
     public OrderStatus getOrderStatusByOrderStatus(final String status) throws DaoException {
 
-        try (final Session session = getSession()) {
+        try {
 
+            final Session session = getSession();
             final String hql = "SELECT OS FROM OrderStatus OS WHERE OS.status=:status";
             final Query query = session.createQuery(hql);
             query.setParameter("status", status);

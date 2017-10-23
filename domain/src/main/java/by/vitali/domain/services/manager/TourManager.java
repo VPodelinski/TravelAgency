@@ -24,12 +24,13 @@ import java.util.Map;
 public class TourManager implements TourManagement {
 
     private TourRepository tourRepository;
-    @Autowired
+
     private HotelRepository hotelRepository;
 
     @Autowired
-    public TourManager(TourRepository tourRepository) {
+    public TourManager(final TourRepository tourRepository, final HotelRepository hotelRepository) {
         this.tourRepository = tourRepository;
+        this.hotelRepository = hotelRepository;
     }
 
     @Override

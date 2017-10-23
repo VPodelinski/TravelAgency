@@ -1,15 +1,11 @@
 package by.vitali.infrastructure.repository.mysql;
 
-import by.vitali.infrastructure.repository.GeneralRepository;
 import by.vitali.infrastructure.exceptions.DaoException;
+import by.vitali.infrastructure.repository.GeneralRepository;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 
@@ -34,8 +30,9 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
     @Override
     public T save(final T t) throws DaoException {
 
-        try (final Session session = getSession()) {
+        try {
 
+            final Session session = getSession();
             session.save(t);
 
             return t;
@@ -49,8 +46,9 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
     public T update(final T t) throws DaoException {
 
 
-        try (final Session session = getSession()) {
+        try {
 
+            final Session session = getSession();
             session.update(t);
 
             return t;
@@ -65,8 +63,8 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
     public T delete(final T t) throws DaoException {
 
 
-        try (final Session session = getSession()) {
-
+        try {
+            final Session session = getSession();
             session.delete(t);
 
             return t;
@@ -80,8 +78,9 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
     @Override
     public T read(final long id, final Class<T> type) throws DaoException {
 
-        try (final Session session = getSession()) {
+        try {
 
+            final Session session = getSession();
             final String hql = "SELECT T FROM " + type.getName() + " T WHERE T.id=:id";
             final Query query = session.createQuery(hql);
             query.setParameter("id", id);
@@ -97,8 +96,9 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
     @Override
     public List<T> getAll(final Class<T> type) throws DaoException {
 
-        try (final Session session = getSession()) {
+        try {
 
+            final Session session = getSession();
             final String hql = "FROM " + type.getName();
             final Query query = session.createQuery(hql);
 

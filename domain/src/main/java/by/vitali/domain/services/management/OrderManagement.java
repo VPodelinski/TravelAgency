@@ -14,6 +14,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
 
     /**
      * This method returns user's orders.
+     *
      * @param user
      * @return
      * @throws Exception
@@ -22,6 +23,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
 
     /**
      * This method removes user's order.
+     *
      * @param user
      * @param tour
      * @throws Exception
@@ -30,6 +32,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
 
     /**
      * This method saves (reserves) user's order.
+     *
      * @param tour
      * @param user
      * @param orderStatus

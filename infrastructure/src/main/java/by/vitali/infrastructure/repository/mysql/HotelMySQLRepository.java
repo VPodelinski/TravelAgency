@@ -8,7 +8,7 @@ import by.vitali.infrastructure.repository.HotelRepository;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,8 +30,8 @@ public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implemen
     @Override
     public List<Hotel> getHotelsByTypeOfMeals(final TypeOfMeals typeOfMeals) throws DaoException {
 
-        try (final Session session = getSession()) {
-
+        try {
+            final Session session = getSession();
             final String hql = "SELECT H FROM Hotel H WHERE type_of_meals=:type_of_meals";
             final Query query = session.createQuery(hql);
             query.setParameter("type_of_meals", typeOfMeals.toString());
@@ -48,8 +48,8 @@ public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implemen
     @Override
     public List<Hotel> getHotelsByHotelCategory(final HotelCategory hotelCategory) throws DaoException {
 
-        try (final Session session = getSession()) {
-
+        try {
+            final Session session = getSession();
             final String hql = "SELECT H FROM Hotel H WHERE category=:category";
             final Query query = session.createQuery(hql);
             query.setParameter("category", hotelCategory);

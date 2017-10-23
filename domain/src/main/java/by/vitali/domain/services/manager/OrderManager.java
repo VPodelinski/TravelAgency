@@ -23,17 +23,18 @@ import java.util.Map;
 @Transactional(propagation = Propagation.REQUIRED)
 public class OrderManager implements OrderManagement {
 
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
+
+    private final TourManagement tourManagement;
+
+    private final OrderStatusRepository orderStatusRepository;
 
     @Autowired
-    private TourManagement tourManagement;
-
-    @Autowired
-    private OrderStatusRepository orderStatusRepository;
-
-    @Autowired
-    public OrderManager(OrderRepository orderRepository) {
+    public OrderManager(final TourManagement tourManagement, final OrderRepository orderRepository,
+                        final OrderStatusRepository orderStatusRepository) {
+        this.tourManagement = tourManagement;
         this.orderRepository = orderRepository;
+        this.orderStatusRepository = orderStatusRepository;
     }
 
     @Override

@@ -39,7 +39,7 @@ public class UserManager implements UserManagement {
 
     @Override
     public void update(User type) throws ServiceException {
-
+        throw new IllegalStateException("User update can't be call");
     }
 
     @Override
