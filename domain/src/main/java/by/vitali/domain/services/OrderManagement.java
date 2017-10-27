@@ -1,4 +1,4 @@
-package by.vitali.domain.services.management;
+package by.vitali.domain.services;
 
 import by.vitali.domain.services.exceptions.ServiceException;
 import by.vitali.infrastructure.model.Order;

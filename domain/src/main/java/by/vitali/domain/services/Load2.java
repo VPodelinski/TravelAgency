@@ -1,7 +1,6 @@
 package by.vitali.domain.services;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.manager.*;
 import by.vitali.infrastructure.model.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

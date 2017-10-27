@@ -1,7 +1,7 @@
-package by.vitali.domain.services.manager;
+package by.vitali.domain.services;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.management.OrderStatusManagement;
+import by.vitali.domain.services.OrderStatusManagement;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.OrderStatus;
 import by.vitali.infrastructure.repository.OrderStatusRepository;

@@ -1,7 +1,7 @@
-package by.vitali.domain.services.manager;
+package by.vitali.domain.services;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.management.UserManagement;
+import by.vitali.domain.services.UserManagement;
 import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.User;
 import by.vitali.infrastructure.repository.UserRepository;

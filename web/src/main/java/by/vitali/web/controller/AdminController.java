@@ -2,8 +2,8 @@ package by.vitali.web.controller;
 
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.management.HotelManagement;
-import by.vitali.domain.services.management.TourManagement;
+import by.vitali.domain.services.HotelManagement;
+import by.vitali.domain.services.TourManagement;
 import by.vitali.infrastructure.model.Country;
 import by.vitali.infrastructure.model.DepartureCity;
 import by.vitali.infrastructure.model.HotelCategory;

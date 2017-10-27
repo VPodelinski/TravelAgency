@@ -2,9 +2,9 @@ package by.vitali.web.controller;
 
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.management.OrderManagement;
-import by.vitali.domain.services.management.OrderStatusManagement;
-import by.vitali.domain.services.management.TourManagement;
+import by.vitali.domain.services.OrderManagement;
+import by.vitali.domain.services.OrderStatusManagement;
+import by.vitali.domain.services.TourManagement;
 import by.vitali.infrastructure.model.*;
 import by.vitali.web.constants.MessageConstants;
 import by.vitali.web.constants.PagePathConstants;

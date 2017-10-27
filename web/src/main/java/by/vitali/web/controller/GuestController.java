@@ -1,7 +1,7 @@
 package by.vitali.web.controller;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.management.UserManagement;
+import by.vitali.domain.services.UserManagement;
 import by.vitali.infrastructure.model.RoleType;
 import by.vitali.infrastructure.model.User;
 import by.vitali.web.constants.MessageConstants;
