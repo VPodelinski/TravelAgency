@@ -20,14 +20,13 @@ public class HibernateSessionManager {
     }
 
     /**
-     *
      * @return session
      */
     public Session getSession() {
         Session session;
         try {
             session = sessionFactory.getCurrentSession();
-        } catch (org.hibernate.HibernateException he) {
+        } catch (org.hibernate.HibernateException e) {
             session = sessionFactory.openSession();
         }
         return session;

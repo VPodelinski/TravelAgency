@@ -1,7 +1,13 @@
 package by.vitali.infrastructure.repository;
 
 import by.vitali.infrastructure.exceptions.DaoException;
-import by.vitali.infrastructure.model.*;
+import by.vitali.infrastructure.model.Country;
+import by.vitali.infrastructure.model.HotelCategory;
+import by.vitali.infrastructure.model.Tour;
+import by.vitali.infrastructure.model.TourType;
+import by.vitali.infrastructure.model.TransportType;
+import by.vitali.infrastructure.model.TypeOfMeals;
+
 
 import java.util.List;
 
@@ -10,10 +16,7 @@ import java.util.List;
  */
 public interface TourRepository extends GeneralRepository<Tour> {
 
-//*********************Think***************************
-
     /**
-     *
      * @param tourType
      * @param country
      * @param transportType
@@ -22,13 +25,16 @@ public interface TourRepository extends GeneralRepository<Tour> {
      * @return
      * @throws DaoException
      */
-    List<Tour> getToursByRequest(TourType tourType, Country country, TransportType transportType, HotelCategory category, TypeOfMeals typeOfMeals) throws DaoException;
+    List<Tour> getToursByRequest(TourType tourType, Country country,
+                                 TransportType transportType, HotelCategory category,
+                                 TypeOfMeals typeOfMeals) throws DaoException;
 
     /**
      * This method returns a limited list of tours.
+     *
      * @param start
      * @param size
-     * @return  List<Tour>
+     * @return List<Tour>
      * @throws DaoException
      */
 
@@ -36,6 +42,7 @@ public interface TourRepository extends GeneralRepository<Tour> {
 
     /**
      * This method returns count of tours.
+     *
      * @return int count
      * @throws DaoException
      */

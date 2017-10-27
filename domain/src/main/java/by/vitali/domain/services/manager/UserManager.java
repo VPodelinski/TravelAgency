@@ -7,9 +7,7 @@ import by.vitali.infrastructure.model.User;
 import by.vitali.infrastructure.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.List;
 
@@ -17,18 +15,18 @@ import java.util.List;
  * User manager.
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional
 public class UserManager implements UserManagement {
 
-    private UserRepository userRepository;
+    final private UserRepository userRepository;
 
     @Autowired
-    public UserManager(UserRepository userRepository) {
+    public UserManager(final UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
-    public void save(User type) throws ServiceException {
+    public void save(final User type) throws ServiceException {
         try {
             userRepository.save(type);
         } catch (DaoException e) {
@@ -38,12 +36,12 @@ public class UserManager implements UserManagement {
     }
 
     @Override
-    public void update(User type) throws ServiceException {
+    public void update(final User type) throws ServiceException {
         throw new IllegalStateException("User update can't be call");
     }
 
     @Override
-    public User read(long id) throws ServiceException {
+    public User read(final long id) throws ServiceException {
         try {
             return userRepository.read(id, User.class);
         } catch (DaoException e) {
@@ -63,7 +61,7 @@ public class UserManager implements UserManagement {
     }
 
     @Override
-    public User getUserByEmail(String email) throws ServiceException {
+    public User getUserByEmail(final String email) throws ServiceException {
         try {
             return userRepository.getUserByEmail(email);
         } catch (DaoException e) {
@@ -73,12 +71,13 @@ public class UserManager implements UserManagement {
     }
 
     @Override
-    public boolean authorized(String email, String password) throws ServiceException {
+    public boolean authorized(final String email, final String password) throws ServiceException {
         try {
             boolean isauthorized = false;
-            User user = userRepository.getUserByEmailAndPassword(email, password);
-            if (user != null)
+            final User user = userRepository.getUserByEmailAndPassword(email, password);
+            if (user != null) {
                 isauthorized = true;
+            }
             return isauthorized;
         } catch (DaoException e) {
             //logger
@@ -87,11 +86,11 @@ public class UserManager implements UserManagement {
     }
 
     @Override
-    public String checkRole(String email) throws ServiceException {
+    public String checkRole(final String email) throws ServiceException {
         //String or RoleType
         try {
-            User user = userRepository.getUserByEmail(email);
-            String roleType = user.getRole().toString();
+            final User user = userRepository.getUserByEmail(email);
+            final String roleType = user.getRole().toString();
             return roleType;
         } catch (DaoException e) {
             //logger
@@ -100,12 +99,13 @@ public class UserManager implements UserManagement {
     }
 
     @Override
-    public boolean isNewUser(String email) throws ServiceException {
+    public boolean isNewUser(final String email) throws ServiceException {
         try {
             boolean isNew = true;
-            User user = userRepository.getUserByEmail(email);
-            if (user != null)
+            final User user = userRepository.getUserByEmail(email);
+            if (user != null) {
                 isNew = false;
+            }
             return isNew;
         } catch (DaoException e) {
             //logger

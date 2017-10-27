@@ -1,9 +1,14 @@
-package by.it_academy.agency.managers;
+package by.vitali.web.managers;
 
-import by.it_academy.agency.constants.PagePathConstants;
+
+
+import by.vitali.web.constants.PagePathConstants;
 
 import java.util.ResourceBundle;
 
+/**
+ *
+ */
 public enum MessageManager implements Manager {
 
     INSTANCE;

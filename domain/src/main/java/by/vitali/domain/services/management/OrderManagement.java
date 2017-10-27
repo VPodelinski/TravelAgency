@@ -17,7 +17,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
      *
      * @param user
      * @return
-     * @throws Exception
+     * @throws ServiceException
      */
     Map<Long, String> getUserOrders(User user) throws ServiceException;
 
@@ -26,7 +26,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
      *
      * @param user
      * @param tour
-     * @throws Exception
+     * @throws ServiceException
      */
     void deleteOrder(User user, Tour tour) throws ServiceException;
 
@@ -36,7 +36,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
      * @param tour
      * @param user
      * @param orderStatus
-     * @throws Exception
+     * @throws ServiceException
      */
     void reserveTour(Tour tour, User user, String orderStatus) throws ServiceException;
 

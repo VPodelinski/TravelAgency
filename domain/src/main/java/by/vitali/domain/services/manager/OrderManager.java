@@ -2,14 +2,16 @@ package by.vitali.domain.services.manager;
 
 import by.vitali.domain.services.exceptions.ServiceException;
 import by.vitali.domain.services.management.OrderManagement;
+import by.vitali.domain.services.management.OrderStatusManagement;
 import by.vitali.domain.services.management.TourManagement;
 import by.vitali.infrastructure.exceptions.DaoException;
-import by.vitali.infrastructure.model.*;
+import by.vitali.infrastructure.model.Order;
+import by.vitali.infrastructure.model.Tour;
+import by.vitali.infrastructure.model.User;
 import by.vitali.infrastructure.repository.OrderRepository;
 import by.vitali.infrastructure.repository.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
@@ -20,7 +22,7 @@ import java.util.Map;
  * Order manager.
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional
 public class OrderManager implements OrderManagement {
 
     private final OrderRepository orderRepository;
@@ -29,16 +31,20 @@ public class OrderManager implements OrderManagement {
 
     private final OrderStatusRepository orderStatusRepository;
 
+    private final OrderStatusManagement orderStatusManagement;
+
+
     @Autowired
     public OrderManager(final TourManagement tourManagement, final OrderRepository orderRepository,
-                        final OrderStatusRepository orderStatusRepository) {
+                        final OrderStatusRepository orderStatusRepository, OrderStatusManagement orderStatusManagement) {
         this.tourManagement = tourManagement;
         this.orderRepository = orderRepository;
         this.orderStatusRepository = orderStatusRepository;
+        this.orderStatusManagement = orderStatusManagement;
     }
 
     @Override
-    public void save(Order type) throws ServiceException {
+    public void save(final Order type) throws ServiceException {
         try {
             orderRepository.save(type);
         } catch (DaoException e) {
@@ -48,12 +54,17 @@ public class OrderManager implements OrderManagement {
     }
 
     @Override
-    public void update(Order type) throws ServiceException {
-
+    public void update(final Order type) throws ServiceException {
+        try {
+            orderRepository.update(type);
+        } catch (DaoException e) {
+            // logger
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @Override
-    public Order read(long id) throws ServiceException {
+    public Order read(final long id) throws ServiceException {
         try {
             return orderRepository.read(id, Order.class);
         } catch (DaoException e) {
@@ -73,12 +84,12 @@ public class OrderManager implements OrderManagement {
     }
 
     @Override
-    public Map<Long, String> getUserOrders(User user) throws ServiceException {
+    public Map<Long, String> getUserOrders(final User user) throws ServiceException {
         try {
-            List<Order> orders = orderRepository.getListUserOrders(user);
-            Map<Long, String> map = new HashMap<>();
-            for (Order order : orders) {
-                long id = order.getId();
+            final List<Order> orders = orderRepository.getListUserOrders(user);
+            final Map<Long, String> map = new HashMap<>();
+            for (final Order order : orders) {
+                final long id = order.getId();
                 map.put(id, tourManagement.convertTourToString(id));
             }
             return map;
@@ -89,22 +100,23 @@ public class OrderManager implements OrderManagement {
     }
 
     @Override
-    public void deleteOrder(User user, Tour tour) throws ServiceException {
+    public void deleteOrder(final User user, final Tour tour) throws ServiceException {
         try {
-            Order order = orderRepository.getOrderByUserAndTour(user.getId(), tour.getId());
+            final Order order = orderRepository.getOrderByUserAndTour(user.getId(), tour.getId());
             orderRepository.delete(order);
         } catch (DaoException e) {
-           // logger.writeLog("ActionService deleteActions error:" + e.getMessage());
+            // logger.writeLog("ActionService deleteActions error:" + e.getMessage());
             throw new ServiceException(e.getMessage());
         }
     }
 
     @Override
-    public void reserveTour(Tour tour, User user, String orderStatus) throws ServiceException {
+    public void reserveTour(final Tour tour, final User user, final String orderStatus) throws ServiceException {
         try {
-            Order order= new Order();
+            final Order order = new Order();
             order.setTour(tour);
             order.setUser(user);
+            orderStatusManagement.createOrderStatus(orderStatus);
             order.setOrderStatus(orderStatusRepository.getOrderStatusByOrderStatus(orderStatus));
             save(order);
         } catch (DaoException e) {

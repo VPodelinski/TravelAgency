@@ -1,81 +1,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 
-<form class="form-horizontal" action="/user/select" method="post">
+<form action="/user/select" method="post">
     <fieldset>
 
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="tourType">Type tour</label>
-
-            <div class="col-md-4">
-                <select id="tourType" name="tourType" class="form-control">
-                    <c:forEach var="TourType" items="${tourTypeList}">
-                        <option value="${TourType.id}">${TourType.tourType}</option>
+        <%--select tour type--%>
+        <div>
+            <select name="tourType">
+                <c:forEach var="tourType" items="${tourTypeList}">
+                    <option tourType="${tourType}"> ${tourType}</option>
+                </c:forEach>
+            </select>
+            <span>Select tour type</span>
+        </div>
+        <br>
+        <%--country--%>
+        <div>
+            <select name="country">
+                <c:forEach var="country" items="${countryList}">
+                    <option country="${country}"> ${country}</option>
+                </c:forEach>
+            </select>
+            <span>Select country</span>
+        </div>
+        <br>
+        <%--transport type--%>
+        <div>
+            <select name="transportType">
+                <c:forEach var="transportType" items="${transportTypeList}">
+                    <option transportType="${transportType}"> ${transportType}</option>
+                </c:forEach>
+            </select>
+            <span>Select transport type</span>
+        </div>
+        <br>
+            <%--hotel category--%>
+            <div>
+                <select name="hotelCategory">
+                    <c:forEach var="hotelCategory" items="${hotelCategoryList}">
+                        <option hotelCategory="${hotelCategory}"> ${hotelCategory}</option>
                     </c:forEach>
                 </select>
+                <span>Select hotel category</span>
             </div>
-        </div>
-
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="country">Country</label>
-
-            <div class="col-md-4">
-                <select id="country" name="country" class="form-control">
-                    <c:forEach var="Countries" items="${countryList}">
-                        <option value="${Countries.id}">${Countries.country}</option>
+            <br>
+            <%--typeOfMealsList--%>
+            <div>
+                <select name="typeOfMeals">
+                    <c:forEach var="typeOfMeals" items="${typeOfMealsList}">
+                        <option typeOfMeals="${typeOfMeals}"> ${typeOfMeals}</option>
                     </c:forEach>
                 </select>
+                <span>Select type of meals</span>
             </div>
-        </div>
-
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="transport">Transport</label>
-
-            <div class="col-md-4">
-                <select id="transport" name="transport" class="form-control">
-                    <c:forEach var="Transport" items="${transportList}">
-                        <option value="${Transport.id}">${Transport.transport}</option>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
-
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="hotelType">Hotel</label>
-
-            <div class="col-md-4">
-                <select id="hotelType" name="hotelType" class="form-control">
-                    <c:forEach var="Hotel" items="${hotelList}">
-                        <option value="${Hotel.id}">${Hotel.hotelType}</option>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
-
-        <!-- Select Basic -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="foodComplex">Food complex</label>
-
-            <div class="col-md-4">
-                <select id="foodComplex" name="foodComplex" class="form-control">
-                    <c:forEach var="FoodComplex" items="${foodComplexList}">
-                        <option value="${FoodComplex.id}">${FoodComplex.foodComplex}</option>
-                    </c:forEach>
-                </select>
-            </div>
-        </div>
-
+            <br>
         <!-- Button (Double) -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="buttonSelect"></label>
 
-            <div class="col-md-8">
-                <button id="buttonSelect" name="buttonSelect" class="btn btn-info">Select tour</button>
-            </div>
+        <div>
+            <button id="buttonSelect" name="buttonSelect">Select tour</button>
         </div>
 
         <div align="center">
@@ -85,6 +67,5 @@
         <div align="center">
             <h3>${operationMessage}<br></h3>
         </div>
-
     </fieldset>
 </form>

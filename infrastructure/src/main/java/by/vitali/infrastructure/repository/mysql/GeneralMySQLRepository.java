@@ -9,6 +9,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+
 /**
  * Common class for other repositories.
  *
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
+
 
     final private HibernateSessionManager sessionManager;
 
@@ -37,7 +39,7 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
             return t;
         } catch (HibernateException e) {
-
+            //logger.writeLog("Save entity error:" + e.getMessage());
             throw new DaoException(e.getMessage());
         }
     }
@@ -53,7 +55,7 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
             return t;
         } catch (HibernateException e) {
-            //log.error
+            //logger.writeLog("Update entity error:" + e.getMessage());
 
             throw new DaoException(e.getMessage());
         }
@@ -69,7 +71,7 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
             return t;
         } catch (HibernateException e) {
-            //log.error
+            //logger.writeLog("Delete entity error:" + e.getMessage());
 
             throw new DaoException(e.getMessage());
         }
@@ -87,7 +89,7 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
             return (T) query.uniqueResult();
         } catch (HibernateException e) {
-            //log.error
+            //logger.writeLog("Read entity error:" + e.getMessage());
 
             throw new DaoException(e.getMessage());
         }
@@ -104,7 +106,7 @@ public class GeneralMySQLRepository<T> implements GeneralRepository<T> {
 
             return (List<T>) query.list();
         } catch (HibernateException e) {
-            //log.error
+            //logger.writeLog("Get all entities error:" + e.getMessage())
 
             throw new DaoException(e.getMessage());
         }

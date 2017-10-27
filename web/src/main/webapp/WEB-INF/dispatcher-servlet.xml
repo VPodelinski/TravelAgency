@@ -11,13 +11,13 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <mvc:resources mapping="/assets/**" location="/assets/"/>
+
     <mvc:annotation-driven/>
+    <context:component-scan base-package="by.vitali.web.controller"/>
 
-    <import resource="classpath*:dao-context.xml"/>
-    <import resource="classpath*:service-context.xml"/>
+    <import resource="classpath*:infrastructure-context.xml"/>
+    <import resource="classpath*:domain-context.xml"/>
 
-    <context:component-scan base-package="by.it_academy.agency.controller, by.it_academy.agency.utils"/>
 
 
     <bean id="tilesConfigurer"

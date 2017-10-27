@@ -1,7 +1,6 @@
 package by.vitali.domain.services.management;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.OrderStatus;
 
 /**
@@ -14,7 +13,15 @@ public interface OrderStatusManagement extends GeneralManagement<OrderStatus> {
      *
      * @param status
      * @return order status
-     * @throws DaoException
+     * @throws ServiceException
      */
     OrderStatus getOrderStatusByOrderStatus(String status) throws ServiceException;
+
+    /**
+     * Create order status.
+     * @throws ServiceException
+     */
+    void createOrderStatus(String status)throws ServiceException;
+
+
 }

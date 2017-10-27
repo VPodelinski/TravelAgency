@@ -1,4 +1,4 @@
-package by.it_academy.agency.constants;
+package by.vitali.web.constants;
 
 public class PagePathConstants {
     public static final String CONFIG_SOURCE = "configs";
@@ -10,7 +10,7 @@ public class PagePathConstants {
 
     public static final String ADMIN_PAGE_PATH = "path.page.admin";
     public static final String ADMIN_CREATE_TOUR_PAGE_PATH = "path.page.admin.createtour";
-    public static final String ADMIN_SET_DISCOUNT_PAGE_PATH = "path.page.admin.discount";
+    public static final String ADMIN_ADD_HOTEL_PAGE_PATH = "path.page.admin.addhotel";
 
     public static final String USER_PAGE_PATH = "path.page.user";
     public static final String USER_RESERVE_PAGE_PATH = "path.page.user.reserve";

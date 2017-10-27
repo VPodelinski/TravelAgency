@@ -24,7 +24,7 @@ public interface UserManagement extends GeneralManagement<User> {
      *
      * @param email
      * @return role
-     * @throws Exception
+     * @throws ServiceException
      */
     String checkRole(String email) throws ServiceException;
 
@@ -33,7 +33,7 @@ public interface UserManagement extends GeneralManagement<User> {
      *
      * @param email
      * @return user
-     * @throws Exception
+     * @throws ServiceException
      */
     User getUserByEmail(String email) throws ServiceException;
 
@@ -42,7 +42,7 @@ public interface UserManagement extends GeneralManagement<User> {
      *
      * @param email
      * @return boolean
-     * @throws Exception
+     * @throws ServiceException
      */
     boolean isNewUser(String email) throws ServiceException;
 }

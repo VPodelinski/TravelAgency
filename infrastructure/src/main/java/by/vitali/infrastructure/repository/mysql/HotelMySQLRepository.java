@@ -8,7 +8,6 @@ import by.vitali.infrastructure.repository.HotelRepository;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +19,7 @@ import java.util.List;
  */
 @Repository
 public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implements HotelRepository {
+
 
     @Autowired
     public HotelMySQLRepository(final HibernateSessionManager sessionManager) {
@@ -38,7 +38,7 @@ public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implemen
 
             return (List<Hotel>) query.list();
         } catch (HibernateException e) {
-            //log.error
+            //logger.writeLog("Hotel getHotelsByTypeOfMeals error:" + e.getMessage());
 
             throw new DaoException(e.getMessage());
         }
@@ -56,7 +56,8 @@ public class HotelMySQLRepository extends GeneralMySQLRepository<Hotel> implemen
 
             return (List<Hotel>) query.list();
         } catch (HibernateException e) {
-            //log.error
+            //logger.writeLog("Hotel getHotelsByHotelCategory error:" + e.getMessage());
+
 
             throw new DaoException(e.getMessage());
         }

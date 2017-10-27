@@ -1,22 +1,20 @@
-    <div class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/admin/main">Main</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/admin/create_tour">Create tour</a></li>
-                    <li><a href="/admin/make_discount">Set discount</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/logout">Sign-out</a></li>
-                </ul>
-            </div>
+<h4 align="center">IT ACADEMY TRAVEL AGENCY</h4>
+<h4 align="center">admin level</h4>
+<div>
+    <div>
+        <div>
+            <h4>Go to the admin start page </h4>
+            <a href="/admin/main">Admin start page</a>
+        </div>
+        <p align="left">Menu</p>
+        <div>
+            <ul>
+                <li type="square"><a href="/admin/add_hotel">Add hotel</a></li>
+                <li type="square"><a href="/admin/create_tour">Create tour</a></li>
+            </ul>
+            <ul>
+                <li type="square"><a href="/logout">Sign-out</a></li>
+            </ul>
         </div>
     </div>
+</div>

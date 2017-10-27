@@ -10,7 +10,6 @@ import by.vitali.infrastructure.model.TypeOfMeals;
 import by.vitali.infrastructure.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -40,7 +39,7 @@ public class HotelManager implements HotelManagement {
     }
 
     @Override
-    public List<Hotel> getHotelsByHotelCategory(HotelCategory hotelCategory) throws ServiceException {
+    public List<Hotel> getHotelsByHotelCategory(final HotelCategory hotelCategory) throws ServiceException {
         try {
             return hotelRepository.getHotelsByHotelCategory(hotelCategory);
         } catch (DaoException e) {
@@ -50,7 +49,7 @@ public class HotelManager implements HotelManagement {
     }
 
     @Override
-    public void save(Hotel type) throws ServiceException {
+    public void save(final Hotel type) throws ServiceException {
         try {
             hotelRepository.save(type);
         } catch (DaoException e) {
@@ -61,12 +60,17 @@ public class HotelManager implements HotelManagement {
     }
 
     @Override
-    public void update(Hotel type) throws ServiceException {
-
+    public void update(final Hotel type) throws ServiceException {
+        try {
+            hotelRepository.update(type);
+        } catch (DaoException e) {
+            // logger
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @Override
-    public Hotel read(long id) throws ServiceException {
+    public Hotel read(final long id) throws ServiceException {
         try {
             return hotelRepository.read(id, Hotel.class);
         } catch (DaoException e) {
@@ -87,12 +91,12 @@ public class HotelManager implements HotelManagement {
     }
 
     @Override
-    public void createHotel(String city, String street, String numbBuilding, HotelCategory category, TypeOfMeals typeOfMeals) throws ServiceException {
-        Address address = new Address();
+    public void createHotel(final String city, final String street, final String numbBuilding, final HotelCategory category, final TypeOfMeals typeOfMeals) throws ServiceException {
+        final Address address = new Address();
         address.setCity(city);
         address.setStreet(street);
         address.setNumberBuilding(numbBuilding);
-        Hotel hotel = new Hotel();
+        final Hotel hotel = new Hotel();
         hotel.setCategory(category);
         hotel.setTypeOfMeals(typeOfMeals);
         hotel.setAddress(address);

@@ -11,62 +11,58 @@ public enum Country {
     /**
      * Travel to India.
      */
-    INDIA("India"),
+    INDIA,
 
     /**
      * Travel to France.
      */
-    FRANCE("France"),
+    FRANCE,
 
     /**
      * Travel to Spain.
      */
-    SPAIN("Spain"),
+    SPAIN,
 
     /**
      * Travel to England.
      */
-    ENGLAND("England"),
+    ENGLAND,
 
     /**
      * Travel to Netherlands.
      */
-    NETHERLANDS("Netherlands"),
+    NETHERLANDS,
 
     /**
      * Travel to Thailand.
      */
-    THAILAND("Thailand"),
+    THAILAND,
 
     /**
      * Travel to Austria.
      */
-    AUSTRIA("Austria"),
+    AUSTRIA,
 
     /**
      * Travel to Italy.
      */
-    ITALY("Italy"),
+    ITALY,
 
     /**
      * Travel to China.
      */
-    CHINA("China"),
+    CHINA,
 
     /**
      * Travel to Czech Republic.
      */
-    CZECH_REPUBLIC("Czech Republic"),
+    CZECH_REPUBLIC,
 
     /**
      * Travel to Turkey.
      */
-    TURKEY("Turkey");
+    TURKEY;
 
-    private String name;
 
-    Country(final String name) {
-        this.name = name;
-    }
 
 }

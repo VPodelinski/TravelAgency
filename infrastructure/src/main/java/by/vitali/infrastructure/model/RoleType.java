@@ -13,11 +13,12 @@ public enum RoleType {
     /**
      * The role is customer for other users.
      */
-    CUSTOMER,
+    USER,
 
     /**
      *The role is travel-agency for administrator.
      */
-    TRAVEL_AGENT
+    ADMIN
+
 
 }

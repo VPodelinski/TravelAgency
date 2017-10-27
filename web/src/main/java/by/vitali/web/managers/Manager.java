@@ -1,5 +1,9 @@
-package by.it_academy.agency.managers;
+package by.vitali.web.managers;
 
+/**
+ *
+ */
 public interface Manager {
+
     String getProperty(String key);
 }

@@ -7,7 +7,6 @@ import by.vitali.infrastructure.model.OrderStatus;
 import by.vitali.infrastructure.repository.OrderStatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,18 +16,18 @@ import java.util.List;
  * Order status manager.
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
+@Transactional
 public class OrderStatusManager implements OrderStatusManagement {
 
-    private OrderStatusRepository orderStatusRepository;
+    final private OrderStatusRepository orderStatusRepository;
 
     @Autowired
-    public OrderStatusManager(OrderStatusRepository orderStatusRepository) {
+    public OrderStatusManager(final OrderStatusRepository orderStatusRepository) {
         this.orderStatusRepository = orderStatusRepository;
     }
 
     @Override
-    public OrderStatus getOrderStatusByOrderStatus(String status) throws ServiceException {
+    public OrderStatus getOrderStatusByOrderStatus(final String status) throws ServiceException {
         try {
             return orderStatusRepository.getOrderStatusByOrderStatus(status);
         } catch (DaoException e) {
@@ -39,24 +38,28 @@ public class OrderStatusManager implements OrderStatusManagement {
     }
 
     @Override
-    public void save(OrderStatus type) throws ServiceException {
+    public void save(final OrderStatus type) throws ServiceException {
         try {
             orderStatusRepository.save(type);
         } catch (DaoException e) {
             // logger
             throw new ServiceException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void update(final OrderStatus type) throws ServiceException {
+        try {
+            orderStatusRepository.update(type);
+        } catch (DaoException e) {
+            // logger
+            throw new ServiceException(e.getMessage());
 
         }
-
     }
 
     @Override
-    public void update(OrderStatus type) throws ServiceException {
-
-    }
-
-    @Override
-    public OrderStatus read(long id) throws ServiceException {
+    public OrderStatus read(final long id) throws ServiceException {
         try {
             return orderStatusRepository.read(id, OrderStatus.class);
         } catch (DaoException e) {
@@ -75,5 +78,14 @@ public class OrderStatusManager implements OrderStatusManagement {
             throw new ServiceException(e.getMessage());
 
         }
+    }
+
+    @Override
+    public void createOrderStatus(final String status) throws ServiceException {
+
+        final OrderStatus orderStatus = new OrderStatus();
+        orderStatus.setStatus(status);
+        save(orderStatus);
+
     }
 }

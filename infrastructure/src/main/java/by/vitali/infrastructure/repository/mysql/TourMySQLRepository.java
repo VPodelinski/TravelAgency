@@ -1,13 +1,16 @@
 package by.vitali.infrastructure.repository.mysql;
 
 import by.vitali.infrastructure.exceptions.DaoException;
-import by.vitali.infrastructure.model.*;
+import by.vitali.infrastructure.model.Country;
+import by.vitali.infrastructure.model.HotelCategory;
+import by.vitali.infrastructure.model.Tour;
+import by.vitali.infrastructure.model.TourType;
+import by.vitali.infrastructure.model.TransportType;
+import by.vitali.infrastructure.model.TypeOfMeals;
 import by.vitali.infrastructure.repository.TourRepository;
 import by.vitali.infrastructure.utils.HibernateSessionManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,7 +29,9 @@ public class TourMySQLRepository extends GeneralMySQLRepository<Tour> implements
     }
 
     @Override
-    public List<Tour> getToursByRequest(final TourType tourType, final Country country, final TransportType transportType, final HotelCategory hotelCategory, final TypeOfMeals typeOfMeals) throws DaoException {
+    public List<Tour> getToursByRequest(final TourType tourType, final Country country,
+                                        final TransportType transportType, final HotelCategory hotelCategory,
+                                        final TypeOfMeals typeOfMeals) throws DaoException {
 
         try {
 

@@ -1,65 +1,86 @@
 package by.vitali.domain.services.management;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.infrastructure.model.*;
+import by.vitali.infrastructure.model.Country;
+import by.vitali.infrastructure.model.DepartureCity;
+import by.vitali.infrastructure.model.HotelCategory;
+import by.vitali.infrastructure.model.Tour;
+import by.vitali.infrastructure.model.TourType;
+import by.vitali.infrastructure.model.TransportType;
+import by.vitali.infrastructure.model.TypeOfMeals;
 
-import java.util.Date;
 import java.util.Map;
 
 /**
- *Interface for tour manager.
+ * Interface for tour manager.
  */
 public interface TourManagement extends GeneralManagement<Tour> {
     /**
      * This method sets a discount.
+     *
      * @param idTour
      * @param discount
-     * @throws Exception
+     * @throws ServiceException
      */
-    void makeDiscount(long idTour, int discount) throws Exception;
+    void makeDiscount(long idTour, int discount) throws ServiceException;
 
     /**
-     *  This method returns a map of tour by request.
+     * This method returns a map of tour by request.
+     *
      * @param tourType
      * @param country
      * @param transportType
      * @param hotelCategory
      * @param typeOfMeals
-     * @return
-     * @throws Exception
+     * @return map
+     * @throws ServiceException
      */
-    Map<Long, String> getMapToursByRequest(final TourType tourType, final Country country, final TransportType transportType, final HotelCategory hotelCategory, final TypeOfMeals typeOfMeals) throws Exception;
+    Map<Long, String> getMapToursByRequest(final TourType tourType, final Country country,
+                                           final TransportType transportType, final HotelCategory hotelCategory,
+                                           final TypeOfMeals typeOfMeals) throws ServiceException;
 
     /**
-     * This method sets the display of the tour
+     * This method sets the display of the tour.
+     *
      * @param id
      * @return map
-     * @throws Exception
+     * @throws ServiceException
      */
     String convertTourToString(long id) throws ServiceException;
 
     /**
      * This method returns a limited map of tour.
+     *
      * @param start
      * @param size
      * @return map
-     * @throws Exception
+     * @throws ServiceException
      */
     Map<Long, String> getToursMapLimit(int start, int size) throws ServiceException;
 
     /**
      * This method returns the count of tour.
+     *
      * @return count
-     * @throws Exception
+     * @throws ServiceException
      */
     int getCountTours() throws ServiceException;
 
     /**
      * This method adds tour to database.
-     * @throws Exception
+     *
+     * @param name
+     * @param tourType
+     * @param country
+     * @param transportType
+     * @param hotelId
+     * @param departureCity
+     * @param duration
+     * @param price
+     * @throws ServiceException
      */
     void createTour(String name, TourType tourType, Country country, TransportType transportType,
 
-                    int hotel_id, DepartureCity departureCity, final Date date, int duration, int discount, int price) throws ServiceException;
+                    int hotelId, DepartureCity departureCity, int duration, int price) throws ServiceException;
 
 }

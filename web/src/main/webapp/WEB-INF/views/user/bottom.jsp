@@ -1,10 +1,8 @@
 <div>
     <p align="center">
-            <span style="font-size: smaller; ">
-                <i> Dailidovich inc. 2016</i>
-                <br/>
+            <span>
                 <span>
-	                <a href="mailto:dmitry.dailidovich@gmail.com">dmitry.dailidovich@gmail.com</a>
+	                <a href="viivpo2014@gmail.com" >IT ACADEMY Project BY VITALI PODELINSKI</a>
                 </span>
             </span>
     </p>

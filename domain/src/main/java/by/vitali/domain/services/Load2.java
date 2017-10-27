@@ -14,40 +14,39 @@ public class Load2 {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("domain-context.xml");
 
-
         HotelManager hotelManager = (HotelManager) context.getBean("hotelManager");
         TourManager tourManager = (TourManager) context.getBean("tourManager");
         UserManager userManager = (UserManager) context.getBean("userManager");
         OrderManager orderManager = (OrderManager) context.getBean("orderManager");
         OrderStatusManager orderStatusManager = (OrderStatusManager) context.getBean("orderStatusManager");
 
-// create hotel
+        // create hotel
         hotelManager.createHotel("Pekin", "1-st street", "45", HotelCategory.FOUR, TypeOfMeals.HB);
         hotelManager.createHotel("Barselona", "some street", "110", HotelCategory.FIVE, TypeOfMeals.UAL);
 
-        tourManager.createTour("Test tour", TourType.SHOPPING, Country.CHINA, TransportType.PLANE, (int) hotelManager.read(1).getId(), DepartureCity.MINSK, null, 7, 0, 400);
-        tourManager.createTour("Test tour 2 ", TourType.REST, Country.CZECH_REPUBLIC, TransportType.SHIP, (int) hotelManager.read(2).getId(), DepartureCity.VILNIUS, null, 10, 0, 300);
+        tourManager.createTour("Test tour", TourType.SHOPPING, Country.CHINA, TransportType.PLANE, (int) hotelManager.read(1).getId(), DepartureCity.MINSK,  7, 400);
+        tourManager.createTour("Test tour 2 ", TourType.REST, Country.CZECH_REPUBLIC, TransportType.SHIP, (int) hotelManager.read(2).getId(), DepartureCity.VILNIUS,  10, 300);
 
         //*****************create User
         User user1 = new User();
         user1.setName("Vitali");
         user1.setSurname("Podelinski");
         user1.setEmail("viivpo2010@mail.ru");
-        user1.setRole(RoleType.TRAVEL_AGENT);
+        user1.setRole(RoleType.ADMIN);
         user1.setPassword("789");
 
         User user2 = new User();
         user2.setName("Ivan");
         user2.setSurname("Ivanov");
         user2.setEmail("iviv@mail.ru");
-        user2.setRole(RoleType.CUSTOMER);
+        user2.setRole(RoleType.USER);
         user2.setPassword("123");
 
         User user3 = new User();
         user3.setName("Vasia");
         user3.setSurname("Petrov");
         user3.setEmail("Petrov@gmail.com");
-        user3.setRole(RoleType.CUSTOMER);
+        user3.setRole(RoleType.USER);
         user3.setPassword("5555");
 
         userManager.save(user1);
@@ -65,7 +64,6 @@ public class Load2 {
         orderStatusManager.save(orderStatus1);
         orderStatusManager.save(orderStatus2);
         orderStatusManager.save(orderStatus3);
-
 
 //************************create order*******************
         orderManager.reserveTour(tourManager.read(2), user2, orderStatusManager.read(3).getStatus());
@@ -165,6 +163,7 @@ public class Load2 {
         for (Order order1 : orders) {
             System.out.println("#########getAll orders " + order1);
         }
+
     }
 
 

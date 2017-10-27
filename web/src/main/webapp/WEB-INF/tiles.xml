@@ -26,8 +26,8 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/createTour.jsp"/>
     </definition>
 
-    <definition name="admin/make_discount" extends="admin_default">
-        <put-attribute name="body" value="/WEB-INF/views/admin/discount.jsp"/>
+    <definition name="admin/add_hotel" extends="admin_default">
+        <put-attribute name="body" value="/WEB-INF/views/admin/addHotels.jsp"/>
     </definition>
 
     <!-- USER PAGES -->

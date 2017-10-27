@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 
 /**
@@ -49,9 +48,6 @@ public class Tour implements Serializable {
 
     @Column(name = "duration")
     private int duration;
-
-    @Column(name = "date")
-    private Date date;
 
     @Column(name = "departure_city")
     @Enumerated(EnumType.STRING)
@@ -96,13 +92,11 @@ public class Tour implements Serializable {
                 + ", price=" + price
                 + ", discount=" + discount
                 + ", duration=" + duration
-                + ", date=" + date
                 + ", departureCity=" + departureCity
                 + ", country=" + country
                 + ", tourType=" + tourType
                 + ", transportType=" + transportType
                 + ", hotel=" + hotel
-                //+ ", orders=" + orders
                 + '}';
     }
 }

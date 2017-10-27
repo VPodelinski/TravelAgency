@@ -5,7 +5,7 @@ package by.vitali.domain.services.exceptions;
  */
 public class ServiceException extends Exception {
 
-    public ServiceException(String message) {
+    public ServiceException(final String message) {
         super(message);
     }
 }
