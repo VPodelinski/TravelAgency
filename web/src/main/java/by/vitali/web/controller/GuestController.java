@@ -1,6 +1,5 @@
 package by.vitali.web.controller;
 
-
 import by.vitali.domain.services.exceptions.ServiceException;
 import by.vitali.domain.services.management.UserManagement;
 import by.vitali.infrastructure.model.RoleType;
@@ -27,7 +26,7 @@ public class GuestController {
     final private UserManagement userManagement;
 
     @Autowired
-    public GuestController(UserManagement userManagement) {
+    public GuestController(final UserManagement userManagement) {
         this.userManagement = userManagement;
 
     }
@@ -42,24 +41,30 @@ public class GuestController {
         return ConfigurationManager.INSTANCE.getProperty(PagePathConstants.REGISTRATION_PAGE_PATH);
     }
 
+    /**
+     * Method for authorization.
+     *
+     * @param request
+     * @return String page
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(HttpServletRequest request) {
-        String email = request.getParameter(Parameters.EMAIL);
-        String password = request.getParameter(Parameters.PASSWORD);
+    public String login(final HttpServletRequest request) {
+        final String email = request.getParameter(Parameters.EMAIL);
+        final String password = request.getParameter(Parameters.PASSWORD);
         String page;
 
         try {
             if (userManagement.authorized(email, password)) {
-                HttpSession session = request.getSession();
-                User user = userManagement.getUserByEmail(email);
-                String role = userManagement.checkRole(email);
+                final HttpSession session = request.getSession();
+                final User user = userManagement.getUserByEmail(email);
+                final String role = userManagement.checkRole(email);
                 session.setAttribute(Parameters.USER_ROLE, role);
                 session.setAttribute(Parameters.USER, user);
-                if (role.equals(Parameters.ADMIN))
+                if (role.equals(Parameters.ADMIN)) {
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ADMIN_PAGE_PATH);
-                else
+                } else {
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
-
+                }
             } else {
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.INDEX_PAGE_PATH);
                 request.setAttribute(Parameters.ERROR_LOGIN_OR_PASSWORD, MessageManager.INSTANCE.getProperty(MessageConstants.WRONG_LOGIN_OR_PASSWORD));
@@ -72,30 +77,42 @@ public class GuestController {
         return page;
     }
 
+    /**
+     * Method returns page log out to main page.
+     *
+     * @param request
+     * @return String page
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request) {
-        String page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.INDEX_PAGE_PATH);
+    public String logout(final HttpServletRequest request) {
+        final String page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.INDEX_PAGE_PATH);
         request.getSession().invalidate();
         return page;
     }
 
+    /**
+     * Method returns registration page.
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String registration(HttpServletRequest request) {
+    public String registration(final HttpServletRequest request) {
         String page;
-        String name = request.getParameter(Parameters.NAME);
-        String surname = request.getParameter(Parameters.SURNAME);
-        String email = request.getParameter(Parameters.EMAIL);
-        String password = request.getParameter(Parameters.PASSWORD);
+        final String name = request.getParameter(Parameters.NAME);
+        final String surname = request.getParameter(Parameters.SURNAME);
+        final String email = request.getParameter(Parameters.EMAIL);
+        final String password = request.getParameter(Parameters.PASSWORD);
         RoleType role;
         try {
-            if (null != request.getParameter(Parameters.ROLE))
+            if (null != request.getParameter(Parameters.ROLE)) {
                 role = RoleType.ADMIN;
-            else
+            } else {
                 role = RoleType.USER;
-
+            }
             if (!name.isEmpty() & !surname.isEmpty() & !email.isEmpty() & !password.isEmpty()) {
                 if (userManagement.isNewUser(email)) {
-                    User user = new User();
+                    final User user = new User();
                     user.setName(name);
                     user.setSurname(surname);
                     user.setEmail(email);
@@ -113,7 +130,7 @@ public class GuestController {
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.EMPTY_FIELDS));
             }
         } catch (ServiceException e) {
-           // logger.writeLog(e.getMessage());
+            // logger.writeLog(e.getMessage());
             page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ERROR_PAGE_PATH);
             request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.INSTANCE.getProperty(MessageConstants.ERROR_DATABASE));
         } catch (NumberFormatException e) {

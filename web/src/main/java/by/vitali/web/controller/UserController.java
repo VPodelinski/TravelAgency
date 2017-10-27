@@ -22,6 +22,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller for user.
+ */
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
@@ -30,24 +33,34 @@ public class UserController {
     final private OrderStatusManagement orderStatusManagement;
 
     @Autowired
-    public UserController(OrderManagement orderManagement, TourManagement tourManagement, OrderStatusManagement orderStatusManagement) {
+    public UserController(final OrderManagement orderManagement, final TourManagement tourManagement, final OrderStatusManagement orderStatusManagement) {
         this.orderManagement = orderManagement;
         this.tourManagement = tourManagement;
         this.orderStatusManagement = orderStatusManagement;
     }
 
-
+    /**
+     * Method main returns page.
+     *
+     * @return
+     */
     @RequestMapping(value = "/main", method = RequestMethod.GET)
     public String goToMain() {
         return ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
     }
 
+    /**
+     * Method  returns reservation page.
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/reserve", method = RequestMethod.GET)
-    public String goToReserveTour(HttpServletRequest request) {
+    public String goToReserveTour(final HttpServletRequest request) {
         String page;
         try {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute(Parameters.USER);
+            final HttpSession session = request.getSession();
+            final User user = (User) session.getAttribute(Parameters.USER);
             page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_RESERVED_TOURS_PAGE_PATH);
             request.setAttribute(Parameters.TOURS_MAP, orderManagement.getUserOrders(user));
         } catch (ServiceException e) {
@@ -58,41 +71,53 @@ public class UserController {
         return page;
     }
 
+    /**
+     * Method  returns page for select tour.
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/select", method = RequestMethod.GET)
-    public String goToSelectTour(HttpServletRequest request) {
-        String page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_SELECT_TOUR_PAGE_PATH);
+    public String goToSelectTour(final HttpServletRequest request) {
+        final String page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_SELECT_TOUR_PAGE_PATH);
 
-        List<TourType> tourTypeList = Arrays.asList(TourType.values());
+        final List<TourType> tourTypeList = Arrays.asList(TourType.values());
         request.getSession().setAttribute(Parameters.TOUR_TYPE_LIST, tourTypeList);
 
-        List<Country> countryList = Arrays.asList(Country.values());
+        final List<Country> countryList = Arrays.asList(Country.values());
         request.getSession().setAttribute(Parameters.COUNTRY_LIST, countryList);
 
-        List<TransportType> transportTypeList = Arrays.asList(TransportType.values());
+        final List<TransportType> transportTypeList = Arrays.asList(TransportType.values());
         request.getSession().setAttribute(Parameters.TRANSPORT_TYPE_LIST, transportTypeList);
 
-        List<HotelCategory> hotelCategoryList = Arrays.asList(HotelCategory.values());
+        final List<HotelCategory> hotelCategoryList = Arrays.asList(HotelCategory.values());
         request.getSession().setAttribute(Parameters.HOTEL_CATEGORY_LIST, hotelCategoryList);
 
-        List<TypeOfMeals> typeOfMealsList = Arrays.asList(TypeOfMeals.values());
+        final List<TypeOfMeals> typeOfMealsList = Arrays.asList(TypeOfMeals.values());
         request.getSession().setAttribute(Parameters.TYPE_OF_MEALS_LIST, typeOfMealsList);
 
         return page;
     }
 
+    /**
+     * Method  returns page for select tour.
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/select", method = RequestMethod.POST)
-    public String selectTour(HttpServletRequest request) {
+    public String selectTour(final HttpServletRequest request) {
         String page = "";
 
-        TourType tourType = TourType.valueOf(request.getParameter(Parameters.TOUR_TYPE));
-        Country chooseCountry = Country.valueOf(request.getParameter(Parameters.COUNTRY));
-        TransportType transportType = TransportType.valueOf(request.getParameter(Parameters.TRANSPORT_TYPE));
-        HotelCategory hotelCategory = HotelCategory.valueOf(request.getParameter(Parameters.HOTEL_CATEGORY));
-        TypeOfMeals typeOfMeals = TypeOfMeals.valueOf(request.getParameter(Parameters.TYPE_OF_MEAL));
+        final TourType tourType = TourType.valueOf(request.getParameter(Parameters.TOUR_TYPE));
+        final Country chooseCountry = Country.valueOf(request.getParameter(Parameters.COUNTRY));
+        final TransportType transportType = TransportType.valueOf(request.getParameter(Parameters.TRANSPORT_TYPE));
+        final HotelCategory hotelCategory = HotelCategory.valueOf(request.getParameter(Parameters.HOTEL_CATEGORY));
+        final TypeOfMeals typeOfMeals = TypeOfMeals.valueOf(request.getParameter(Parameters.TYPE_OF_MEAL));
 
         if (null != tourType & null != chooseCountry & null != transportType & null != hotelCategory & null != typeOfMeals) {
             try {
-                Map<Long, String> map = tourManagement.getMapToursByRequest(tourType, chooseCountry, transportType, hotelCategory, typeOfMeals);
+                final Map<Long, String> map = tourManagement.getMapToursByRequest(tourType, chooseCountry, transportType, hotelCategory, typeOfMeals);
                 if (!map.isEmpty()) {
                     request.setAttribute(Parameters.TOURS_MAP, map);
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_RESERVE_PAGE_PATH);
@@ -107,18 +132,26 @@ public class UserController {
                 request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.INSTANCE.getProperty(MessageConstants.ERROR_DATABASE));
             }
 
-        }  return page;
+        }
+        return page;
     }
+
+    /**
+     * Method  returns page for reserve tour.
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/reserve", method = RequestMethod.POST)
-    public String reserveTour(HttpServletRequest request) {
+    public String reserveTour(final HttpServletRequest request) {
         String page;
         try {
             String idTourString = request.getParameter(Parameters.RESERVING_TOUR);
             if (null != idTourString) {
-                int idTour = Integer.parseInt(idTourString);
-                Tour tour = tourManagement.read(idTour);
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute(Parameters.USER);
+                final int idTour = Integer.parseInt(idTourString);
+                final Tour tour = tourManagement.read(idTour);
+                final HttpSession session = request.getSession();
+                final User user = (User) session.getAttribute(Parameters.USER);
                 orderManagement.reserveTour(tour, user, "RESERVE");
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.RESERVE_TOUR));
@@ -134,16 +167,22 @@ public class UserController {
         return page;
     }
 
+    /**
+     * Cancel reservation.
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
-    public String cancelReservation(HttpServletRequest request) {
+    public String cancelReservation(final HttpServletRequest request) {
         String page;
         try {
-            String idTourString = request.getParameter(Parameters.RESERVING_TOUR);
+            final String idTourString = request.getParameter(Parameters.RESERVING_TOUR);
             if (null != idTourString) {
-                HttpSession session = request.getSession();
-                User user = (User) session.getAttribute(Parameters.USER);
-                Long idTour = Long.parseLong(idTourString);
-                Tour tour = tourManagement.read(idTour);
+                final HttpSession session = request.getSession();
+                final User user = (User) session.getAttribute(Parameters.USER);
+                final Long idTour = Long.parseLong(idTourString);
+                final Tour tour = tourManagement.read(idTour);
                 orderManagement.deleteOrder(user, tour);
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.CANCEL_RESERVING));

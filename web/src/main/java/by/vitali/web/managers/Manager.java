@@ -1,7 +1,7 @@
 package by.vitali.web.managers;
 
 /**
- *
+ * Interface for managers.
  */
 public interface Manager {
 

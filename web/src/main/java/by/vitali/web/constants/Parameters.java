@@ -1,5 +1,8 @@
 package by.vitali.web.constants;
 
+/**
+ * Parameters.
+ */
 public class Parameters {
     //for user
     public static final String NAME = "name";
@@ -7,7 +10,6 @@ public class Parameters {
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String ROLE = "role";
-
     //enum for admin level
     public static final String TOUR_TYPE_LIST = "tourTypeList";
     public static final String COUNTRY_LIST = "countryList";
@@ -18,16 +20,12 @@ public class Parameters {
     public static final String TYPE_OF_MEALS_LIST = "typeOfMealsList";
     public static final String RESERVING_TOUR = "reservingTour";
     public static final String TOURS_MAP = "toursMap";
-    public static final String DISCOUNTING_TOUR = "discountingTour";
-    public static final String AMOUNT_DISCOUNT = "amountDiscount";
-
     // parameters hotel
     public static final String CITY = "city";
     public static final String STREET = "street";
     public static final String NUMB_OF_BUILDING = "numbOfBuilding";
     public static final String HOTEL_CATEGORY = "hotelCategory";
     public static final String TYPE_OF_MEAL = "typeOfMeals";
-
     // parameters tour
     public static final String NAME_TOUR = "nameTour";
     public static final String TOUR_TYPE = "tourType";
@@ -39,7 +37,6 @@ public class Parameters {
     public static final String PRICE = "price";
 
     public static final String ADMIN = "ADMIN";
-    public static final String COMMAND = "command";
     public static final String USER_ROLE = "userRole";
     public static final String USER = "USER";
     public static final String ERROR_DATABASE = "errorDatabase";
