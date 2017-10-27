@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- USER'S PAGES TEMPLATE -->
+    <definition name="default" template="/WEB-INF/views/layout/default_layout.jsp">
+        <put-attribute name="header" value=""/>
+        <put-attribute name="sidebar" value=""/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value=""/>
+    </definition>
+
+    <!-- ADMIN PAGES -->
+    <definition name="admin_default" extends="default">
+        <put-attribute name="sidebar" value="/WEB-INF/views/admin/top.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/admin/bottom.jsp"/>
+    </definition>
+
+    <definition name="admin/main" extends="admin_default">
+        <put-attribute name="body" value="/WEB-INF/views/admin/main.jsp"/>
+    </definition>
+
+    <definition name="admin/create_tour" extends="admin_default">
+        <put-attribute name="body" value="/WEB-INF/views/admin/createTour.jsp"/>
+    </definition>
+
+    <definition name="admin/make_discount" extends="admin_default">
+        <put-attribute name="body" value="/WEB-INF/views/admin/discount.jsp"/>
+    </definition>
+
+    <!-- USER PAGES -->
+    <definition name="user_default" extends="default">
+        <put-attribute name="sidebar" value="/WEB-INF/views/user/top.jsp"/>
+        <put-attribute name="footer" value="/WEB-INF/views/user/bottom.jsp"/>
+    </definition>
+
+    <definition name="user/main" extends="user_default">
+        <put-attribute name="body" value="/WEB-INF/views/user/main.jsp"/>
+    </definition>
+
+    <definition name="user/reserve" extends="user_default">
+        <put-attribute name="body" value="/WEB-INF/views/user/reserve.jsp"/>
+    </definition>
+
+    <definition name="user/select" extends="user_default">
+        <put-attribute name="body" value="/WEB-INF/views/user/tourSelect.jsp"/>
+    </definition>
+
+    <definition name="user/cancel" extends="user_default">
+        <put-attribute name="body" value="/WEB-INF/views/user/reservedTours.jsp"/>
+    </definition>
+
+    <!-- ERROR PAGE -->
+    <definition name="error" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/error/error.jsp"/>
+    </definition>
+
+    <!-- REGISTRATION PAGE -->
+    <definition name="registration" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/guest/registry.jsp"/>
+    </definition>
+
+    <!-- HOME PAGE -->
+    <definition name="home" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/guest/login.jsp"/>
+    </definition>
+
+</tiles-definitions>
+
