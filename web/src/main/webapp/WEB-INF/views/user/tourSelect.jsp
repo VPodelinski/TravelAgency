@@ -55,7 +55,8 @@
             </div>
             <br>
         <!-- Button (Double) -->
-
+            <br>
+            <br>
         <div>
             <button id="buttonSelect" name="buttonSelect">Select tour</button>
         </div>

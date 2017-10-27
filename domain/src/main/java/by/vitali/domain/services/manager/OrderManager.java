@@ -116,7 +116,7 @@ public class OrderManager implements OrderManagement {
             final Order order = new Order();
             order.setTour(tour);
             order.setUser(user);
-            orderStatusManagement.createOrderStatus(orderStatus);
+            //orderStatusManagement.createOrderStatus(orderStatus);
             order.setOrderStatus(orderStatusRepository.getOrderStatusByOrderStatus(orderStatus));
             save(order);
         } catch (DaoException e) {

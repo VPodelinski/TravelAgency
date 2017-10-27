@@ -68,4 +68,28 @@ public class Hotel implements Serializable {
                 //", tours=" + tours +
                 + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Hotel hotel = (Hotel) o;
+
+        if (id != hotel.id) return false;
+        if (address != null ? !address.equals(hotel.address) : hotel.address != null) return false;
+        if (category != hotel.category) return false;
+        if (typeOfMeals != hotel.typeOfMeals) return false;
+        return tours != null ? tours.equals(hotel.tours) : hotel.tours == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (category != null ? category.hashCode() : 0);
+        result = 31 * result + (typeOfMeals != null ? typeOfMeals.hashCode() : 0);
+        result = 31 * result + (tours != null ? tours.hashCode() : 0);
+        return result;
+    }
 }

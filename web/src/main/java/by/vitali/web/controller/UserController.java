@@ -121,7 +121,6 @@ public class UserController {
                 if (!map.isEmpty()) {
                     request.setAttribute(Parameters.TOURS_MAP, map);
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_RESERVE_PAGE_PATH);
-
                 } else {
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_SELECT_TOUR_PAGE_PATH);
                     request.setAttribute(Parameters.ERROR_TOUR_LIST_IS_EMPTY, MessageManager.INSTANCE.getProperty(MessageConstants.ERROR_TOURS_LIST));
@@ -181,8 +180,7 @@ public class UserController {
             if (null != idTourString) {
                 final HttpSession session = request.getSession();
                 final User user = (User) session.getAttribute(Parameters.USER);
-                final Long idTour = Long.parseLong(idTourString);
-                final Tour tour = tourManagement.read(idTour);
+                final Tour tour = tourManagement.read(Integer.parseInt(idTourString));
                 orderManagement.deleteOrder(user, tour);
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.CANCEL_RESERVING));

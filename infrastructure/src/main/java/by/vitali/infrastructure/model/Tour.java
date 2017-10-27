@@ -99,4 +99,40 @@ public class Tour implements Serializable {
                 + ", hotel=" + hotel
                 + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tour tour = (Tour) o;
+
+        if (id != tour.id) return false;
+        if (price != tour.price) return false;
+        if (discount != tour.discount) return false;
+        if (duration != tour.duration) return false;
+        if (name != null ? !name.equals(tour.name) : tour.name != null) return false;
+        if (departureCity != tour.departureCity) return false;
+        if (country != tour.country) return false;
+        if (tourType != tour.tourType) return false;
+        if (transportType != tour.transportType) return false;
+        if (hotel != null ? !hotel.equals(tour.hotel) : tour.hotel != null) return false;
+        return orders != null ? orders.equals(tour.orders) : tour.orders == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + price;
+        result = 31 * result + discount;
+        result = 31 * result + duration;
+        result = 31 * result + (departureCity != null ? departureCity.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (tourType != null ? tourType.hashCode() : 0);
+        result = 31 * result + (transportType != null ? transportType.hashCode() : 0);
+        result = 31 * result + (hotel != null ? hotel.hashCode() : 0);
+        result = 31 * result + (orders != null ? orders.hashCode() : 0);
+        return result;
+    }
 }

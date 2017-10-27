@@ -5,7 +5,7 @@
     <fieldset>
         <div>
             <select id="reservingTour" name="reservingTour"
-                    style="width: 500px; height: 500px;">
+                    style="width: 500px; height: 300px;">
                 <c:forEach var="Tour" items="${toursMap}">
                     <option value="${Tour.key}">${Tour.value}</option>
                 </c:forEach>

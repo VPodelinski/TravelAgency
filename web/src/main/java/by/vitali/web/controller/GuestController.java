@@ -28,7 +28,6 @@ public class GuestController {
     @Autowired
     public GuestController(final UserManagement userManagement) {
         this.userManagement = userManagement;
-
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
