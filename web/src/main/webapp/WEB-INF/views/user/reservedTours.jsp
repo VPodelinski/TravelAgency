@@ -12,6 +12,16 @@
                 </c:forEach>
             </select>
         </div>
+
+        <div>
+            <select name="orderStatus">
+                <c:forEach var="orderStatus" items="${orderStatusesList}">
+                    <option value="${orderStatus.status}">"${orderStatus}"</option>
+                </c:forEach>
+            </select>
+            <span>***Select order status***</span>
+        </div>
+
         <!-- Button -->
         <div>
             <button id="singlebuttonCancelReserv" name="singlebuttonCancelReserv"> Cancel

@@ -30,7 +30,7 @@ public class OrderManager implements OrderManagement {
 
     @Autowired
     public OrderManager(final TourManagement tourManagement, final OrderRepository orderRepository,
-                        final OrderStatusRepository orderStatusRepository, OrderStatusManagement orderStatusManagement) {
+                        final OrderStatusRepository orderStatusRepository) {
         this.tourManagement = tourManagement;
         this.orderRepository = orderRepository;
         this.orderStatusRepository = orderStatusRepository;
@@ -79,7 +79,6 @@ public class OrderManager implements OrderManagement {
             if (user == null) {
                 throw new IllegalArgumentException("User must not be null.");
             }
-
             final List<Order> orders = orderRepository.getListUserOrders(user);
             final Map<Long, String> map = new HashMap<>();
             for (final Order order : orders) {
@@ -121,7 +120,6 @@ public class OrderManager implements OrderManagement {
             final Order order = new Order();
             order.setTour(tour);
             order.setUser(user);
-            //orderStatusManagement.createOrderStatus(orderStatus);
             order.setOrderStatus(orderStatusRepository.getOrderStatusByOrderStatus(orderStatus));
             save(order);
         } catch (HibernateException e) {

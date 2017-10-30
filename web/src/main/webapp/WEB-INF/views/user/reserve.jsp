@@ -11,9 +11,19 @@
                 </c:forEach>
             </select>
         </div>
+        <br>
+        <div>
+            <select id="orderStatus" name="orderStatus">
+                <c:forEach var="orderStatus" items="${orderStatusesList}">
+                    <option value="${orderStatus}">"${orderStatus}"</option>
+                </c:forEach>
+            </select>
+            <span>***Select order status***</span>
+        </div>
+        <br>
         <!-- Button -->
         <div>
-            <button id="singlebuttonReserv" name="singlebuttonReserv">Reserve</button>
+            <button id="singlebuttonReserv" name="singlebuttonReserv">Action</button>
         </div>
     </fieldset>
 </form>

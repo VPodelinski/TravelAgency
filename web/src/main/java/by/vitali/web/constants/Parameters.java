@@ -28,6 +28,7 @@ public class Parameters {
     public static final String TYPE_OF_MEAL = "typeOfMeals";
     //parameters orderstatus
     public static final String ORDERSTATUS = "orderStatus";
+    public static final String ORDER_STATUS_LIST = "orderStatusesList";
     // parameters tour
     public static final String NAME_TOUR = "nameTour";
     public static final String TOUR_TYPE = "tourType";

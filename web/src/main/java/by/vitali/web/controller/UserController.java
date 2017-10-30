@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Controller for user.
  */
@@ -61,8 +62,14 @@ public class UserController {
         try {
             final HttpSession session = request.getSession();
             final User user = (User) session.getAttribute(Parameters.USER);
-            page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_RESERVED_TOURS_PAGE_PATH);
             request.setAttribute(Parameters.TOURS_MAP, orderManagement.getUserOrders(user));
+
+            final List<OrderStatus> orderStatusesList = orderStatusManagement.getAll();
+
+            request.getSession().setAttribute(Parameters.ORDER_STATUS_LIST, orderStatusesList);
+            page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_RESERVED_TOURS_PAGE_PATH);
+
+
         } catch (ServiceException e) {
             //logger.writeLog(e.getMessage());
             page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ERROR_PAGE_PATH);
@@ -80,22 +87,16 @@ public class UserController {
     @RequestMapping(value = "/select", method = RequestMethod.GET)
     public String goToSelectTour(final HttpServletRequest request) {
         final String page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_SELECT_TOUR_PAGE_PATH);
-
         final List<TourType> tourTypeList = Arrays.asList(TourType.values());
         request.getSession().setAttribute(Parameters.TOUR_TYPE_LIST, tourTypeList);
-
         final List<Country> countryList = Arrays.asList(Country.values());
         request.getSession().setAttribute(Parameters.COUNTRY_LIST, countryList);
-
         final List<TransportType> transportTypeList = Arrays.asList(TransportType.values());
         request.getSession().setAttribute(Parameters.TRANSPORT_TYPE_LIST, transportTypeList);
-
         final List<HotelCategory> hotelCategoryList = Arrays.asList(HotelCategory.values());
         request.getSession().setAttribute(Parameters.HOTEL_CATEGORY_LIST, hotelCategoryList);
-
         final List<TypeOfMeals> typeOfMealsList = Arrays.asList(TypeOfMeals.values());
         request.getSession().setAttribute(Parameters.TYPE_OF_MEALS_LIST, typeOfMealsList);
-
         return page;
     }
 
@@ -115,6 +116,7 @@ public class UserController {
         final HotelCategory hotelCategory = HotelCategory.valueOf(request.getParameter(Parameters.HOTEL_CATEGORY));
         final TypeOfMeals typeOfMeals = TypeOfMeals.valueOf(request.getParameter(Parameters.TYPE_OF_MEAL));
 
+
         if (null != tourType & null != chooseCountry & null != transportType & null != hotelCategory & null != typeOfMeals) {
             try {
                 final Map<Long, String> map = tourManagement.getMapToursByRequest(tourType, chooseCountry, transportType, hotelCategory, typeOfMeals);
@@ -130,7 +132,6 @@ public class UserController {
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ERROR_PAGE_PATH);
                 request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.INSTANCE.getProperty(MessageConstants.ERROR_DATABASE));
             }
-
         }
         return page;
     }
@@ -151,7 +152,10 @@ public class UserController {
                 final Tour tour = tourManagement.read(idTour);
                 final HttpSession session = request.getSession();
                 final User user = (User) session.getAttribute(Parameters.USER);
-                orderManagement.reserveTour(tour, user, "RESERVE");
+
+                final OrderStatus orderStatus = orderStatusManagement.getOrderStatusByOrderStatus(request.getParameter(Parameters.ORDERSTATUS));
+                //final OrderStatus orderStatus = orderStatusManagement.getOrderStatusByOrderStatus(request.getParameter(Parameters.ORDERSTATUS));
+                orderManagement.reserveTour(tour, user, orderStatus.getStatus());
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.RESERVE_TOUR));
             } else {
