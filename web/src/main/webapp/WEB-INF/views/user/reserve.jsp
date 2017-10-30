@@ -5,7 +5,7 @@
     <fieldset>
         <div>
             <select id="reservingTour" name="reservingTour"
-                    style="width: 500px; height: 300px;">
+                    style="width: 500px; height: 200px;">
                 <c:forEach var="Tour" items="${toursMap}">
                     <option value="${Tour.key}">${Tour.value}</option>
                 </c:forEach>
@@ -13,9 +13,9 @@
         </div>
         <br>
         <div>
-            <select id="orderStatus" name="orderStatus">
+            <select name="orderStatus">
                 <c:forEach var="orderStatus" items="${orderStatusesList}">
-                    <option value="${orderStatus}">"${orderStatus}"</option>
+                    <option value="${orderStatus.status}">"${orderStatus.status}"</option>
                 </c:forEach>
             </select>
             <span>***Select order status***</span>

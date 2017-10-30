@@ -28,7 +28,7 @@ public class OrderStatusManager implements OrderStatusManagement {
     @Override
     public OrderStatus getOrderStatusByOrderStatus(final String status) throws ServiceException {
         try {
-            if(status == null){
+            if (status == null) {
                 throw new IllegalArgumentException("Order status must not be null.");
             }
             return orderStatusRepository.getOrderStatusByOrderStatus(status);
@@ -42,7 +42,7 @@ public class OrderStatusManager implements OrderStatusManagement {
     @Override
     public void save(final OrderStatus status) throws ServiceException {
         try {
-            if(status == null){
+            if (status == null) {
                 throw new IllegalArgumentException("Order status must not be null.");
             }
             orderStatusRepository.save(status);
@@ -55,7 +55,7 @@ public class OrderStatusManager implements OrderStatusManagement {
     @Override
     public void update(final OrderStatus status) throws ServiceException {
         try {
-            if(status == null){
+            if (status == null) {
                 throw new IllegalArgumentException("Order status must not be null.");
             }
             orderStatusRepository.update(status);
@@ -67,7 +67,7 @@ public class OrderStatusManager implements OrderStatusManagement {
     @Override
     public OrderStatus read(final Long id) throws ServiceException {
         try {
-            if(id == null){
+            if (id == null) {
                 throw new IllegalArgumentException("Order id  must not be null.");
             }
             return orderStatusRepository.read(id, OrderStatus.class);

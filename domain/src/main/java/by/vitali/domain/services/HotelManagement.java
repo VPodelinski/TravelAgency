@@ -39,6 +39,7 @@ public interface HotelManagement extends GeneralManagement<Hotel> {
 
     /**
      * This method returns all hotels.
+     *
      * @return
      * @throws ServiceException
      */

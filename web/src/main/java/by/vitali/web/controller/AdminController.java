@@ -187,19 +187,14 @@ public class AdminController {
     @RequestMapping(value = "/create_tour", method = RequestMethod.GET)
     public String goToCreateTour(final HttpServletRequest request) {
         final String page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ADMIN_CREATE_TOUR_PAGE_PATH);
-
         final List<TourType> tourTypeList = Arrays.asList(TourType.values());
         request.getSession().setAttribute(Parameters.TOUR_TYPE_LIST, tourTypeList);
-
         final List<Country> countryList = Arrays.asList(Country.values());
         request.getSession().setAttribute(Parameters.COUNTRY_LIST, countryList);
-
         final List<TransportType> transportTypeList = Arrays.asList(TransportType.values());
         request.getSession().setAttribute(Parameters.TRANSPORT_TYPE_LIST, transportTypeList);
-
         final List<DepartureCity> departureCityList = Arrays.asList(DepartureCity.values());
         request.getSession().setAttribute(Parameters.DEPARTURE_CITY_LIST, departureCityList);
-
         return page;
     }
 

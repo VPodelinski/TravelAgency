@@ -63,13 +63,9 @@ public class UserController {
             final HttpSession session = request.getSession();
             final User user = (User) session.getAttribute(Parameters.USER);
             request.setAttribute(Parameters.TOURS_MAP, orderManagement.getUserOrders(user));
-
-            final List<OrderStatus> orderStatusesList = orderStatusManagement.getAll();
-
-            request.getSession().setAttribute(Parameters.ORDER_STATUS_LIST, orderStatusesList);
             page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_RESERVED_TOURS_PAGE_PATH);
-
-
+            final List<OrderStatus> orderStatusesList = orderStatusManagement.getAll();
+            request.getSession().setAttribute(Parameters.ORDER_STATUS_LIST, orderStatusesList);
         } catch (ServiceException e) {
             //logger.writeLog(e.getMessage());
             page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ERROR_PAGE_PATH);
@@ -116,7 +112,6 @@ public class UserController {
         final HotelCategory hotelCategory = HotelCategory.valueOf(request.getParameter(Parameters.HOTEL_CATEGORY));
         final TypeOfMeals typeOfMeals = TypeOfMeals.valueOf(request.getParameter(Parameters.TYPE_OF_MEAL));
 
-
         if (null != tourType & null != chooseCountry & null != transportType & null != hotelCategory & null != typeOfMeals) {
             try {
                 final Map<Long, String> map = tourManagement.getMapToursByRequest(tourType, chooseCountry, transportType, hotelCategory, typeOfMeals);
@@ -152,9 +147,7 @@ public class UserController {
                 final Tour tour = tourManagement.read(idTour);
                 final HttpSession session = request.getSession();
                 final User user = (User) session.getAttribute(Parameters.USER);
-
                 final OrderStatus orderStatus = orderStatusManagement.getOrderStatusByOrderStatus(request.getParameter(Parameters.ORDERSTATUS));
-                //final OrderStatus orderStatus = orderStatusManagement.getOrderStatusByOrderStatus(request.getParameter(Parameters.ORDERSTATUS));
                 orderManagement.reserveTour(tour, user, orderStatus.getStatus());
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.RESERVE_TOUR));
