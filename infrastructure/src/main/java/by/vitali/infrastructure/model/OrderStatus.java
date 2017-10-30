@@ -1,7 +1,9 @@
 package by.vitali.infrastructure.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +22,8 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@ToString(exclude = "orders")
+@EqualsAndHashCode
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Entity
 @Table(name = "order_status")
@@ -30,7 +34,7 @@ public class OrderStatus implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "status")
     private String status;
@@ -38,12 +42,4 @@ public class OrderStatus implements Serializable {
     @OneToMany(mappedBy = "orderStatus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
 
-    @Override
-    public String toString() {
-        return "OrderStatus{"
-                + "id=" + id
-                + ", status='" + status + '\''
-                +
-                '}';
-    }
 }

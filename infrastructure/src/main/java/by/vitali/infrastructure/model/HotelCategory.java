@@ -4,6 +4,7 @@ package by.vitali.infrastructure.model;
  * This enum lists hotel category (stars).
  */
 public enum HotelCategory {
+
     /**
      * 1 star.
      */

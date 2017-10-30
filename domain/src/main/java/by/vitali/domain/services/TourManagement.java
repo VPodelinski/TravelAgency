@@ -9,6 +9,7 @@ import by.vitali.infrastructure.model.TourType;
 import by.vitali.infrastructure.model.TransportType;
 import by.vitali.infrastructure.model.TypeOfMeals;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,7 +23,7 @@ public interface TourManagement extends GeneralManagement<Tour> {
      * @param discount
      * @throws ServiceException
      */
-    void makeDiscount(long idTour, int discount) throws ServiceException;
+    void makeDiscount(Long idTour, int discount) throws ServiceException;
 
     /**
      * This method returns a map of tour by request.
@@ -46,7 +47,7 @@ public interface TourManagement extends GeneralManagement<Tour> {
      * @return map
      * @throws ServiceException
      */
-    String convertTourToString(long id) throws ServiceException;
+    String convertTourToString(Long id) throws ServiceException;
 
     /**
      * This method returns a limited map of tour.
@@ -83,4 +84,11 @@ public interface TourManagement extends GeneralManagement<Tour> {
 
                     int hotelId, DepartureCity departureCity, int duration, int price) throws ServiceException;
 
+    /**
+     * This method returns all tours.
+     *
+     * @return
+     * @throws ServiceException
+     */
+    public List<Tour> getAll() throws ServiceException;
 }

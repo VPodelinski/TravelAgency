@@ -10,6 +10,7 @@
         <div>
             <ul>
                 <li type="square"><a href="/admin/add_hotel">Add hotel</a></li>
+                <li type="square"><a href="/admin/add_status">Add order status</a></li>
                 <li type="square"><a href="/admin/create_tour">Create tour</a></li>
             </ul>
             <ul>

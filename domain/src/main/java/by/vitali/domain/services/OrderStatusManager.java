@@ -1,10 +1,9 @@
 package by.vitali.domain.services;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.OrderStatusManagement;
-import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.OrderStatus;
 import by.vitali.infrastructure.repository.OrderStatusRepository;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +28,11 @@ public class OrderStatusManager implements OrderStatusManagement {
     @Override
     public OrderStatus getOrderStatusByOrderStatus(final String status) throws ServiceException {
         try {
+            if(status == null){
+                throw new IllegalArgumentException("Order status must not be null.");
+            }
             return orderStatusRepository.getOrderStatusByOrderStatus(status);
-        } catch (DaoException e) {
+        } catch (HibernateException e) {
             // logger
             throw new ServiceException(e.getMessage());
 
@@ -38,54 +40,58 @@ public class OrderStatusManager implements OrderStatusManagement {
     }
 
     @Override
-    public void save(final OrderStatus type) throws ServiceException {
+    public void save(final OrderStatus status) throws ServiceException {
         try {
-            orderStatusRepository.save(type);
-        } catch (DaoException e) {
+            if(status == null){
+                throw new IllegalArgumentException("Order status must not be null.");
+            }
+            orderStatusRepository.save(status);
+        } catch (HibernateException e) {
             // logger
             throw new ServiceException(e.getMessage());
         }
     }
 
     @Override
-    public void update(final OrderStatus type) throws ServiceException {
+    public void update(final OrderStatus status) throws ServiceException {
         try {
-            orderStatusRepository.update(type);
-        } catch (DaoException e) {
-            // logger
+            if(status == null){
+                throw new IllegalArgumentException("Order status must not be null.");
+            }
+            orderStatusRepository.update(status);
+        } catch (HibernateException e) {
             throw new ServiceException(e.getMessage());
-
         }
     }
 
     @Override
-    public OrderStatus read(final long id) throws ServiceException {
+    public OrderStatus read(final Long id) throws ServiceException {
         try {
+            if(id == null){
+                throw new IllegalArgumentException("Order id  must not be null.");
+            }
             return orderStatusRepository.read(id, OrderStatus.class);
-        } catch (DaoException e) {
-            // logger
+        } catch (HibernateException e) {
             throw new ServiceException(e.getMessage());
-
         }
     }
 
     @Override
     public List<OrderStatus> getAll() throws ServiceException {
         try {
-            return orderStatusRepository.getAll(OrderStatus.class);
-        } catch (DaoException e) {
-            // logger
+            return orderStatusRepository.getOrderStatuses();
+        } catch (HibernateException e) {
             throw new ServiceException(e.getMessage());
-
         }
     }
 
     @Override
     public void createOrderStatus(final String status) throws ServiceException {
-
+        if (status == null) {
+            throw new IllegalArgumentException("Status must not be null.");
+        }
         final OrderStatus orderStatus = new OrderStatus();
         orderStatus.setStatus(status);
         save(orderStatus);
-
     }
 }

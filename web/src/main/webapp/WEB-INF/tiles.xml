@@ -30,6 +30,10 @@
         <put-attribute name="body" value="/WEB-INF/views/admin/addHotels.jsp"/>
     </definition>
 
+    <definition name="admin/add_status" extends="admin_default">
+        <put-attribute name="body" value="/WEB-INF/views/admin/addStatus.jsp"/>
+    </definition>
+
     <!-- USER PAGES -->
     <definition name="user_default" extends="default">
         <put-attribute name="sidebar" value="/WEB-INF/views/user/top.jsp"/>

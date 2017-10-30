@@ -1,8 +1,6 @@
 package by.vitali.infrastructure.repository;
 
-import by.vitali.infrastructure.exceptions.DaoException;
-
-import java.util.List;
+import org.hibernate.HibernateException;
 
 /**
  * Common  Repository interface.
@@ -11,43 +9,39 @@ public interface GeneralRepository<T> {
 
     /**
      * This method saves object.
+     *
      * @param t
-     * @return T
-     * @throws DaoException
+     * @return T type
+     * @throws HibernateException
      */
-    T save(T t) throws DaoException;
+    T save(T t) throws HibernateException;
 
     /**
      * This method reads object.
+     *
      * @param id
      * @param t
-     * @return T
-     * @throws DaoException
+     * @return T type
+     * @throws HibernateException
      */
-    T read(long id, Class<T> t) throws DaoException;
-
-    /**
-     * This method returns all objects.
-     * @param type
-     * @return List<T>
-     * @throws DaoException
-     */
-    List<T> getAll(Class<T> type) throws DaoException;
+    T read(long id, Class<T> t) throws HibernateException;
 
     /**
      * This method updates object.
+     *
      * @param t
-     * @return T
-     * @throws DaoException
+     * @return T type
+     * @throws HibernateException
      */
-    T update(T t) throws DaoException;
+    T update(T t) throws HibernateException;
 
     /**
      * This method removes object.
+     *
      * @param t
-     * @return T
-     * @throws DaoException
+     * @return T type
+     * @throws HibernateException
      */
-    T delete(T t) throws DaoException;
+    T delete(T t) throws HibernateException;
 
 }

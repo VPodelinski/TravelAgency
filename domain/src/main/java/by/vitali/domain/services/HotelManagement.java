@@ -37,4 +37,11 @@ public interface HotelManagement extends GeneralManagement<Hotel> {
      */
     void createHotel(String city, String street, String numbBuilding, HotelCategory category, TypeOfMeals typeOfMeals) throws ServiceException;
 
+    /**
+     * This method returns all hotels.
+     * @return
+     * @throws ServiceException
+     */
+    List<Hotel> getHotels() throws ServiceException;
+
 }

@@ -1,8 +1,10 @@
 package by.vitali.infrastructure.model;
 
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,6 +27,8 @@ import java.util.Set;
  */
 @Getter
 @Setter
+@EqualsAndHashCode
+@ToString(exclude = "orders")
 @SuppressWarnings("PMD.ShortClassName" + "PMD.UnusedPrivateField")
 @Entity
 @Table(name = "tour")
@@ -72,67 +76,4 @@ public class Tour implements Serializable {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Order> orders;
 
-    public Tour() {
-        // Empty constructor
-    }
-
-    public Tour(final String name, final int price, final int duration, final Country country, final TourType tourType) {
-        this.name = name;
-        this.price = price;
-        this.duration = duration;
-        this.country = country;
-        this.tourType = tourType;
-    }
-
-    @Override
-    public String toString() {
-        return "Tour{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + ", price=" + price
-                + ", discount=" + discount
-                + ", duration=" + duration
-                + ", departureCity=" + departureCity
-                + ", country=" + country
-                + ", tourType=" + tourType
-                + ", transportType=" + transportType
-                + ", hotel=" + hotel
-                + '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Tour tour = (Tour) o;
-
-        if (id != tour.id) return false;
-        if (price != tour.price) return false;
-        if (discount != tour.discount) return false;
-        if (duration != tour.duration) return false;
-        if (name != null ? !name.equals(tour.name) : tour.name != null) return false;
-        if (departureCity != tour.departureCity) return false;
-        if (country != tour.country) return false;
-        if (tourType != tour.tourType) return false;
-        if (transportType != tour.transportType) return false;
-        if (hotel != null ? !hotel.equals(tour.hotel) : tour.hotel != null) return false;
-        return orders != null ? orders.equals(tour.orders) : tour.orders == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + price;
-        result = 31 * result + discount;
-        result = 31 * result + duration;
-        result = 31 * result + (departureCity != null ? departureCity.hashCode() : 0);
-        result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (tourType != null ? tourType.hashCode() : 0);
-        result = 31 * result + (transportType != null ? transportType.hashCode() : 0);
-        result = 31 * result + (hotel != null ? hotel.hashCode() : 0);
-        result = 31 * result + (orders != null ? orders.hashCode() : 0);
-        return result;
-    }
 }

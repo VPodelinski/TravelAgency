@@ -1,5 +1,6 @@
 package by.vitali.infrastructure.model;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,6 +21,7 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
+@EqualsAndHashCode
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Entity
 @Table(name = "`order`")
@@ -30,7 +32,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "status_id")
@@ -44,25 +46,4 @@ public class Order implements Serializable {
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Order order = (Order) o;
-
-        if (id != order.id) return false;
-        if (orderStatus != null ? !orderStatus.equals(order.orderStatus) : order.orderStatus != null) return false;
-        if (user != null ? !user.equals(order.user) : order.user != null) return false;
-        return tour != null ? tour.equals(order.tour) : order.tour == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
-        result = 31 * result + (user != null ? user.hashCode() : 0);
-        result = 31 * result + (tour != null ? tour.hashCode() : 0);
-        return result;
-    }
 }

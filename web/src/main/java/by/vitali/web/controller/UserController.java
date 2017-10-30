@@ -147,7 +147,7 @@ public class UserController {
         try {
             String idTourString = request.getParameter(Parameters.RESERVING_TOUR);
             if (null != idTourString) {
-                final int idTour = Integer.parseInt(idTourString);
+                final Long idTour = Long.parseLong(idTourString);
                 final Tour tour = tourManagement.read(idTour);
                 final HttpSession session = request.getSession();
                 final User user = (User) session.getAttribute(Parameters.USER);
@@ -180,7 +180,7 @@ public class UserController {
             if (null != idTourString) {
                 final HttpSession session = request.getSession();
                 final User user = (User) session.getAttribute(Parameters.USER);
-                final Tour tour = tourManagement.read(Integer.parseInt(idTourString));
+                final Tour tour = tourManagement.read(Long.parseLong(idTourString));
                 orderManagement.deleteOrder(user, tour);
                 page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);
                 request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.CANCEL_RESERVING));

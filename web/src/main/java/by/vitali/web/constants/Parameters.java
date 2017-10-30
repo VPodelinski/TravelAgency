@@ -26,6 +26,8 @@ public class Parameters {
     public static final String NUMB_OF_BUILDING = "numbOfBuilding";
     public static final String HOTEL_CATEGORY = "hotelCategory";
     public static final String TYPE_OF_MEAL = "typeOfMeals";
+    //parameters orderstatus
+    public static final String ORDERSTATUS = "orderStatus";
     // parameters tour
     public static final String NAME_TOUR = "nameTour";
     public static final String TOUR_TYPE = "tourType";

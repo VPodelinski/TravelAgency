@@ -1,7 +1,7 @@
 package by.vitali.infrastructure.model;
 
 
-
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,9 +12,10 @@ import java.io.Serializable;
 /**
  * This class save hotels address.
  */
-@ToString
 @Getter
 @Setter
+@ToString
+@EqualsAndHashCode
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class Address implements Serializable {
 

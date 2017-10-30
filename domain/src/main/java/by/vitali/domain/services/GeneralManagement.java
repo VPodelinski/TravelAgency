@@ -34,13 +34,6 @@ public interface GeneralManagement<T> {
      * @return
      * @throws Exception
      */
-    T read(long id) throws ServiceException;
+    T read(Long id) throws ServiceException;
 
-    /**
-     * This method returns all objects.
-     *
-     * @return
-     * @throws Exception
-     */
-    List<T> getAll() throws ServiceException;
 }

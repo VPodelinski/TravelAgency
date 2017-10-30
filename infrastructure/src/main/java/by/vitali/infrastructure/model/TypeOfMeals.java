@@ -4,6 +4,7 @@ package by.vitali.infrastructure.model;
  * This listing lists the type of meals.
  */
 public enum TypeOfMeals {
+
     /**
      * Type of meal is BB (ВB — breakfast, beverages (tea, coffee, water)).
      */

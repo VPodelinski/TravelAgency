@@ -1,13 +1,8 @@
 package by.vitali.infrastructure.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * This enum lists user role.
  */
-@Entity
-@Table(name = "role")
 public enum RoleType {
 
     /**
@@ -16,9 +11,7 @@ public enum RoleType {
     USER,
 
     /**
-     *The role is travel-agency for administrator.
+     * The role is travel-agency for administrator.
      */
     ADMIN
-
-
 }

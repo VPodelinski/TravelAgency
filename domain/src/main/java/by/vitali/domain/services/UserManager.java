@@ -1,15 +1,12 @@
 package by.vitali.domain.services;
 
 import by.vitali.domain.services.exceptions.ServiceException;
-import by.vitali.domain.services.UserManagement;
-import by.vitali.infrastructure.exceptions.DaoException;
 import by.vitali.infrastructure.model.User;
 import by.vitali.infrastructure.repository.UserRepository;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * User manager.
@@ -26,10 +23,13 @@ public class UserManager implements UserManagement {
     }
 
     @Override
-    public void save(final User type) throws ServiceException {
+    public void save(final User user) throws ServiceException {
         try {
-            userRepository.save(type);
-        } catch (DaoException e) {
+            if (user == null) {
+                throw new IllegalArgumentException("User must not be null.");
+            }
+            userRepository.save(user);
+        } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
         }
@@ -41,30 +41,27 @@ public class UserManager implements UserManagement {
     }
 
     @Override
-    public User read(final long id) throws ServiceException {
+    public User read(final Long id) throws ServiceException {
         try {
+            if (id == null) {
+                throw new IllegalArgumentException("User id must not be null.");
+            }
             return userRepository.read(id, User.class);
-        } catch (DaoException e) {
+        } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
         }
     }
 
-    @Override
-    public List<User> getAll() throws ServiceException {
-        try {
-            return userRepository.getAll(User.class);
-        } catch (DaoException e) {
-            //logger
-            throw new ServiceException(e.getMessage());
-        }
-    }
 
     @Override
     public User getUserByEmail(final String email) throws ServiceException {
         try {
+            if (email == null) {
+                throw new IllegalArgumentException("Email must not be null.");
+            }
             return userRepository.getUserByEmail(email);
-        } catch (DaoException e) {
+        } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
         }
@@ -73,13 +70,16 @@ public class UserManager implements UserManagement {
     @Override
     public boolean authorized(final String email, final String password) throws ServiceException {
         try {
+            if (email == null || password == null) {
+                throw new IllegalArgumentException("Email, password must not be null.");
+            }
             boolean isauthorized = false;
             final User user = userRepository.getUserByEmailAndPassword(email, password);
             if (user != null) {
                 isauthorized = true;
             }
             return isauthorized;
-        } catch (DaoException e) {
+        } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
         }
@@ -87,12 +87,14 @@ public class UserManager implements UserManagement {
 
     @Override
     public String checkRole(final String email) throws ServiceException {
-        //String or RoleType
         try {
+            if (email == null) {
+                throw new IllegalArgumentException("Email must not be null.");
+            }
             final User user = userRepository.getUserByEmail(email);
             final String roleType = user.getRole().toString();
             return roleType;
-        } catch (DaoException e) {
+        } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
         }
@@ -101,13 +103,16 @@ public class UserManager implements UserManagement {
     @Override
     public boolean isNewUser(final String email) throws ServiceException {
         try {
+            if (email == null) {
+                throw new IllegalArgumentException("Email must not be null.");
+            }
             boolean isNew = true;
             final User user = userRepository.getUserByEmail(email);
             if (user != null) {
                 isNew = false;
             }
             return isNew;
-        } catch (DaoException e) {
+        } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
         }

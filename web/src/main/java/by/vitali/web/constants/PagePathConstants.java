@@ -11,6 +11,8 @@ public class PagePathConstants {
     public static final String ADMIN_PAGE_PATH = "path.page.admin";
     public static final String ADMIN_CREATE_TOUR_PAGE_PATH = "path.page.admin.createtour";
     public static final String ADMIN_ADD_HOTEL_PAGE_PATH = "path.page.admin.addhotel";
+    public static final String ADMIN_ADD_ORDER_STATUS_PAGE_PATH = "path.page.admin.addorderstatus";
+
 
     public static final String USER_PAGE_PATH = "path.page.user";
     public static final String USER_RESERVE_PAGE_PATH = "path.page.user.reserve";

@@ -1,6 +1,7 @@
 package by.vitali.web.controller;
 
 
+import by.vitali.domain.services.OrderStatusManagement;
 import by.vitali.domain.services.exceptions.ServiceException;
 import by.vitali.domain.services.HotelManagement;
 import by.vitali.domain.services.TourManagement;
@@ -33,12 +34,13 @@ public class AdminController {
 
     final private TourManagement tourManagement;
     final private HotelManagement hotelManagement;
-
+    final private OrderStatusManagement orderStatusManagement;
 
     @Autowired
-    public AdminController(final TourManagement tourManagement, final HotelManagement hotelManagement) {
+    public AdminController(final TourManagement tourManagement, final HotelManagement hotelManagement, final OrderStatusManagement orderStatusManagement) {
         this.tourManagement = tourManagement;
         this.hotelManagement = hotelManagement;
+        this.orderStatusManagement = orderStatusManagement;
 
     }
 
@@ -105,6 +107,38 @@ public class AdminController {
 
         return page;
     }
+
+    @RequestMapping(value = "/add_status", method = RequestMethod.POST)
+    public String addOrderStatus(final HttpServletRequest request) {
+        String page;
+        try {
+            final String orderStatus = request.getParameter(Parameters.ORDERSTATUS);
+
+            if (!orderStatus.isEmpty()) {
+                orderStatusManagement.createOrderStatus(orderStatus);
+                page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ADMIN_PAGE_PATH);
+                request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.SUCCESS_OPERATION));
+            } else {
+                page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ADMIN_CREATE_TOUR_PAGE_PATH);
+                request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.EMPTY_FIELDS));
+            }
+        } catch (ServiceException e) {
+            // logger.writeLog(e.getMessage());
+            page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ERROR_PAGE_PATH);
+            request.setAttribute(Parameters.ERROR_DATABASE, MessageManager.INSTANCE.getProperty(MessageConstants.ERROR_DATABASE));
+        } catch (NumberFormatException e) {
+            page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ADMIN_CREATE_TOUR_PAGE_PATH);
+            request.setAttribute(Parameters.OPERATION_MESSAGE, MessageManager.INSTANCE.getProperty(MessageConstants.INVALID_NUMBER_FORMAT));
+        }
+        return page;
+    }
+
+    @RequestMapping(value = "/add_status", method = RequestMethod.GET)
+    public String goToAddOrderStatus(final HttpServletRequest request) {
+        final String page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ADMIN_ADD_ORDER_STATUS_PAGE_PATH);
+        return page;
+    }
+
 
     /**
      * Method returns page for create tour.
