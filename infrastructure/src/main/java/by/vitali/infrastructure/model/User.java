@@ -26,7 +26,7 @@ import java.util.Set;
 @Setter
 @ToString(exclude = "orders")
 @EqualsAndHashCode
-@SuppressWarnings("PMD.ShortClassName" + "PMD.UnusedPrivateField")
+@SuppressWarnings(value = {"PMD.ShortClassName", "PMD.UnusedPrivateField"})
 @Entity
 @Table(name = "user")
 public class User implements Serializable {

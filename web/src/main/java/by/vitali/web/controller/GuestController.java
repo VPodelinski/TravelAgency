@@ -56,10 +56,9 @@ public class GuestController {
             if (userManagement.authorized(email, password)) {
                 final HttpSession session = request.getSession();
                 final User user = userManagement.getUserByEmail(email);
-                final String role = userManagement.checkRole(email);
-                session.setAttribute(Parameters.USER_ROLE, role);
+                session.setAttribute(Parameters.USER_ROLE, user.getRole());
                 session.setAttribute(Parameters.USER, user);
-                if (role.equals(Parameters.ADMIN)) {
+                if (Parameters.ADMIN.equals(user.getRole().toString())) {
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.ADMIN_PAGE_PATH);
                 } else {
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_PAGE_PATH);

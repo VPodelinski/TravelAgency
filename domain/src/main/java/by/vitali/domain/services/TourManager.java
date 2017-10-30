@@ -76,16 +76,6 @@ public class TourManager implements TourManagement {
     }
 
     @Override
-    public List<Tour> getAll() throws ServiceException {
-        try {
-            return tourRepository.getAll();
-        } catch (HibernateException e) {
-            //logger
-            throw new ServiceException(e.getMessage());
-        }
-    }
-
-    @Override
     public void makeDiscount(final Long idTour, final int discount) throws ServiceException {
         try {
             if (idTour == null || discount < 0) {
@@ -101,18 +91,16 @@ public class TourManager implements TourManagement {
     }
 
     @Override
-    public Map<Long, String> getMapToursByRequest(final TourType tourType, final Country country, final TransportType transportType, final HotelCategory hotelCategory, final TypeOfMeals typeOfMeals) throws ServiceException {
+    public Map<Long, Tour> getMapToursByRequest(final TourType tourType, final Country country, final TransportType transportType, final HotelCategory hotelCategory, final TypeOfMeals typeOfMeals) throws ServiceException {
         try {
             if (tourType == null || country == null || transportType == null || hotelCategory == null || typeOfMeals == null) {
                 throw new IllegalArgumentException("Tour type, country, transport type, hotel category, type of meals must not be null.");
             }
             final List<Tour> list = tourRepository.getToursByRequest(tourType, country, transportType, hotelCategory, typeOfMeals);
 
-            final Map<Long, String> map = new HashMap<>();
-
+            final Map<Long, Tour> map = new HashMap<>();
             for (final Tour tour : list) {
-                final long id = tour.getId();
-                map.put(id, convertTourToString(id));
+                map.put(tour.getId(), tour);
             }
             return map;
         } catch (HibernateException e) {
@@ -122,43 +110,16 @@ public class TourManager implements TourManagement {
     }
 
     @Override
-    public String convertTourToString(final Long id) throws ServiceException {
-        try {
-            if (id == null) {
-                throw new IllegalArgumentException("Tour id must not be null.");
-
-            }
-            final Tour tour = tourRepository.read(id, Tour.class);
-            final String tourString =
-                    tour.getName()
-                            + " " + tour.getTourType()
-                            + " " + tour.getCountry()
-                            + " " + tour.getTransportType()
-                            + " " + tour.getHotel().getCategory()
-                            + " " + tour.getHotel().getTypeOfMeals()
-                            + " " + tour.getDepartureCity()
-                            + " " + tour.getDuration()
-                            + " " + tour.getDiscount()
-                            + " " + tour.getPrice();
-            return tourString;
-        } catch (HibernateException e) {
-            //logger
-            throw new ServiceException(e.getMessage());
-        }
-    }
-
-    @Override
-    public Map<Long, String> getToursMapLimit(final int start, final int size) throws ServiceException {
+    public Map<Long, Tour> getToursMapLimit(final int start, final int size) throws ServiceException {
         try {
             if (start < 0 || size < 0) {
                 throw new IllegalArgumentException("Start and size must be more 0.");
 
             }
             final List<Tour> list = tourRepository.getToursWithLimit(start, size);
-            final Map<Long, String> map = new HashMap<>();
+            final Map<Long, Tour> map = new HashMap<>();
             for (final Tour tour : list) {
-                final long idTour = tour.getId();
-                map.put(idTour, convertTourToString(idTour));
+                map.put(tour.getId(), tour);
             }
             return map;
         } catch (HibernateException e) {

@@ -8,7 +8,7 @@
             <select id="reservingTour" name="reservingTour"
                     style="width: 300px; height: 100px;">
                 <c:forEach var="Tour" items="${toursMap}">
-                    <option value="${Tour.key}">${Tour.value}</option>
+                    <option value="${Tour.key}">${Tour.value.toString}</option>
                 </c:forEach>
             </select>
         </div>

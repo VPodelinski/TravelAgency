@@ -29,7 +29,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode
 @ToString(exclude = "orders")
-@SuppressWarnings("PMD.ShortClassName" + "PMD.UnusedPrivateField")
+@SuppressWarnings(value = {"PMD.ShortClassName", "PMD.UnusedPrivateField"})
 @Entity
 @Table(name = "tour")
 public class Tour implements Serializable {

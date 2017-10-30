@@ -19,7 +19,7 @@ public interface OrderManagement extends GeneralManagement<Order> {
      * @return
      * @throws ServiceException
      */
-    Map<Long, String> getUserOrders(User user) throws ServiceException;
+    Map<Long, Tour> getUserOrders(User user) throws ServiceException;
 
     /**
      * This method removes user's order.

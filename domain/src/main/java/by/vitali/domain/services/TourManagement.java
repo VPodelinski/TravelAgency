@@ -36,18 +36,9 @@ public interface TourManagement extends GeneralManagement<Tour> {
      * @return map
      * @throws ServiceException
      */
-    Map<Long, String> getMapToursByRequest(final TourType tourType, final Country country,
+    Map<Long, Tour> getMapToursByRequest(final TourType tourType, final Country country,
                                            final TransportType transportType, final HotelCategory hotelCategory,
                                            final TypeOfMeals typeOfMeals) throws ServiceException;
-
-    /**
-     * This method sets the display of the tour.
-     *
-     * @param id
-     * @return map
-     * @throws ServiceException
-     */
-    String convertTourToString(Long id) throws ServiceException;
 
     /**
      * This method returns a limited map of tour.
@@ -57,7 +48,7 @@ public interface TourManagement extends GeneralManagement<Tour> {
      * @return map
      * @throws ServiceException
      */
-    Map<Long, String> getToursMapLimit(int start, int size) throws ServiceException;
+    Map<Long, Tour> getToursMapLimit(int start, int size) throws ServiceException;
 
     /**
      * This method returns the count of tour.
@@ -81,14 +72,5 @@ public interface TourManagement extends GeneralManagement<Tour> {
      * @throws ServiceException
      */
     void createTour(String name, TourType tourType, Country country, TransportType transportType,
-
                     int hotelId, DepartureCity departureCity, int duration, int price) throws ServiceException;
-
-    /**
-     * This method returns all tours.
-     *
-     * @return
-     * @throws ServiceException
-     */
-    public List<Tour> getAll() throws ServiceException;
 }

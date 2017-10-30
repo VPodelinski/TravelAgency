@@ -60,8 +60,4 @@ public class TourMySQLRepository extends GeneralMySQLRepository<Tour> implements
         return (int) count;
     }
 
-    @Override
-    public List<Tour> getAll() throws HibernateException {
-        return null;
-    }
 }

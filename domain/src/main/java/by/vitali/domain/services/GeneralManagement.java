@@ -15,7 +15,7 @@ public interface GeneralManagement<T> {
      * This method saves object.
      *
      * @param type
-     * @throws Exception
+     * @throws ServiceException
      */
     void save(T type) throws ServiceException;
 
@@ -23,7 +23,7 @@ public interface GeneralManagement<T> {
      * This method updates object.
      *
      * @param type
-     * @throws Exception
+     * @throws ServiceException
      */
     void update(T type) throws ServiceException;
 
@@ -32,7 +32,7 @@ public interface GeneralManagement<T> {
      *
      * @param id
      * @return
-     * @throws Exception
+     * @throws ServiceException
      */
     T read(Long id) throws ServiceException;
 

@@ -24,14 +24,11 @@ public class OrderManager implements OrderManagement {
 
     private final OrderRepository orderRepository;
 
-    private final TourManagement tourManagement;
-
     private final OrderStatusRepository orderStatusRepository;
 
     @Autowired
-    public OrderManager(final TourManagement tourManagement, final OrderRepository orderRepository,
+    public OrderManager(final OrderRepository orderRepository,
                         final OrderStatusRepository orderStatusRepository) {
-        this.tourManagement = tourManagement;
         this.orderRepository = orderRepository;
         this.orderStatusRepository = orderStatusRepository;
     }
@@ -74,19 +71,15 @@ public class OrderManager implements OrderManagement {
     }
 
     @Override
-    public Map<Long, String> getUserOrders(final User user) throws ServiceException {
+    public Map<Long, Tour> getUserOrders(final User user) throws ServiceException {
         try {
             if (user == null) {
                 throw new IllegalArgumentException("User must not be null.");
             }
             final List<Order> orders = orderRepository.getListUserOrders(user);
-            final Map<Long, String> map = new HashMap<>();
+            final Map<Long, Tour> map = new HashMap<>();
             for (final Order order : orders) {
-                final long id = order.getId();
-                if (tourManagement.convertTourToString(id) == null) {
-                    throw new IllegalArgumentException("Tour must not be null.");
-                }
-                map.put(id, tourManagement.convertTourToString(id));
+                map.put(order.getId(), order.getTour());
             }
             return map;
         } catch (HibernateException e) {

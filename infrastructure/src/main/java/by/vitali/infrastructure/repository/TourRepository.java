@@ -47,12 +47,4 @@ public interface TourRepository extends GeneralRepository<Tour> {
      */
     int getCountTours() throws HibernateException;
 
-    /**
-     * This method returns all tours.
-     *
-     * @return
-     * @throws HibernateException
-     */
-    List<Tour> getAll() throws HibernateException;
-
 }

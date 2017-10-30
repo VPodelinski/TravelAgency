@@ -114,7 +114,7 @@ public class UserController {
 
         if (null != tourType & null != chooseCountry & null != transportType & null != hotelCategory & null != typeOfMeals) {
             try {
-                final Map<Long, String> map = tourManagement.getMapToursByRequest(tourType, chooseCountry, transportType, hotelCategory, typeOfMeals);
+                final Map<Long, Tour> map = tourManagement.getMapToursByRequest(tourType, chooseCountry, transportType, hotelCategory, typeOfMeals);
                 if (!map.isEmpty()) {
                     request.setAttribute(Parameters.TOURS_MAP, map);
                     page = ConfigurationManager.INSTANCE.getProperty(PagePathConstants.USER_RESERVE_PAGE_PATH);

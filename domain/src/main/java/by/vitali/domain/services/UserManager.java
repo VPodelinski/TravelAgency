@@ -73,12 +73,8 @@ public class UserManager implements UserManagement {
             if (email == null || password == null) {
                 throw new IllegalArgumentException("Email, password must not be null.");
             }
-            boolean isauthorized = false;
             final User user = userRepository.getUserByEmailAndPassword(email, password);
-            if (user != null) {
-                isauthorized = true;
-            }
-            return isauthorized;
+            return user != null;
         } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
@@ -92,8 +88,7 @@ public class UserManager implements UserManagement {
                 throw new IllegalArgumentException("Email must not be null.");
             }
             final User user = userRepository.getUserByEmail(email);
-            final String roleType = user.getRole().toString();
-            return roleType;
+            return user.getRole().toString();
         } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
@@ -106,12 +101,8 @@ public class UserManager implements UserManagement {
             if (email == null) {
                 throw new IllegalArgumentException("Email must not be null.");
             }
-            boolean isNew = true;
             final User user = userRepository.getUserByEmail(email);
-            if (user != null) {
-                isNew = false;
-            }
-            return isNew;
+            return user == null;
         } catch (HibernateException e) {
             //logger
             throw new ServiceException(e.getMessage());
